@@ -28,8 +28,9 @@
   #loginScreen{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
   .login-card{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.52), rgba(255,255,255,0.68)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: cover;
+    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
+    background-size: 38% auto;
+    background-repeat: no-repeat;
     background-position: center;
     border: 1px solid var(--card-edge); border-radius: var(--radius);
     padding: 28px; width:100%; max-width: 360px; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.7);
@@ -37,7 +38,7 @@
   .login-card h1{ font-family:'Space Grotesk', sans-serif; font-size: 22px; margin: 0 0 6px; }
   .admin-title{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .admin-title h1{ margin:0; }
-  .venue-logo{ width:108px; height:54px; display:block; flex:0 0 auto; }
+  .venue-logo{ width:88px; height:44px; display:block; flex:0 0 auto; opacity:0.5; }
   .login-card p{ color: var(--ink-dim); font-size: 13.5px; margin: 0 0 20px; }
   .login-card input{
     width:100%; background:#FFFFFF; border:1px solid var(--card-edge); color:var(--ink);
@@ -94,8 +95,9 @@
 
   .ticket-row{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.52), rgba(255,255,255,0.68)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: cover;
+    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
+    background-size: 38% auto;
+    background-repeat: no-repeat;
     background-position: center;
     border: 1px solid var(--card-edge); border-radius: 12px;
     padding: 14px 16px; cursor:pointer; transition: border-color .15s ease;
@@ -104,7 +106,6 @@
   .ticket-row:hover{ border-color: var(--amber); }
   .t-id{ font-family:'JetBrains Mono', monospace; font-size: 12.5px; color: var(--amber); min-width: 76px; }
   .t-main{ flex:1; min-width: 180px; }
-  .t-subject{ font-size: 14px; font-weight: 600; margin-bottom: 2px; }
   .t-meta{ font-size: 12px; color: var(--ink-dim); }
   .t-pill{
     font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:0.05em; text-transform:uppercase;
@@ -121,8 +122,9 @@
   }
   .modal{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.52), rgba(255,255,255,0.68)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: cover;
+    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
+    background-size: 38% auto;
+    background-repeat: no-repeat;
     background-position: center;
     border: 1px solid var(--card-edge); border-radius: var(--radius);
     width:100%; max-width: 480px; max-height: 88vh; overflow-y:auto;
@@ -263,7 +265,6 @@
   <div class="modal">
     <div class="modal-head">
       <span class="t-id" id="mTicketId"></span>
-      <h2 id="mSubject" aria-label="Ticket subject">Ticket Subject</h2>
       <div class="kv" id="mTeam"></div>
     </div>
     <div class="modal-body">
@@ -407,7 +408,7 @@
 
     let filtered = complaints.filter(c => {
       const statusMatch = currentFilter === 'all' || (c.status || '').toLowerCase() === currentFilter;
-      const searchMatch = !q || [c.teamName, c.tableNumber, c.ticketId, c.venue, c.subject]
+      const searchMatch = !q || [c.teamName, c.tableNumber, c.ticketId, c.venue]
         .join(' ').toLowerCase().includes(q);
       return statusMatch && searchMatch;
     });
@@ -421,7 +422,6 @@
       <div class="ticket-row" data-ticket="${c.ticketId}">
         <span class="t-id">${c.ticketId}</span>
         <div class="t-main">
-          <div class="t-subject">${escapeHtml(c.subject)}</div>
           <div class="t-meta">${escapeHtml(c.teamName)} (${escapeHtml(c.tableNumber)}) · ${escapeHtml(c.category)} · ${escapeHtml(c.venue)}</div>
         </div>
         <span class="t-pill ${(c.status||'').toLowerCase()}">${c.status || 'Pending'}</span>
@@ -446,7 +446,6 @@
     activeTicket = c;
 
     document.getElementById('mTicketId').textContent = c.ticketId;
-    document.getElementById('mSubject').textContent = c.subject;
     document.getElementById('mTeam').innerHTML = `Team <b>${escapeHtml(c.teamName)}</b> · ${escapeHtml(c.tableNumber)}`;
     document.getElementById('mCategory').textContent = c.category;
     document.getElementById('mVenue').textContent = c.venue;

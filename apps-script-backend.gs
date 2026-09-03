@@ -42,7 +42,7 @@ function doPost(e) {
 
     sheet.appendRow([
       new Date(), ticketId, data.teamName || '', data.tableNumber || '', data.category || '',
-      data.subject || '', data.issue || '', data.venue || '', 'Pending', '', new Date(), ''
+      '', data.issue || '', data.venue || '', 'Pending', '', new Date(), ''
     ]);
 
     cache.put(deviceId, '1', COOLDOWN_SECONDS);
@@ -192,7 +192,6 @@ function getStatus(ticketId, teamNo) {
         ticketId: row[COL.TICKET - 1],
         teamName: row[COL.TEAM_NAME - 1],
         category: row[COL.CATEGORY - 1],
-        subject: row[COL.SUBJECT - 1],
         venue: row[COL.VENUE - 1],
         status: row[COL.STATUS - 1],
         remarks: row[COL.REMARKS - 1],
@@ -216,7 +215,6 @@ function listComplaints() {
       teamName: row[COL.TEAM_NAME - 1],
       teamNo: row[COL.TEAM_NO - 1],
       category: row[COL.CATEGORY - 1],
-      subject: row[COL.SUBJECT - 1],
       issue: row[COL.ISSUE - 1],
       venue: row[COL.VENUE - 1],
       status: row[COL.STATUS - 1],

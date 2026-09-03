@@ -56,7 +56,7 @@
   }
   .title-row{ display:flex; align-items:center; justify-content:space-between; gap:18px; }
   .title-row h1{ margin:0; }
-  .venue-logo{ width:138px; height:68px; display:block; flex:0 0 auto; }
+  .venue-logo{ width:100px; height:50px; display:block; flex:0 0 auto; opacity:0.5; }
   .intro{ color: var(--ink-dim); font-size: 14.5px; line-height: 1.6; margin: 0 0 28px; max-width: 46ch; }
   .back-link{
     color: var(--ink-dim);
@@ -68,7 +68,7 @@
 
   .card{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.52), rgba(255,255,255,0.68)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
+    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
     background-size: cover;
     background-position: center;
     border: 1px solid var(--card-edge);
@@ -231,7 +231,6 @@
       </div>
 
       <div class="detail">
-        <div><b id="dSubject"></b></div>
         <div id="dMeta" style="margin-top:4px;"></div>
       </div>
 
@@ -308,7 +307,6 @@
       }
 
       setStep(data.status);
-      document.getElementById('dSubject').textContent = data.subject || '';
       document.getElementById('dMeta').textContent = `${data.category} · ${data.venue} · Team ${data.teamName}`;
 
       const remarksBox = document.getElementById('remarksBox');

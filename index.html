@@ -89,7 +89,7 @@
   /* Ticket card */
   .ticket{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.52), rgba(255,255,255,0.68)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
+    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
     background-size: cover;
     background-position: center;
     border: 1px solid var(--card-edge);
@@ -310,11 +310,6 @@
       </div>
 
       <div class="field">
-        <label for="subject">Subject<span class="req">*</span></label>
-        <input type="text" id="subject" name="subject" placeholder="Short summary of the issue" required>
-      </div>
-
-      <div class="field">
         <label for="issue">Issue details<span class="req">*</span></label>
         <textarea id="issue" name="issue" placeholder="Describe what's happening — the more specific, the faster it gets fixed." required></textarea>
       </div>
@@ -447,7 +442,6 @@
       teamName: document.getElementById('teamName').value.trim(),
       tableNumber: document.getElementById('tableNumber').value.trim(),
       category: document.getElementById('category').value,
-      subject: document.getElementById('subject').value.trim(),
       issue: document.getElementById('issue').value.trim(),
       venue: document.getElementById('venue').value.trim(),
     };
