@@ -4,6 +4,8 @@ const COOLDOWN_SECONDS = 10 * 60;
 
 const COMPLAINTS_SHEET = 'Complaints';
 const ADMINS_SHEET = 'Admins';
+const COMPLAINTS_CACHE_KEY = 'complaints_list_v1';
+const COMPLAINTS_CACHE_SECONDS = 5;
 
 const COL = { // Complaints sheet
   TIMESTAMP: 1, TICKET: 2, TEAM_NAME: 3, TEAM_NO: 4, CATEGORY: 5,
@@ -45,6 +47,7 @@ function doPost(e) {
       '', data.issue || '', data.venue || '', 'Pending', '', new Date(), ''
     ]);
 
+    CacheService.getScriptCache().remove(COMPLAINTS_CACHE_KEY);
     cache.put(deviceId, '1', COOLDOWN_SECONDS);
     return jsonResponse({ result: 'success', ticketId: ticketId });
   } finally {
@@ -203,6 +206,10 @@ function getStatus(ticketId, teamNo) {
 }
 
 function listComplaints() {
+  const cache = CacheService.getScriptCache();
+  const cached = cache.get(COMPLAINTS_CACHE_KEY);
+  if (cached) return jsonResponse(JSON.parse(cached));
+
   const sheet = complaintsSheet();
   const values = sheet.getDataRange().getValues();
   const out = [];
@@ -224,7 +231,9 @@ function listComplaints() {
     });
   }
   out.reverse();
-  return jsonResponse({ complaints: out });
+  const response = { complaints: out };
+  cache.put(COMPLAINTS_CACHE_KEY, JSON.stringify(response), COMPLAINTS_CACHE_SECONDS);
+  return jsonResponse(response);
 }
 
 function updateComplaint(params, adminName) {
@@ -244,6 +253,7 @@ function updateComplaint(params, adminName) {
         if (params.remarks !== undefined) sheet.getRange(rowIndex, COL.REMARKS).setValue(params.remarks);
         sheet.getRange(rowIndex, COL.UPDATED).setValue(new Date());
         sheet.getRange(rowIndex, COL.HANDLED_BY).setValue(adminName);
+        CacheService.getScriptCache().remove(COMPLAINTS_CACHE_KEY);
         return jsonResponse({ result: 'success' });
       }
     }

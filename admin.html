@@ -77,6 +77,7 @@
   .icon-btn.owner-only{ display:none; }
 
   .filters{ display:flex; gap:8px; margin-bottom: 18px; flex-wrap:wrap; }
+  .category-filters{ margin-bottom: 12px; }
   .filter-btn{
     background: var(--card); border: 1px solid var(--card-edge); color: var(--ink-dim);
     font-family:'JetBrains Mono', monospace; font-size: 12px; padding: 8px 14px; border-radius: 100px; cursor:pointer;
@@ -250,6 +251,15 @@
     <button class="filter-btn" data-filter="solved">Solved</button>
   </div>
 
+  <div class="filters category-filters" id="categoryFilters">
+    <button class="filter-btn active" data-category="all">All categories</button>
+    <button class="filter-btn" data-category="Internet / Wi-Fi">Internet / Wi-Fi</button>
+    <button class="filter-btn" data-category="Power / Electrical">Power / Electrical</button>
+    <button class="filter-btn" data-category="Tech Support">Tech Support</button>
+    <button class="filter-btn" data-category="Hardware Components">Hardware Components</button>
+    <button class="filter-btn" data-category="Other">Other</button>
+  </div>
+
   <div class="search">
     <label for="searchInput" class="sr-only">Search complaints</label>
     <input type="text" id="searchInput" placeholder="Search by team name, table number (e.g. Table 32), ticket ID, or venue…">
@@ -325,8 +335,10 @@
   let ME = { name: '', role: '' };
   let complaints = [];
   let currentFilter = 'all';
+  let currentCategory = 'all';
   let activeTicket = null;
   let selectedStatus = null;
+  let refreshInFlight = false;
 
   const loginScreen = document.getElementById('loginScreen');
   const dashboard = document.getElementById('dashboard');
@@ -382,15 +394,27 @@
 
   // ---------- List + filters ----------
   async function refreshList() {
-    const res = await fetch(`${SCRIPT_URL}?action=list&key=${encodeURIComponent(MY_KEY)}`);
-    const data = await res.json();
-    if (!data.error) {
-      complaints = data.complaints || [];
-      renderList();
+    if (refreshInFlight || document.hidden) return;
+    refreshInFlight = true;
+    const refreshButton = document.getElementById('refreshBtn');
+    refreshButton.disabled = true;
+    try {
+      const res = await fetch(`${SCRIPT_URL}?action=list&key=${encodeURIComponent(MY_KEY)}`);
+      const data = await res.json();
+      if (!data.error) {
+        complaints = data.complaints || [];
+        renderList();
+      }
+    } finally {
+      refreshInFlight = false;
+      refreshButton.disabled = false;
     }
   }
   document.getElementById('refreshBtn').addEventListener('click', refreshList);
   setInterval(refreshList, 30000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refreshList();
+  });
 
   document.querySelectorAll('.filter-btn').forEach(b => {
     b.addEventListener('click', () => {
@@ -400,7 +424,19 @@
       renderList();
     });
   });
-  document.getElementById('searchInput').addEventListener('input', renderList);
+  document.querySelectorAll('#categoryFilters .filter-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#categoryFilters .filter-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      currentCategory = b.dataset.category;
+      renderList();
+    });
+  });
+  let searchTimer;
+  document.getElementById('searchInput').addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(renderList, 120);
+  });
 
   function renderList() {
     const list = document.getElementById('list');
@@ -408,9 +444,10 @@
 
     let filtered = complaints.filter(c => {
       const statusMatch = currentFilter === 'all' || (c.status || '').toLowerCase() === currentFilter;
+      const categoryMatch = currentCategory === 'all' || (c.category || '') === currentCategory;
       const searchMatch = !q || [c.teamName, c.tableNumber, c.ticketId, c.venue]
         .join(' ').toLowerCase().includes(q);
-      return statusMatch && searchMatch;
+      return statusMatch && categoryMatch && searchMatch;
     });
 
     if (filtered.length === 0) {
