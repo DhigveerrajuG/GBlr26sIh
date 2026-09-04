@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — SIH Support Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://script.google.com/macros/s/AKfycbx-0b1JFIeRDCbab_71a0uvZPfHJ6e-AW2A01TyGj3gMIFPd9J0yXRtVIi6W6lutpUD/exec" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #F0E0C1; --bg-grid: #A6EDE5; --card: #A6EDE5; --card-edge: #007366;
+    --bg: #F0E0C1; --card: #FFFFFF; --card-edge: #007366;
     --ink: #007366; --ink-dim: #007366; --amber: #007366; --teal: #007366;
     --danger: #007366; --radius: 14px;
   }
@@ -16,10 +16,7 @@
   html,body{ margin:0; padding:0; }
   body{
     min-height:100vh;
-    background:
-      repeating-linear-gradient(0deg, var(--bg-grid) 0px, var(--bg-grid) 1px, transparent 1px, transparent 32px),
-      repeating-linear-gradient(90deg, var(--bg-grid) 0px, var(--bg-grid) 1px, transparent 1px, transparent 32px),
-      var(--bg);
+    background: var(--bg);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
   }
@@ -28,17 +25,13 @@
   #loginScreen{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
   .login-card{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: 38% auto;
-    background-repeat: no-repeat;
-    background-position: center;
     border: 1px solid var(--card-edge); border-radius: var(--radius);
     padding: 28px; width:100%; max-width: 360px; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.7);
   }
   .login-card h1{ font-family:'Space Grotesk', sans-serif; font-size: 22px; margin: 0 0 6px; }
   .admin-title{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .admin-title h1{ margin:0; }
-  .venue-logo{ width:88px; height:44px; display:block; flex:0 0 auto; opacity:0.5; }
+  .venue-logo{ width:104px; height:auto; display:block; flex:0 0 auto; object-fit:contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); }
   .login-card p{ color: var(--ink-dim); font-size: 13.5px; margin: 0 0 20px; }
   .login-card input{
     width:100%; background:#FFFFFF; border:1px solid var(--card-edge); color:var(--ink);
@@ -95,10 +88,6 @@
 
   .ticket-row{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: 38% auto;
-    background-repeat: no-repeat;
-    background-position: center;
     border: 1px solid var(--card-edge); border-radius: 12px;
     padding: 14px 16px; cursor:pointer; transition: border-color .15s ease;
     display:flex; align-items:center; gap:14px; flex-wrap:wrap;
@@ -122,10 +111,6 @@
   }
   .modal{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: 38% auto;
-    background-repeat: no-repeat;
-    background-position: center;
     border: 1px solid var(--card-edge); border-radius: var(--radius);
     width:100%; max-width: 480px; max-height: 88vh; overflow-y:auto;
     box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8);
@@ -137,15 +122,15 @@
   .kv{ font-size: 13px; color: var(--ink-dim); margin-bottom: 4px; }
   .kv b{ color: var(--ink); font-weight:500; }
   .issue-box{
-    margin-top: 14px; background:#0D1220; border:1px solid var(--card-edge); border-radius:9px;
-    padding: 13px; font-size: 13.5px; line-height:1.6; color: var(--ink);
+    margin-top: 14px; background:#FFFFFF; border:1px solid var(--card-edge); border-radius:9px;
+    padding: 13px; font-size: 13.5px; line-height:1.6; color:#1F2937;
   }
   .modal-body label{
     display:block; font-size: 12px; font-weight:600; color: var(--ink-dim); margin: 18px 0 7px;
     text-transform:uppercase; letter-spacing:0.04em; font-family:'JetBrains Mono', monospace;
   }
   .modal-body textarea, .modal-body input[type=text]{
-    width:100%; background:#FFFFFF; border:1px solid var(--card-edge); color:var(--ink);
+    width:100%; background:#FFFFFF; border:1px solid var(--card-edge); color:#1F2937;
     font-family:'Inter', sans-serif; font-size: 13.5px; padding: 11px; border-radius:9px;
     outline:none; resize:vertical;
   }
@@ -153,13 +138,13 @@
   .modal-body textarea:focus, .modal-body input:focus{ border-color: var(--amber); }
   .status-buttons{ display:flex; gap:8px; margin-top:8px; }
   .status-buttons button{
-    flex:1; padding: 10px; border-radius: 8px; border:1px solid var(--card-edge); background:#0D1220;
-    color: var(--ink-dim); font-family:'JetBrains Mono', monospace; font-size:11.5px; text-transform:uppercase;
-    cursor:pointer; letter-spacing:0.04em;
+    flex:1; padding: 10px; border-radius: 8px; border:2px solid #005B52; background:#F5FAF9;
+    color:#005B52; font-family:'JetBrains Mono', monospace; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; cursor:pointer; letter-spacing:0.04em;
   }
-  .status-buttons button.selected.pending{ border-color: var(--ink-dim); color: var(--ink); }
-  .status-buttons button.selected.ongoing{ border-color: var(--amber); color: var(--amber); background: rgba(245,165,36,0.08); }
-  .status-buttons button.selected.solved{ border-color: var(--teal); color: var(--teal); background: rgba(45,212,191,0.08); }
+  .status-buttons button.selected.pending{ border-color:#374151; color:#FFFFFF; background:#374151; }
+  .status-buttons button.selected.ongoing{ border-color:#005B52; color:#FFFFFF; background:#005B52; }
+  .status-buttons button.selected.solved{ border-color:#007366; color:#FFFFFF; background:#007366; }
 
   .modal-actions{ display:flex; gap:10px; margin-top:20px; }
   .save-btn{
@@ -178,7 +163,7 @@
   /* Manage Admins modal */
   .admin-list{ display:flex; flex-direction:column; gap:8px; margin-top: 4px; }
   .admin-row{
-    display:flex; align-items:center; gap:10px; background:#0D1220; border:1px solid var(--card-edge);
+    display:flex; align-items:center; gap:10px; background:#FFFFFF; border:1px solid var(--card-edge);
     border-radius: 9px; padding: 10px 12px;
   }
   .admin-row .name{ flex:1; font-size: 13.5px; }
@@ -208,17 +193,7 @@
   <div class="login-card">
     <div class="admin-title">
       <h1>Admin access</h1>
-      <svg class="venue-logo" role="img" aria-label="Venture Development Centre" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="adminVdcGreen" color-interpolation-filters="sRGB">
-            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0.45  0 0 0 0 0.40  0.2126 0.7152 0.0722 0 0" />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="2.2" intercept="-0.1" />
-            </feComponentTransfer>
-          </filter>
-        </defs>
-        <image href="images/WhatsApp Image 2026-09-03 at 6.16.22 PM.jpeg" width="720" height="360" preserveAspectRatio="xMidYMid meet" filter="url(#adminVdcGreen)" />
-      </svg>
+      <img class="venue-logo" src="images/sih_image-CtCyz0b-.jpg.jpeg" alt="SIH logo">
     </div>
     <p>Enter your personal admin key to open the SIH support dashboard.</p>
     <label for="adminKey">Admin key</label>
@@ -425,7 +400,7 @@
 
     let filtered = complaints.filter(c => {
       const statusMatch = currentFilter === 'all' || (c.status || '').toLowerCase() === currentFilter;
-      const searchMatch = !q || [c.teamName, c.tableNumber, c.ticketId, c.venue]
+      const searchMatch = !q || [c.teamName, c.teamNo, c.ticketId, c.venue]
         .join(' ').toLowerCase().includes(q);
       return statusMatch && searchMatch;
     });
@@ -439,7 +414,7 @@
       <div class="ticket-row" data-ticket="${c.ticketId}">
         <span class="t-id">${c.ticketId}</span>
         <div class="t-main">
-          <div class="t-meta">${escapeHtml(c.teamName)} (${escapeHtml(c.tableNumber)}) · ${escapeHtml(c.category)} · ${escapeHtml(c.venue)}</div>
+          <div class="t-meta">${escapeHtml(c.teamName)} · Table ${escapeHtml(c.teamNo)} · ${escapeHtml(c.category)} · ${escapeHtml(c.venue)}</div>
         </div>
         <span class="t-pill ${(c.status||'').toLowerCase()}">${c.status || 'Pending'}</span>
       </div>
@@ -463,7 +438,7 @@
     activeTicket = c;
 
     document.getElementById('mTicketId').textContent = c.ticketId;
-    document.getElementById('mTeam').innerHTML = `Team <b>${escapeHtml(c.teamName)}</b> · ${escapeHtml(c.tableNumber)}`;
+    document.getElementById('mTeam').innerHTML = `Team <b>${escapeHtml(c.teamName)}</b> · Table ${escapeHtml(c.teamNo)}`;
     document.getElementById('mCategory').textContent = c.category;
     document.getElementById('mVenue').textContent = c.venue;
     document.getElementById('mTime').textContent = `Submitted: ${c.timestamp}`;

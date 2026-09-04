@@ -7,13 +7,20 @@ const ADMINS_SHEET = 'Admins';
 const COMPLAINTS_CACHE_KEY = 'complaints_list_v1';
 const COMPLAINTS_CACHE_SECONDS = 5;
 
+/** @typedef {Object} ComplaintsColumns */
 const COL = { // Complaints sheet
   TIMESTAMP: 1, TICKET: 2, TEAM_NAME: 3, TEAM_NO: 4, CATEGORY: 5,
   SUBJECT: 6, ISSUE: 7, VENUE: 8, STATUS: 9, REMARKS: 10, UPDATED: 11, HANDLED_BY: 12
 };
 
+/** @typedef {Object.<string, number>} AdminsColumns */
 const ACOL = { // Admins sheet
-  NAME: 1, KEY: 2, ROLE: 3, ACTIVE: 4, ADDED_BY: 5, ADDED_ON: 6
+  NAME: 1,
+  KEY: 2,
+  ROLE: 3,
+  ACTIVE: 4,
+  ADDED_BY: 5,
+  ADDED_ON: 6
 };
 
 function complaintsSheet() {
@@ -59,8 +66,6 @@ function doPost(e) {
 
 function doGet(e) {
   const action = e.parameter.action;
-
-  if (action === 'status') return getStatus(e.parameter.ticketId, e.parameter.teamNo);
 
   if (action === 'adminLogin') return adminLogin(e.parameter.key);
 
@@ -177,33 +182,7 @@ function generateAdminKey() {
   return 'SIH-' + Utilities.getUuid().split('-')[0].toUpperCase();
 }
 
-// ---------- Complaints: status lookup + list + update ----------
-
-function getStatus(ticketId, teamNo) {
-  if (!ticketId || !teamNo) return jsonResponse({ error: 'missing ticketId or teamNo' });
-  const sheet = complaintsSheet();
-  const values = sheet.getDataRange().getValues();
-
-  for (let i = 1; i < values.length; i++) {
-    const row = values[i];
-    if (
-      String(row[COL.TICKET - 1]).trim().toUpperCase() === String(ticketId).trim().toUpperCase() &&
-      String(row[COL.TEAM_NO - 1]).trim().toUpperCase() === String(teamNo).trim().toUpperCase()
-    ) {
-      return jsonResponse({
-        found: true,
-        ticketId: row[COL.TICKET - 1],
-        teamName: row[COL.TEAM_NAME - 1],
-        category: row[COL.CATEGORY - 1],
-        venue: row[COL.VENUE - 1],
-        status: row[COL.STATUS - 1],
-        remarks: row[COL.REMARKS - 1],
-        lastUpdated: row[COL.UPDATED - 1]
-      });
-    }
-  }
-  return jsonResponse({ found: false });
-}
+// ---------- Complaints: list + update ----------
 
 function listComplaints() {
   const cache = CacheService.getScriptCache();

@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIH Helpdesk — Raise a Complaint</title>
+<title>Facing a Problem!</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://script.google.com/macros/s/AKfycbx-0b1JFIeRDCbab_71a0uvZPfHJ6e-AW2A01TyGj3gMIFPd9J0yXRtVIi6W6lutpUD/exec" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #F0E0C1;
-    --bg-grid: #A6EDE5;
-    --card: #A6EDE5;
+    --card: #FFFFFF;
     --card-edge: #007366;
     --ink: #007366;
     --ink-dim: #007366;
@@ -24,17 +23,12 @@
   html,body{ margin:0; padding:0; }
   body{
     min-height:100vh;
-    background:
-      radial-gradient(circle at 15% 0%, rgba(231, 228, 223, 0.08), transparent 40%),
-      radial-gradient(circle at 85% 100%, rgba(45,212,191,0.06), transparent 40%),
-      repeating-linear-gradient(0deg, var(--bg-grid) 0px, var(--bg-grid) 1px, transparent 1px, transparent 32px),
-      repeating-linear-gradient(90deg, var(--bg-grid) 0px, var(--bg-grid) 1px, transparent 1px, transparent 32px),
-      var(--bg);
+    background: var(--bg);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     display:flex;
     justify-content:center;
-    padding: 40px 16px 80px;
+    padding: 24px 16px 32px;
   }
   .wrap{ width:100%; max-width: 560px; }
 
@@ -47,7 +41,7 @@
     display:flex;
     align-items:center;
     gap:8px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .eyebrow::before{
     content:"";
@@ -58,9 +52,9 @@
   }
   h1{
     font-family:'Space Grotesk', sans-serif;
-    font-size: clamp(28px, 5vw, 36px);
+    font-size: clamp(24px, 4vw, 32px);
     line-height: 1.15;
-    margin: 0 0 8px;
+    margin: 0;
     font-weight: 700;
   }
   .title-row{
@@ -71,17 +65,19 @@
   }
   .title-row h1{ margin:0; }
   .venue-logo{
-    width:138px;
-    height:68px;
+    width:120px;
+    height:auto;
     display:block;
     flex:0 0 auto;
+    object-fit:contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
   }
   .lead{
     color: var(--ink-dim);
     font-family: 'Inter', sans-serif;
     font-size: 14.5px;
-    line-height: 1.6;
-    margin: 0 0 28px;
+    line-height: 1.5;
+    margin: 6px 0 18px;
     max-width: 46ch;
     font-weight: 400;
   }
@@ -89,60 +85,15 @@
   /* Ticket card */
   .ticket{
     background-color: var(--card);
-    background-image: linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.82)), url('images/sih_image-CtCyz0b-.jpg.jpeg');
-    background-size: cover;
-    background-position: center;
     border: 1px solid var(--card-edge);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: 0 30px 60px -30px rgba(237, 233, 233, 0.916);
   }
-  .ticket-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 18px 22px;
-    background: linear-gradient(180deg, rgba(245,165,36,0.07), transparent);
-  }
-  .ticket-id{
-    font-family:'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--ink-dim);
-  }
-  .ticket-id b{ color: var(--amber); font-weight: 600; }
-  .ticket-status{
-    font-family:'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--teal);
-    border: 1px solid rgba(45,212,191,0.35);
-    background: rgba(45,212,191,0.08);
-    padding: 4px 10px;
-    border-radius: 100px;
-  }
 
-  /* perforation divider */
-  .perf{
-    position: relative;
-    height: 0;
-    border-top: 1.5px dashed var(--card-edge);
-    margin: 0 0;
-  }
-  .perf::before, .perf::after{
-    content:"";
-    position:absolute; top:-9px;
-    width:18px; height:18px;
-    background: var(--bg);
-    border: 1px solid var(--card-edge);
-    border-radius: 50%;
-  }
-  .perf::before{ left:-9px; }
-  .perf::after{ right:-9px; }
+  form{ padding: 18px 18px 18px; }
 
-  form{ padding: 26px 22px 22px; }
-
-  .field{ margin-bottom: 18px; }
+  .field{ margin-bottom: 14px; }
   .field label{
     display:block;
     font-size: 12.5px;
@@ -179,7 +130,7 @@
     border-color: var(--amber);
     box-shadow: 0 0 0 3px rgba(245,165,36,0.15);
   }
-  input::placeholder, textarea::placeholder{ color: #4B5468; }
+  input::placeholder, textarea::placeholder{ color: rgba(0, 0, 0, 0.38); }
 
   button{
     width:100%;
@@ -231,6 +182,12 @@
 
   @media (max-width: 480px){
     .row2{ grid-template-columns: 1fr; }
+    .title-row{ align-items:flex-start; gap:12px; }
+    .venue-logo{ width:100px; }
+    .lead{ margin: 4px 0 12px; }
+    .field{ margin-bottom: 12px; }
+    form{ padding: 16px 14px 14px; }
+    .note{ margin-top: 10px; }
   }
 
   /* Honeypot: invisible to real users, catches simple bots */
@@ -251,7 +208,7 @@
   }
   @media (max-width: 480px){
     .title-row{ align-items:flex-start; gap:12px; }
-    .venue-logo{ width:108px; height:54px; }
+    .venue-logo{ width:100px; }
   }
 </style>
 </head>
@@ -259,28 +216,12 @@
 <div class="wrap">
   <div class="eyebrow">SIH · On-ground helpdesk</div>
   <div class="title-row">
-    <h1>Raise a complaint</h1>
-    <svg class="venue-logo" role="img" aria-label="Venture Development Centre" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="vdcGreen" color-interpolation-filters="sRGB">
-          <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0.45  0 0 0 0 0.40  0.2126 0.7152 0.0722 0 0" />
-          <feComponentTransfer>
-            <feFuncA type="linear" slope="2.2" intercept="-0.1" />
-          </feComponentTransfer>
-        </filter>
-      </defs>
-      <image href="images/WhatsApp Image 2026-09-03 at 6.16.22 PM.jpeg" width="720" height="360" preserveAspectRatio="xMidYMid meet" filter="url(#vdcGreen)" />
-    </svg>
+    <h1>Facing a Problem!</h1>
+    <img class="venue-logo" src="images/sih_image-CtCyz0b-.jpg.jpeg" alt="SIH logo">
   </div>
   <p class="lead">Participants can report issues through this web portal, which are directly sent to the organizing team for quick resolution.</p>
 
   <div class="ticket">
-    <div class="ticket-head">
-      <div class="ticket-id">Ticket <b id="ticketPreview">SIH-••••</b></div>
-      <div class="ticket-status">Open</div>
-    </div>
-    <div class="perf"></div>
-
     <form id="complaintForm">
       <div class="hp-field" aria-hidden="true">
         <label for="website">Leave this field empty</label>
@@ -321,8 +262,7 @@
 
       <button type="submit" id="submitBtn">Submit complaint →</button>
       <div class="msg" id="formMsg"></div>
-      <p class="note">Your complaint is logged with a timestamp and routed to the SIH helpdesk team for resolution.<br>
-      Already submitted one? <a href="track.html" style="color: var(--amber);">Track its status →</a></p>
+      <p class="note">Your complaint is logged with a timestamp and routed to the SIH helpdesk team for resolution.</p>
     </form>
   </div>
 </div>
@@ -366,14 +306,6 @@
     const s = totalSec % 60;
     return `${m}m ${s.toString().padStart(2,'0')}s`;
   }
-
-  // Cosmetic live ticket-id preview (actual ID / timestamp is assigned by the sheet)
-  const tableNumberInput = document.getElementById('tableNumber');
-  const ticketPreview = document.getElementById('ticketPreview');
-  tableNumberInput.addEventListener('input', () => {
-    const v = tableNumberInput.value.trim();
-    ticketPreview.textContent = v ? `SIH-${v.replace(/\s+/g,'').toUpperCase()}` : 'SIH-••••';
-  });
 
   const form = document.getElementById('complaintForm');
   const btn = document.getElementById('submitBtn');
@@ -430,9 +362,8 @@
     if (honeypot) {
       // Pretend it worked so bots don't learn to avoid this field
       msg.className = 'msg ok';
-      msg.textContent = `Logged ✓ Ticket ${ticketPreview.textContent} has been sent to the helpdesk.`;
+      msg.textContent = 'Logged ✓ Your complaint has been sent to the helpdesk.';
       form.reset();
-      ticketPreview.textContent = 'SIH-••••';
       return;
     }
 
@@ -459,13 +390,11 @@
 
       if (result.result === 'success') {
         localStorage.setItem(LAST_SUBMIT_KEY, Date.now().toString());
-        localStorage.setItem('sih_last_ticket', result.ticketId);
         localStorage.setItem('sih_last_tableNumber', data.tableNumber);
 
         msg.className = 'msg ok';
-        msg.textContent = `Logged ✓ Your ticket ID is ${result.ticketId} — save this along with your Table Number to track its status later.`;
+        msg.textContent = `Logged ✓ Your ticket ID is ${result.ticketId} — keep it for your records.`;
         form.reset();
-        ticketPreview.textContent = 'SIH-••••';
         refreshCooldownUI();
       } else if (result.result === 'cooldown') {
         msg.className = 'msg wait';
