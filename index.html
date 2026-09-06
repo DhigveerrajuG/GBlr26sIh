@@ -40,14 +40,15 @@
     text-transform: uppercase;
     display:flex;
     align-items:center;
-    gap:8px;
-    margin-bottom: 8px;
+    gap:0px;
+    margin-bottom: 0;
+    line-height: 1;
   }
   .eyebrow::before{
     content:"";
-    width:7px; height:7px; border-radius:50%;
+    width:7px; height:1px; border-radius:50%;
     background: var(--amber);
-    box-shadow: 0 0 8px var(--amber);
+    box-shadow: 0 0 0px var(--amber);
     display:inline-block;
   }
   h1{
@@ -61,7 +62,9 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:18px;
+    gap:12px;
+    margin-top: 2px;
+    margin-bottom: 0;
   }
   .title-row h1{ margin:0; }
   .venue-logo{
@@ -70,6 +73,7 @@
     display:block;
     flex:0 0 auto;
     object-fit:contain;
+    background: transparent;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
   }
   .lead{
@@ -184,7 +188,7 @@
     .row2{ grid-template-columns: 1fr; }
     .title-row{ align-items:flex-start; gap:12px; }
     .venue-logo{ width:100px; }
-    .lead{ margin: 4px 0 12px; }
+    .lead{ margin: 0 0 12px; }
     .field{ margin-bottom: 12px; }
     form{ padding: 16px 14px 14px; }
     .note{ margin-top: 10px; }
@@ -217,9 +221,9 @@
   <div class="eyebrow">SIH · On-ground helpdesk</div>
   <div class="title-row">
     <h1>Facing a Problem!</h1>
-    <img class="venue-logo" src="images/sih_image-CtCyz0b-.jpg.jpeg" alt="SIH logo">
+    <img class="venue-logo" src="images/sih_logo_transparent.png" alt="SIH logo">
   </div>
-  <p class="lead">Your can report issues through this web portal, which are directly sent to the organizing team for quick resolution.</p>
+  <p class="lead">You can report issues through this web portal, which are directly sent to the organizing team for quick resolution.</p>
 
   <div class="ticket">
     <form id="complaintForm">

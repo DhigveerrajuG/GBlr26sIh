@@ -24,7 +24,7 @@ Create a Google Spreadsheet with these two tabs and a header row in each.
 ### `Complaints`
 
 ```text
-Timestamp | Ticket ID | Team Name | Table No | Category | Subject | Issue | Venue | Status | Remarks | Updated | Handled By
+Timestamp | Ticket ID | Team Name | Table No | Category | Subject (reserved) | Issue | Venue | Status | Remarks | Updated | Handled By
 ```
 
 ### `Admins`
