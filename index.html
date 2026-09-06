@@ -32,6 +32,17 @@
   }
   .wrap{ width:100%; max-width: 560px; }
 
+  .header-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom: 16px;
+  }
+  .header-text{
+    flex:1;
+    min-width:0;
+  }
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
     font-size: 12px;
@@ -41,7 +52,7 @@
     display:flex;
     align-items:center;
     gap:0px;
-    margin-bottom: 0;
+    margin-bottom: 4px;
     line-height: 1;
   }
   .eyebrow::before{
@@ -55,34 +66,26 @@
     font-family:'Space Grotesk', sans-serif;
     font-size: clamp(24px, 4vw, 32px);
     line-height: 1.15;
-    margin: 0;
+    margin: 0 0 6px 0;
     font-weight: 700;
   }
-  .title-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    margin-top: 2px;
-    margin-bottom: 0;
-  }
-  .title-row h1{ margin:0; }
   .venue-logo{
-    width:120px;
+    width:90px;
     height:auto;
     display:block;
     flex:0 0 auto;
     object-fit:contain;
     background: transparent;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+    margin-top: 2px;
   }
   .lead{
     color: var(--ink-dim);
     font-family: 'Inter', sans-serif;
-    font-size: 14.5px;
-    line-height: 1.5;
-    margin: 0 0 18px;
-    max-width: 46ch;
+    font-size: 14px;
+    line-height: 1.45;
+    margin: 0;
+    max-width: 44ch;
     font-weight: 400;
   }
 
@@ -186,9 +189,9 @@
 
   @media (max-width: 480px){
     .row2{ grid-template-columns: 1fr; }
-    .title-row{ align-items:flex-start; gap:12px; }
-    .venue-logo{ width:100px; }
-    .lead{ margin: 0 0 12px; }
+    .header-row{ gap:12px; margin-bottom: 14px; }
+    .venue-logo{ width:75px; }
+    .lead{ font-size: 13.5px; }
     .field{ margin-bottom: 12px; }
     form{ padding: 16px 14px 14px; }
     .note{ margin-top: 10px; }
@@ -210,20 +213,18 @@
     border: 1px solid rgba(245,165,36,0.35);
     color: var(--amber);
   }
-  @media (max-width: 480px){
-    .title-row{ align-items:flex-start; gap:12px; }
-    .venue-logo{ width:100px; }
-  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="eyebrow">SIH · On-ground helpdesk</div>
-  <div class="title-row">
-    <h1>Facing a Problem!</h1>
+  <div class="header-row">
+    <div class="header-text">
+      <div class="eyebrow">SIH · On-ground helpdesk</div>
+      <h1>Facing a Problem!</h1>
+      <p class="lead">You can report issues through this web portal, which are directly sent to the organizing team for quick resolution.</p>
+    </div>
     <img class="venue-logo" src="images/sih_logo_transparent.png" alt="SIH logo">
   </div>
-  <p class="lead">You can report issues through this web portal, which are directly sent to the organizing team for quick resolution.</p>
 
   <div class="ticket">
     <form id="complaintForm">

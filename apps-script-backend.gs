@@ -10,7 +10,7 @@ const COMPLAINTS_CACHE_SECONDS = 5;
 /** @typedef {Object} ComplaintsColumns */
 const COL = { // Complaints sheet
   TIMESTAMP: 1, TICKET: 2, TEAM_NAME: 3, TEAM_NO: 4, CATEGORY: 5,
-  SUBJECT: 6, ISSUE: 7, VENUE: 8, STATUS: 9, REMARKS: 10, UPDATED: 11, HANDLED_BY: 12
+  RESERVED: 6, ISSUE: 7, VENUE: 8, STATUS: 9, REMARKS: 10, UPDATED: 11, HANDLED_BY: 12
 };
 
 /** @typedef {Object.<string, number>} AdminsColumns */

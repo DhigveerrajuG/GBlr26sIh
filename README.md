@@ -11,7 +11,7 @@ A lightweight issue-reporting portal for an on-ground SIH help desk. Participant
 
 ## How it works
 
-1. A participant submits team, table, category, issue, and venue details.
+1. A participant submits team name, table number, category, issue details, and venue details.
 2. The frontend sends the complaint to the Apps Script web app.
 3. The backend appends the complaint to the `Complaints` sheet and returns a ticket ID such as `SIH-0001`.
 4. An admin signs in through `admin.html`, filters/searches tickets, and updates status or remarks.
@@ -24,7 +24,7 @@ Create a Google Spreadsheet with these two tabs and a header row in each.
 ### `Complaints`
 
 ```text
-Timestamp | Ticket ID | Team Name | Table No | Category | Subject (reserved) | Issue | Venue | Status | Remarks | Updated | Handled By
+Timestamp | Ticket ID | Team Name | Table No | Category | Reserved | Issue | Venue | Status | Remarks | Updated | Handled By
 ```
 
 ### `Admins`

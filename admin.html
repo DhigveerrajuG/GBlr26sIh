@@ -29,10 +29,11 @@
     padding: 28px; width:100%; max-width: 360px; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.7);
   }
   .login-card h1{ font-family:'Space Grotesk', sans-serif; font-size: 22px; margin: 0 0 6px; }
-  .admin-title{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  .admin-title h1{ margin:0; }
-  .venue-logo{ width:104px; height:auto; display:block; flex:0 0 auto; object-fit:contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); }
-  .login-card p{ color: var(--ink-dim); font-size: 13.5px; margin: 0 0 20px; }
+  .admin-title{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom: 16px; }
+  .admin-header-text{ flex:1; min-width:0; }
+  .admin-title h1{ margin:0 0 6px 0; line-height:1.15; }
+  .venue-logo{ width:90px; height:auto; display:block; flex:0 0 auto; object-fit:contain; background:transparent; margin-top:2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08)); }
+  .login-card p{ color: var(--ink-dim); font-size: 13.5px; line-height:1.45; margin: 0; }
   .login-card input{
     width:100%; background:#FFFFFF; border:1px solid var(--card-edge); color:var(--ink);
     font-family:'JetBrains Mono', monospace; font-size: 14px; padding: 12px 13px; border-radius: 9px;
@@ -192,10 +193,12 @@
 <div id="loginScreen">
   <div class="login-card">
     <div class="admin-title">
-      <h1>Admin access</h1>
+      <div class="admin-header-text">
+        <h1>Admin access</h1>
+        <p>Enter your personal admin key to open the SIH support dashboard.</p>
+      </div>
       <img class="venue-logo" src="images/sih_logo_transparent.png" alt="SIH logo">
     </div>
-    <p>Enter your personal admin key to open the SIH support dashboard.</p>
     <label for="adminKey">Admin key</label>
     <input type="password" id="adminKey" placeholder="Your admin key" autocomplete="off">
     <button id="loginBtn">Unlock dashboard</button>
