@@ -325,7 +325,7 @@
       btn.disabled = true;
       btn.textContent = `Wait ${formatMinSec(remaining)}`;
       msg.className = 'msg wait';
-      msg.textContent = `You can submit another complaint from this device in ${formatMinSec(remaining)}. This limit helps stop duplicate/spam tickets.`;
+      msg.textContent = `You can submit another complaint from this device in ${formatMinSec(remaining)}.`;
       if (!cooldownTimer) {
         cooldownTimer = setInterval(() => {
           if (msRemainingInCooldown() <= 0) {
