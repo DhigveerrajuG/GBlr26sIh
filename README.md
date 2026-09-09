@@ -18,8 +18,8 @@ A lightweight, high-performance issue-reporting portal for on-ground SIH hackath
 ### Venues
 - 📚 **Library**
 - 🚀 **Alpha Space**
-- 🌌 **Gamma Space**
-- ⚡ **Gamma**
+- 🌌 **Gamma Space Square**
+- ⚡ **Gamma Space**
 
 ### Issue Categories
 - 📶 **Wi-Fi** (`Internet / Wi-Fi`)

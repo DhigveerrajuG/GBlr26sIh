@@ -1180,9 +1180,10 @@
             id="vBadgeLibrary">0</span></button>
         <button class="v-pill" data-venue="Alpha Space">🚀 Alpha Space <span class="v-badge"
             id="vBadgeAlpha">0</span></button>
-        <button class="v-pill" data-venue="Gamma Space">🌌 Gamma Space <span class="v-badge"
+        <button class="v-pill" data-venue="Gamma Space Square">🌌 Gamma Space Square <span class="v-badge"
+            id="vBadgeGammaSquare">0</span></button>
+        <button class="v-pill" data-venue="Gamma Space">⚡ Gamma Space <span class="v-badge"
             id="vBadgeGammaSpace">0</span></button>
-        <button class="v-pill" data-venue="Gamma">⚡ Gamma <span class="v-badge" id="vBadgeGamma">0</span></button>
       </div>
     </div>
 
@@ -1532,12 +1533,12 @@
 
       if (cleanItem === cleanTarget) return true;
 
-      // Differentiate "Gamma Space" from "Gamma"
-      if (cleanTarget === 'gamma space') {
-        return cleanItem.includes('gamma space');
+      // Differentiate "Gamma Space Square" from "Gamma Space" (and legacy "Gamma")
+      if (cleanTarget === 'gamma space square') {
+        return cleanItem.includes('square');
       }
-      if (cleanTarget === 'gamma') {
-        return cleanItem.includes('gamma') && !cleanItem.includes('gamma space');
+      if (cleanTarget === 'gamma space' || cleanTarget === 'gamma') {
+        return (cleanItem.includes('gamma space') && !cleanItem.includes('square')) || cleanItem === 'gamma';
       }
 
       return cleanItem.includes(cleanTarget) || cleanTarget.includes(cleanItem);
@@ -1550,8 +1551,8 @@
 
       let vLibrary = 0;
       let vAlpha = 0;
+      let vGammaSpaceSquare = 0;
       let vGammaSpace = 0;
-      let vGamma = 0;
 
       for (let i = 0; i < complaints.length; i++) {
         const c = complaints[i];
@@ -1562,8 +1563,8 @@
 
         if (isVenueMatch(c.venue, 'Library')) vLibrary++;
         if (isVenueMatch(c.venue, 'Alpha Space')) vAlpha++;
+        if (isVenueMatch(c.venue, 'Gamma Space Square')) vGammaSpaceSquare++;
         if (isVenueMatch(c.venue, 'Gamma Space')) vGammaSpace++;
-        if (isVenueMatch(c.venue, 'Gamma')) vGamma++;
       }
 
       const sAll = document.getElementById('statAll');
@@ -1582,10 +1583,10 @@
       if (bLib) bLib.textContent = vLibrary;
       const bAlpha = document.getElementById('vBadgeAlpha');
       if (bAlpha) bAlpha.textContent = vAlpha;
-      const bGammaSpace = document.getElementById('vBadgeGammaSpace');
+      const bGammaSquare = document.getElementById('vBadgeGammaSquare');
+      if (bGammaSquare) bGammaSquare.textContent = vGammaSpaceSquare;
+      const bGammaSpace = document.getElementById('vBadgeGammaSpace') || document.getElementById('vBadgeGamma');
       if (bGammaSpace) bGammaSpace.textContent = vGammaSpace;
-      const bGamma = document.getElementById('vBadgeGamma');
-      if (bGamma) bGamma.textContent = vGamma;
     }
 
     // Metric Cards as 1-click status filters
