@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Facing a Problem!</title>
+  <title>Facing a Problem! — SIH Help Desk</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://script.google.com/macros/s/AKfycbyRdMDsqHgWD-xkguwhQH9crAltqJm0-iAmiMQT29fkSmA2Fc3VMOH6vRSgtW86JXXG8w/exec"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -15,12 +16,14 @@
       --card: #FFFFFF;
       --card-edge: #007366;
       --ink: #007366;
-      --ink-dim: #007366;
+      --ink-dim: rgba(0, 115, 102, 0.75);
+      --ink-light: rgba(0, 115, 102, 0.5);
       --amber: #007366;
       --amber-dim: #007366;
       --teal: #007366;
-      --danger: #007366;
+      --danger: #D9381E;
       --radius: 14px;
+      --radius-sm: 9px;
     }
 
     * {
@@ -35,17 +38,31 @@
 
     body {
       min-height: 100vh;
-      background: var(--bg);
+      background: radial-gradient(circle at 50% 0%, rgba(0, 115, 102, 0.08) 0%, transparent 70%), var(--bg);
       color: var(--ink);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       display: flex;
       justify-content: center;
-      padding: 24px 16px 32px;
+      padding: 28px 16px 48px;
+      -webkit-font-smoothing: antialiased;
     }
 
     .wrap {
       width: 100%;
-      max-width: 560px;
+      max-width: 580px;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .header-row {
@@ -53,7 +70,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .header-text {
@@ -63,85 +80,108 @@
 
     .eyebrow {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11.5px;
       letter-spacing: 0.14em;
-      color: var(--amber);
+      color: var(--ink);
       text-transform: uppercase;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0px;
-      margin-bottom: 4px;
-      line-height: 1;
+      gap: 7px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      background: rgba(0, 115, 102, 0.1);
+      padding: 4px 10px;
+      border-radius: 100px;
     }
 
     .eyebrow::before {
       content: "";
-      width: 7px;
-      height: 1px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--amber);
-      box-shadow: 0 0 0px var(--amber);
+      background: var(--ink);
+      box-shadow: 0 0 8px var(--ink);
       display: inline-block;
     }
 
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(24px, 4vw, 32px);
+      font-size: clamp(26px, 4.5vw, 34px);
       line-height: 1.15;
-      margin: 0 0 6px 0;
+      margin: 4px 0 8px 0;
       font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
     }
 
     .venue-logo {
-      width: 90px;
+      width: 96px;
       height: auto;
       display: block;
       flex: 0 0 auto;
       object-fit: contain;
       background: transparent;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
-      margin-top: 2px;
+      filter: drop-shadow(0 3px 6px rgba(0, 115, 102, 0.15));
+      margin-top: 4px;
+      transition: transform 0.25s ease;
+    }
+
+    .venue-logo:hover {
+      transform: scale(1.04) rotate(-1deg);
     }
 
     .lead {
       color: var(--ink-dim);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      line-height: 1.45;
+      font-size: 14.5px;
+      line-height: 1.5;
       margin: 0;
-      max-width: 44ch;
+      max-width: 46ch;
       font-weight: 400;
     }
 
     /* Ticket card */
     .ticket {
       background-color: var(--card);
-      border: 1px solid var(--card-edge);
+      border: 1.5px solid var(--card-edge);
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 30px 60px -30px rgba(237, 233, 233, 0.916);
+      box-shadow: 0 24px 50px -20px rgba(0, 115, 102, 0.25), 0 0 0 1px rgba(0, 115, 102, 0.1);
+      position: relative;
+      transition: box-shadow 0.25s ease;
+    }
+
+    .ticket::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #007366, #00A896, #007366);
     }
 
     form {
-      padding: 18px 18px 18px;
+      padding: 24px 22px 22px;
     }
 
     .field {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .field label {
-      display: block;
-      font-size: 12.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
       font-weight: 600;
-      color: var(--ink-dim);
+      color: var(--ink);
       margin-bottom: 7px;
       letter-spacing: 0.01em;
     }
 
     .field label .req {
-      color: var(--amber);
-      margin-left: 3px;
+      color: var(--ink);
+      margin-left: 2px;
     }
 
     .row2 {
@@ -155,108 +195,360 @@
     textarea {
       width: 100%;
       background: #FFFFFF;
-      border: 1px solid var(--card-edge);
+      border: 1.5px solid rgba(0, 115, 102, 0.3);
       color: var(--ink);
       font-family: 'Inter', sans-serif;
       font-size: 14.5px;
-      padding: 12px 13px;
-      border-radius: 9px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
       outline: none;
-      transition: border-color .15s ease, box-shadow .15s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       appearance: none;
     }
 
-    select {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%238A93A8' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-      background-repeat: no-repeat;
-      background-position: right 13px center;
-      padding-right: 34px;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 96px;
-      line-height: 1.5;
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(0, 115, 102, 0.4);
+      font-weight: 400;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: var(--amber);
-      box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.15);
+      border-color: var(--card-edge);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 4px rgba(0, 115, 102, 0.15);
     }
 
-    input::placeholder,
-    textarea::placeholder {
-      color: rgba(0, 0, 0, 0.38);
-    }
-
-    button {
-      width: 100%;
-      background: var(--amber);
-      color: #241503;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      border: none;
-      padding: 14px 16px;
-      border-radius: 9px;
+    select {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' stroke='%23007366' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
       cursor: pointer;
-      transition: transform .1s ease, background .15s ease;
-      display: flex;
+      font-weight: 500;
+    }
+
+    /* Interactive Category & Venue Selection Grid */
+    .category-pill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+      transition: all 0.2s ease;
+    }
+
+    #categoryPillGrid button:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .cat-pill {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(0, 115, 102, 0.25);
+      border-radius: 9px;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-    }
-
-    button:hover {
-      background: #ffb541;
-    }
-
-    button:active {
-      transform: scale(0.98);
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: progress;
-    }
-
-    .note {
-      font-size: 12px;
-      color: var(--ink-dim);
+      user-select: none;
+      font-family: 'Inter', sans-serif;
+      width: 100%;
       text-align: center;
-      margin-top: 12px;
+    }
+
+    .cat-pill:hover {
+      border-color: var(--card-edge);
+      background: rgba(0, 115, 102, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .cat-pill.active {
+      background: var(--card-edge);
+      color: #FFFFFF;
+      border-color: var(--card-edge);
+      font-weight: 600;
+      box-shadow: 0 4px 10px -2px rgba(0, 115, 102, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .category-pill-grid.has-error .cat-pill {
+      border-color: var(--danger);
+      background: rgba(217, 56, 30, 0.04);
+    }
+
+    @keyframes pillShake {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-4px);
+      }
+
+      40% {
+        transform: translateX(4px);
+      }
+
+      60% {
+        transform: translateX(-3px);
+      }
+
+      80% {
+        transform: translateX(3px);
+      }
+    }
+
+    .category-pill-grid.shake {
+      animation: pillShake 0.35s ease;
+    }
+
+    .textarea-wrap {
+      position: relative;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
       line-height: 1.5;
     }
 
+    .char-counter {
+      display: flex;
+      justify-content: flex-end;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-dim);
+      margin-top: 5px;
+    }
+
+    /* Action button */
+    button[type="submit"] {
+      width: 100%;
+      background: var(--card-edge);
+      color: #FFFFFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15.5px;
+      border: none;
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 6px;
+      box-shadow: 0 4px 14px -3px rgba(0, 115, 102, 0.4);
+      letter-spacing: 0.01em;
+    }
+
+    button[type="submit"]:hover {
+      background: #005B52;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px -3px rgba(0, 115, 102, 0.45);
+    }
+
+    button[type="submit"]:active {
+      transform: scale(0.985);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Messages & Digital Ticket Pass */
     .msg {
       display: none;
       margin-top: 16px;
-      padding: 12px 14px;
-      border-radius: 9px;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
       font-size: 13.5px;
       font-family: 'JetBrains Mono', monospace;
       line-height: 1.5;
+      animation: slideDown 0.25s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .msg.ok {
       display: block;
-      background: rgba(45, 212, 191, 0.08);
-      border: 1px solid rgba(45, 212, 191, 0.35);
-      color: var(--teal);
+      background: rgba(0, 115, 102, 0.08);
+      border: 1.5px solid var(--card-edge);
+      color: var(--card-edge);
     }
 
     .msg.err {
       display: block;
-      background: rgba(241, 101, 101, 0.08);
-      border: 1px solid rgba(241, 101, 101, 0.35);
+      background: rgba(217, 56, 30, 0.08);
+      border: 1.5px solid var(--danger);
       color: var(--danger);
+    }
+
+    .msg.wait {
+      display: block;
+      background: rgba(0, 115, 102, 0.08);
+      border: 1.5px solid var(--card-edge);
+      color: var(--ink);
+    }
+
+    /* Digital Ticket Pass Card */
+    .ticket-pass {
+      display: none;
+      margin-top: 18px;
+      background: #FFFFFF;
+      border: 2px dashed var(--card-edge);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+      animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pass-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0, 115, 102, 0.18);
+      margin-bottom: 14px;
+    }
+
+    .pass-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(0, 115, 102, 0.12);
+      color: var(--ink);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .pass-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--ink-dim);
+    }
+
+    .pass-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      margin-bottom: 16px;
+    }
+
+    .pass-item {
+      font-size: 12.5px;
+    }
+
+    .pass-item .lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 2px;
+    }
+
+    .pass-item .val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .pass-ticket-id {
+      grid-column: 1 / -1;
+      background: #F4F8F7;
+      border: 1px solid rgba(0, 115, 102, 0.25);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pass-ticket-id .id-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--card-edge);
+    }
+
+    .copy-btn {
+      background: var(--card-edge);
+      color: #FFFFFF;
+      border: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background: #005B52;
+    }
+
+    /* Cooldown progress indicator */
+    .cooldown-bar {
+      display: none;
+      margin-top: 10px;
+      height: 5px;
+      background: rgba(0, 115, 102, 0.15);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .cooldown-fill {
+      height: 100%;
+      background: var(--card-edge);
+      width: 0%;
+      transition: width 1s linear;
     }
 
     @media (max-width: 480px) {
       .row2 {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
 
       .header-row {
@@ -265,7 +557,7 @@
       }
 
       .venue-logo {
-        width: 75px;
+        width: 78px;
       }
 
       .lead {
@@ -277,15 +569,25 @@
       }
 
       form {
-        padding: 16px 14px 14px;
+        padding: 18px 16px 16px;
       }
 
-      .note {
-        margin-top: 10px;
+      .pass-body {
+        grid-template-columns: 1fr;
+      }
+
+      .category-pill-grid {
+        gap: 8px;
+      }
+
+      .cat-pill {
+        padding: 9px 8px;
+        font-size: 12.5px;
+        gap: 6px;
       }
     }
 
-    /* Honeypot: invisible to real users, catches simple bots */
+    /* Honeypot: invisible to real users */
     .hp-field {
       position: absolute;
       left: -9999px;
@@ -295,75 +597,136 @@
       pointer-events: none;
     }
 
-    .msg.wait {
-      display: block;
-      background: rgba(245, 165, 36, 0.08);
-      border: 1px solid rgba(245, 165, 36, 0.35);
-      color: var(--amber);
+    /* Confetti canvas */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
     }
   </style>
 </head>
 
 <body>
+  <canvas id="confettiCanvas"></canvas>
+
   <div class="wrap">
-    <div class="header-row">
+    <header class="header-row">
       <div class="header-text">
-        <div class="eyebrow">SIH · On-ground helpdesk</div>
+        <div class="eyebrow">SIH · On-ground help desk</div>
         <h1>Facing a Problem!</h1>
-        <p class="lead">You can report issues through this web portal, which are directly sent to the organizing team
-          for quick resolution.</p>
+        <p class="lead">Report issues directly to the organizing team through this portal for priority on-ground
+          resolution.</p>
       </div>
       <img class="venue-logo" src="images/sih_logo_transparent.png" alt="SIH logo">
-    </div>
+    </header>
 
-    <div class="ticket">
+    <main class="ticket">
       <form id="complaintForm">
         <div class="hp-field" aria-hidden="true">
           <label for="website">Leave this field empty</label>
           <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
         </div>
+
         <div class="row2">
           <div class="field">
-            <label for="teamName">Team name<span class="req">*</span></label>
-            <input type="text" id="teamName" name="teamName" placeholder="e.g. Team Alpha" required>
+            <label for="teamName">Team name <span class="req">*</span></label>
+            <input type="text" id="teamName" name="teamName" placeholder="e.g. Team Alpha" required autocomplete="off">
           </div>
           <div class="field">
-            <label for="tableNumber">Table number<span class="req">*</span></label>
-            <input type="text" id="tableNumber" name="tableNumber" placeholder="e.g. Table 32" required>
+            <label for="tableNumber">Table number <span class="req">*</span></label>
+            <input type="text" id="tableNumber" name="tableNumber" placeholder="e.g. Table 32" required
+              autocomplete="off">
           </div>
         </div>
 
-        <div class="field">
-          <label for="category">Category<span class="req">*</span></label>
-          <select id="category" name="category" required>
-            <option value="" disabled selected>Select an issue category</option>
-            <option>Internet / Wi-Fi</option>
-            <option>Power / Electrical</option>
-            <option>Tech Support</option>
-            <option>Hardware Components</option>
-            <option>Other</option>
-          </select>
-        </div>
+        <fieldset class="field">
+          <legend id="categoryLabel">Category <span class="req">*</span></legend>
+          <input type="hidden" id="category" name="category">
+          <div class="category-pill-grid" id="categoryPillGrid">
+            <button type="button" class="cat-pill" data-cat="Internet / Wi-Fi">📶 Wi-Fi</button>
+            <button type="button" class="cat-pill" data-cat="Power / Electrical">⚡ Electricity</button>
+            <button type="button" class="cat-pill" data-cat="Tech Support">💻 Tech Support</button>
+            <button type="button" class="cat-pill" data-cat="Hardware Components">🔌 Hardware Components</button>
+            <button type="button" class="cat-pill" data-cat="Other">❓ Other</button>
+          </div>
+        </fieldset>
 
         <div class="field">
-          <label for="issue">Issue details<span class="req">*</span></label>
-          <textarea id="issue" name="issue"
-            placeholder="Describe what's happening — the more specific, the faster it gets fixed." required></textarea>
+          <label for="issue">Issue details <span class="req">*</span></label>
+          <div class="textarea-wrap">
+            <textarea id="issue" name="issue" maxlength="500"
+              placeholder="Describe what's happening — the more specific, the faster it gets fixed."
+              required></textarea>
+            <div class="char-counter"><span id="charCount">0</span> / 500</div>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="venue">Venue<span class="req">*</span></label>
-          <input type="text" id="venue" name="venue" placeholder="e.g. Hall B, Table 14" required>
+        <fieldset class="field">
+          <legend id="venueLabel">Venue <span class="req">*</span></legend>
+          <input type="hidden" id="venue" name="venue">
+          <div class="category-pill-grid" id="venuePillGrid">
+            <button type="button" class="cat-pill venue-pill" data-venue="Library">📚 Library</button>
+            <button type="button" class="cat-pill venue-pill" data-venue="Alpha Space">🚀 Alpha Space</button>
+            <button type="button" class="cat-pill venue-pill" data-venue="Gamma Space">🌌 Gamma Space</button>
+            <button type="button" class="cat-pill venue-pill" data-venue="Gamma">⚡ Gamma</button>
+          </div>
+        </fieldset>
+
+        <button type="submit" id="submitBtn">
+          <span id="btnText">Submit complaint →</span>
+          <span class="btn-spinner" id="btnSpinner" style="display:none;"></span>
+        </button>
+
+        <div class="cooldown-bar" id="cooldownBar">
+          <div class="cooldown-fill" id="cooldownFill"></div>
         </div>
 
-        <button type="submit" id="submitBtn">Submit complaint →</button>
         <div class="msg" id="formMsg"></div>
+
+        <!-- Stylized Digital Ticket Pass Result -->
+        <div class="ticket-pass" id="ticketPass">
+          <div class="pass-top">
+            <span class="pass-pill">Official Support Ticket</span>
+            <span class="pass-time" id="passTime">Just now</span>
+          </div>
+          <div class="pass-ticket-id">
+            <div>
+              <div class="pass-item">
+                <div class="lbl">Ticket Reference</div>
+              </div>
+              <div class="id-text" id="passTicketId">SIH-0000</div>
+            </div>
+            <button type="button" class="copy-btn" id="copyPassBtn">Copy ID</button>
+          </div>
+          <div class="pass-body">
+            <div class="pass-item">
+              <div class="lbl">Team</div>
+              <div class="val" id="passTeamName">-</div>
+            </div>
+            <div class="pass-item">
+              <div class="lbl">Table</div>
+              <div class="val" id="passTableNo">-</div>
+            </div>
+            <div class="pass-item">
+              <div class="lbl">Category</div>
+              <div class="val" id="passCategory">-</div>
+            </div>
+            <div class="pass-item">
+              <div class="lbl">Venue</div>
+              <div class="val" id="passVenue">-</div>
+            </div>
+          </div>
+        </div>
       </form>
-    </div>
+    </main>
   </div>
 
   <script>
-    // ⚠️ Replace this with your deployed Google Apps Script Web App URL
+    // ⚠️ Deployed Google Apps Script Web App URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRdMDsqHgWD-xkguwhQH9crAltqJm0-iAmiMQT29fkSmA2Fc3VMOH6vRSgtW86JXXG8w/exec";
 
     // ⚠️ Must match SHARED_SECRET in apps-script-backend.gs
@@ -373,14 +736,13 @@
     const DEVICE_KEY = 'sih_device_id';
     const LAST_SUBMIT_KEY = 'sih_last_submit';
 
-    // Persistent per-device ID (survives reloads, tied to this browser/device)
+    // Per-device persistent ID
     function getDeviceId() {
       let id = localStorage.getItem(DEVICE_KEY);
       if (!id) {
         if (!window.crypto || !window.crypto.getRandomValues) {
           throw new Error('Secure random number generation is not available in this browser.');
         }
-
         const bytes = new Uint8Array(16);
         window.crypto.getRandomValues(bytes);
         id = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
@@ -404,26 +766,86 @@
 
     const form = document.getElementById('complaintForm');
     const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
     const msg = document.getElementById('formMsg');
-    const originalBtnText = 'Submit complaint →';
+    const ticketPass = document.getElementById('ticketPass');
+    const cooldownBar = document.getElementById('cooldownBar');
+    const cooldownFill = document.getElementById('cooldownFill');
+    const categoryInput = document.getElementById('category');
+    const venueInput = document.getElementById('venue');
+    const categoryGrid = document.getElementById('categoryPillGrid');
+    const venueGrid = document.getElementById('venuePillGrid');
+    const issueTextarea = document.getElementById('issue');
+    const charCount = document.getElementById('charCount');
+    const categoryPills = document.querySelectorAll('.cat-pill:not(.venue-pill)');
+    const venuePills = document.querySelectorAll('.venue-pill');
 
     let cooldownTimer = null;
 
+    // Category Pill Selection
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const cat = pill.dataset.cat;
+        categoryInput.value = cat;
+        categoryPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        categoryGrid.classList.remove('has-error', 'shake');
+        if (msg.textContent.includes('category')) {
+          msg.className = 'msg';
+          msg.textContent = '';
+        }
+      });
+    });
+
+    // Venue Pill Selection
+    venuePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const v = pill.dataset.venue;
+        venueInput.value = v;
+        venuePills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        venueGrid.classList.remove('has-error', 'shake');
+        if (msg.textContent.includes('venue')) {
+          msg.className = 'msg';
+          msg.textContent = '';
+        }
+      });
+    });
+
+    // Dynamic Character Counter
+    issueTextarea.addEventListener('input', () => {
+      const len = issueTextarea.value.length;
+      charCount.textContent = len;
+      if (len >= 480) {
+        charCount.style.color = 'var(--danger)';
+      } else {
+        charCount.style.color = 'var(--ink-dim)';
+      }
+    });
+
+    // Cooldown timer handler
     function refreshCooldownUI() {
       const remaining = msRemainingInCooldown();
       if (remaining > 0) {
         btn.disabled = true;
-        btn.textContent = `Wait ${formatMinSec(remaining)}`;
+        btnText.textContent = `Wait ${formatMinSec(remaining)}`;
+        cooldownBar.style.display = 'block';
+        const pct = Math.max(0, Math.min(100, ((COOLDOWN_MS - remaining) / COOLDOWN_MS) * 100));
+        cooldownFill.style.width = pct + '%';
+
         msg.className = 'msg wait';
-        msg.textContent = `Your complaint has been logged and sent to the SIH helpdesk team for resolution.
- You can submit another complaint in ${formatMinSec(remaining)}.`;
+        msg.textContent = `Your complaint has been logged and sent to the SIH help desk team for resolution. You can submit another complaint in ${formatMinSec(remaining)}.`;
+
         if (!cooldownTimer) {
           cooldownTimer = setInterval(() => {
-            if (msRemainingInCooldown() <= 0) {
+            const rem = msRemainingInCooldown();
+            if (rem <= 0) {
               clearInterval(cooldownTimer);
               cooldownTimer = null;
               btn.disabled = false;
-              btn.textContent = originalBtnText;
+              btnText.textContent = 'Submit complaint →';
+              cooldownBar.style.display = 'none';
               msg.className = 'msg';
               msg.textContent = '';
             } else {
@@ -432,85 +854,200 @@
           }, 1000);
         }
         return true;
+      } else {
+        cooldownBar.style.display = 'none';
       }
       return false;
     }
 
-    // Check cooldown state on page load
+    // Pre-fill last known table number if saved
+    const savedTable = localStorage.getItem('sih_last_tableNumber');
+    if (savedTable && !document.getElementById('tableNumber').value) {
+      document.getElementById('tableNumber').value = savedTable;
+    }
+
+    // Check cooldown on page load
     refreshCooldownUI();
 
+    // Copy Ticket ID helper
+    document.getElementById('copyPassBtn').addEventListener('click', () => {
+      const id = document.getElementById('passTicketId').textContent;
+      navigator.clipboard.writeText(id).then(() => {
+        const copyBtn = document.getElementById('copyPassBtn');
+        copyBtn.textContent = 'Copied ✓';
+        setTimeout(() => { copyBtn.textContent = 'Copy ID'; }, 2000);
+      });
+    });
+
+    // Form submission
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      if (refreshCooldownUI()) return; // still cooling down
+      if (refreshCooldownUI()) return;
 
       msg.className = 'msg';
       msg.textContent = '';
+      ticketPass.style.display = 'none';
 
-      if (SCRIPT_URL.includes('PASTE_YOUR')) {
-        msg.className = 'msg err';
-        msg.textContent = 'Setup needed: add your Google Apps Script Web App URL in index.html (SCRIPT_URL).';
-        return;
-      }
-
-      // Honeypot check — if this hidden field got filled, it's almost certainly a bot
+      // Honeypot check
       const honeypot = document.getElementById('website').value;
       if (honeypot) {
-        // Pretend it worked so bots don't learn to avoid this field
         msg.className = 'msg ok';
-        msg.textContent = 'Logged ✓ Your complaint has been sent to the helpdesk.';
+        msg.textContent = 'Logged ✓ Your complaint has been sent to the help desk.';
         form.reset();
         return;
       }
 
-      const data = {
+      // Client-side validation for category and venue
+      const selectedCategory = categoryInput.value.trim();
+      if (!selectedCategory) {
+        msg.className = 'msg err';
+        msg.textContent = 'Please select an issue category above.';
+        categoryGrid.classList.remove('shake');
+        void categoryGrid.offsetWidth; // trigger reflow
+        categoryGrid.classList.add('has-error', 'shake');
+        categoryGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const selectedVenue = venueInput.value.trim();
+      if (!selectedVenue) {
+        msg.className = 'msg err';
+        msg.textContent = 'Please select a venue location above.';
+        venueGrid.classList.remove('shake');
+        void venueGrid.offsetWidth; // trigger reflow
+        venueGrid.classList.add('has-error', 'shake');
+        venueGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      const payload = {
         secret: SHARED_SECRET,
         deviceId: getDeviceId(),
         teamName: document.getElementById('teamName').value.trim(),
         tableNumber: document.getElementById('tableNumber').value.trim(),
-        category: document.getElementById('category').value,
-        issue: document.getElementById('issue').value.trim(),
-        venue: document.getElementById('venue').value.trim(),
+        category: selectedCategory,
+        issue: issueTextarea.value.trim(),
+        venue: selectedVenue
       };
 
       btn.disabled = true;
-      btn.textContent = 'Submitting…';
+      btnText.textContent = 'Submitting…';
+      btnSpinner.style.display = 'inline-block';
 
       try {
         const res = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // keeps this a "simple request" (no CORS preflight)
-          body: JSON.stringify(data)
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
         });
         const result = await res.json();
 
         if (result.result === 'success') {
           localStorage.setItem(LAST_SUBMIT_KEY, Date.now().toString());
-          localStorage.setItem('sih_last_tableNumber', data.tableNumber);
+          localStorage.setItem('sih_last_tableNumber', payload.tableNumber);
 
           msg.className = 'msg ok';
           msg.textContent = `Logged ✓ Your ticket ID is ${result.ticketId} — keep it for your records.`;
+
+          // Populate Digital Ticket Pass
+          document.getElementById('passTicketId').textContent = result.ticketId;
+          document.getElementById('passTeamName').textContent = payload.teamName;
+          document.getElementById('passTableNo').textContent = payload.tableNumber;
+          document.getElementById('passCategory').textContent = payload.category;
+          document.getElementById('passVenue').textContent = payload.venue;
+          document.getElementById('passTime').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          ticketPass.style.display = 'block';
+
+          // Trigger confetti celebration
+          launchConfetti();
+
           form.reset();
+          categoryInput.value = '';
+          venueInput.value = '';
+          charCount.textContent = '0';
+          categoryPills.forEach(p => p.classList.remove('active'));
+          venuePills.forEach(p => p.classList.remove('active'));
+          categoryGrid.classList.remove('has-error', 'shake');
+          venueGrid.classList.remove('has-error', 'shake');
           refreshCooldownUI();
         } else if (result.result === 'cooldown') {
           msg.className = 'msg wait';
           msg.textContent = 'This device recently submitted a complaint. Please wait for the cooldown to finish.';
           btn.disabled = false;
-          btn.textContent = originalBtnText;
+          btnText.textContent = 'Submit complaint →';
         } else {
           msg.className = 'msg err';
-          msg.textContent = 'Submission was rejected by the server. Please try again.';
+          msg.textContent = 'Submission was rejected by the server. Please check your inputs and try again.';
           btn.disabled = false;
-          btn.textContent = originalBtnText;
+          btnText.textContent = 'Submit complaint →';
         }
       } catch (err) {
         console.error('Submission error:', err);
         msg.className = 'msg err';
         msg.textContent = 'Could not submit — check your connection and try again.';
         btn.disabled = false;
-        btn.textContent = originalBtnText;
+        btnText.textContent = 'Submit complaint →';
+      } finally {
+        btnSpinner.style.display = 'none';
       }
     });
+
+    // Lightweight Pure JS Confetti
+    function launchConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const pieces = [];
+      const colors = ['#007366', '#00A896', '#028090', '#F0E0C1', '#F4A261'];
+
+      for (let i = 0; i < 60; i++) {
+        pieces.push({
+          x: canvas.width / 2,
+          y: canvas.height * 0.4,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.8) * 10,
+          size: Math.random() * 7 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10,
+          opacity: 1
+        });
+      }
+
+      let frame = 0;
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+        for (const p of pieces) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.28; // gravity
+          p.rotation += p.rotSpeed;
+          p.opacity -= 0.015;
+          if (p.opacity > 0) {
+            alive = true;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+          }
+        }
+        frame++;
+        if (alive && frame < 90) {
+          requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      requestAnimationFrame(render);
+    }
   </script>
 </body>
 
