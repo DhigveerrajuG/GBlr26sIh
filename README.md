@@ -11,6 +11,10 @@ A lightweight, high-performance issue-reporting portal for on-ground SIH hackath
 - `apps-script-backend.gs` - Google Apps Script Web App API backend with chunked caching, lock-safe writes, and admin role management.
 - `images/` - Logos and branding assets (`sih_logo_transparent.png`).
 - `CONTRIBUTORS.md` - Project contributors & AI pair programmer acknowledgements.
+- `CONTRIBUTING.md` - Contribution guidelines and development workflow.
+- `CODE_OF_CONDUCT.md` - Contributor Covenant Code of Conduct.
+- `SECURITY.md` - Security policy and vulnerability disclosure instructions.
+- `LICENSE` - MIT License terms.
 
 ---
 
@@ -116,3 +120,19 @@ This project is built and maintained through the collaboration of human ingenuit
 | **[Claude](https://www.anthropic.com/claude)** (Anthropic) | 🤖 AI Pair Programmer | Feature Engineering, Refactoring & API Integration |
 
 For full details, roles, and contribution guidelines, see [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
+---
+
+## 👥 Community & Contributing
+
+We welcome contributions from the community!
+- 📖 **Contributing**: Please review our [Contributing Guidelines](CONTRIBUTING.md) to get started with setup, coding conventions, and PR submissions.
+- 📜 **Code of Conduct**: We follow the [Contributor Covenant](CODE_OF_CONDUCT.md) to foster an open and inclusive community.
+- 🛡️ **Security Policy**: Found a vulnerability? Check our [Security Policy](SECURITY.md) for responsible disclosure procedures.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+

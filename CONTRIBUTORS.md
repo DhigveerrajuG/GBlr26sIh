@@ -48,8 +48,14 @@ This project was developed through the collaborative synergy of the lead project
 ## 🤝 Contribution Guidelines
 
 Contributions, issues, and feature requests are welcome!
+- 📖 For setup instructions, coding conventions, and PR guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+- 📜 All community participants must follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+- 🛡️ To report security vulnerabilities, review our [Security Policy](SECURITY.md).
+
+Quick contribution workflow:
 1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+2. Create your feature branch (`git checkout -b feat/AmazingFeature`).
 3. Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+4. Push to the branch (`git push origin feat/AmazingFeature`).
+5. Open a Pull Request following our [PR Template](.github/pull_request_template.md).
+
