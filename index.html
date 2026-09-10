@@ -177,7 +177,14 @@
       margin-bottom: 16px;
     }
 
-    .field label {
+    fieldset.field {
+      border: none;
+      padding: 0;
+      margin: 0 0 16px 0;
+    }
+
+    .field label,
+    .field legend {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -186,9 +193,12 @@
       color: var(--ink);
       margin-bottom: 7px;
       letter-spacing: 0.01em;
+      padding: 0;
+      width: 100%;
     }
 
-    .field label .req {
+    .field label .req,
+    .field legend .req {
       color: var(--ink);
       margin-left: 2px;
     }
@@ -735,31 +745,37 @@
   </div>
 
   <script>
+    const safeStorage = {
+      get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+      set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} },
+      remove: (k) => { try { localStorage.removeItem(k); } catch (e) {} }
+    };
 
-    const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
-    const SHARED_SECRET = "YOUR_SHARED_SECRET_HERE";
+    const urlParams = new URLSearchParams(window.location.search);
+    const SCRIPT_URL = urlParams.get('scriptUrl') || safeStorage.get('sih_script_url') || "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+    const SHARED_SECRET = urlParams.get('secret') || safeStorage.get('sih_shared_secret') || "YOUR_SHARED_SECRET_HERE";
 
     const COOLDOWN_MS = 10 * 60 * 1000;
     const DEVICE_KEY = 'sih_device_id';
     const LAST_SUBMIT_KEY = 'sih_last_submit';
 
-
     function getDeviceId() {
-      let id = localStorage.getItem(DEVICE_KEY);
+      let id = safeStorage.get(DEVICE_KEY);
       if (!id) {
         if (!window.crypto || !window.crypto.getRandomValues) {
-          throw new Error('Secure random number generation is not available in this browser.');
+          id = 'dev_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+        } else {
+          const bytes = new Uint8Array(16);
+          window.crypto.getRandomValues(bytes);
+          id = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
         }
-        const bytes = new Uint8Array(16);
-        window.crypto.getRandomValues(bytes);
-        id = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
-        localStorage.setItem(DEVICE_KEY, id);
+        safeStorage.set(DEVICE_KEY, id);
       }
       return id;
     }
 
     function msRemainingInCooldown() {
-      const last = Number.parseInt(localStorage.getItem(LAST_SUBMIT_KEY) || '0', 10);
+      const last = Number.parseInt(safeStorage.get(LAST_SUBMIT_KEY) || '0', 10);
       const elapsed = Date.now() - last;
       return Math.max(0, COOLDOWN_MS - elapsed);
     }
@@ -868,24 +884,25 @@
     }
 
 
-    const savedTable = localStorage.getItem('sih_last_tableNumber');
+    const savedTable = safeStorage.get('sih_last_tableNumber');
     if (savedTable && !document.getElementById('tableNumber').value) {
       document.getElementById('tableNumber').value = savedTable;
     }
 
-
     refreshCooldownUI();
 
-
+    let copyPassTimer = null;
     document.getElementById('copyPassBtn').addEventListener('click', () => {
       const id = document.getElementById('passTicketId').textContent;
-      navigator.clipboard.writeText(id).then(() => {
-        const copyBtn = document.getElementById('copyPassBtn');
-        copyBtn.textContent = 'Copied ✓';
-        setTimeout(() => { copyBtn.textContent = 'Copy ID'; }, 2000);
-      });
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(id).then(() => {
+          const copyBtn = document.getElementById('copyPassBtn');
+          copyBtn.textContent = 'Copied ✓';
+          clearTimeout(copyPassTimer);
+          copyPassTimer = setTimeout(() => { copyBtn.textContent = 'Copy ID'; }, 2000);
+        }).catch(() => {});
+      }
     });
-
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -896,7 +913,6 @@
       msg.textContent = '';
       ticketPass.style.display = 'none';
 
-
       const honeypot = document.getElementById('website').value;
       if (honeypot) {
         msg.className = 'msg ok';
@@ -904,7 +920,6 @@
         form.reset();
         return;
       }
-
 
       const selectedCategory = categoryInput.value.trim();
       if (!selectedCategory) {
@@ -925,6 +940,12 @@
         void venueGrid.offsetWidth;
         venueGrid.classList.add('has-error', 'shake');
         venueGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      if (!SCRIPT_URL || SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE" || !SCRIPT_URL.startsWith('http')) {
+        msg.className = 'msg err';
+        msg.textContent = 'Configuration required: Please set your Google Apps Script Web App URL via ?scriptUrl=... in the address bar.';
         return;
       }
 
@@ -951,8 +972,8 @@
         const result = await res.json();
 
         if (result.result === 'success') {
-          localStorage.setItem(LAST_SUBMIT_KEY, Date.now().toString());
-          localStorage.setItem('sih_last_tableNumber', payload.tableNumber);
+          safeStorage.set(LAST_SUBMIT_KEY, Date.now().toString());
+          safeStorage.set('sih_last_tableNumber', payload.tableNumber);
 
           msg.className = 'msg ok';
           msg.textContent = `Logged ✓ Your ticket ID is ${result.ticketId} — keep it for your records.`;

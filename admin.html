@@ -1258,8 +1258,8 @@
   </div>
 
   <script type="module">
-
-    const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+    const urlParams = new URLSearchParams(window.location.search);
+    const SCRIPT_URL = urlParams.get('scriptUrl') || localStorage.getItem('sih_script_url') || "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 
     const STORAGE_KEYS = {
@@ -1395,9 +1395,7 @@
 
             document.getElementById('whoamiName').textContent = ME.name || 'Admin';
             document.getElementById('whoamiRole').textContent = ME.role || 'Admin';
-            if (ME.role === 'Owner') {
-              document.getElementById('manageAdminsBtn').style.display = 'inline-flex';
-            }
+            document.getElementById('manageAdminsBtn').style.display = (ME.role === 'Owner') ? 'inline-flex' : 'none';
 
             setComplaintsData(complaints);
             renderList();
@@ -1407,13 +1405,17 @@
         } catch (e) { }
       }
 
-
       refreshList(false);
       flushSyncQueue();
     }
 
     async function tryLogin(key) {
       const loginBtn = document.getElementById('loginBtn');
+      if (!SCRIPT_URL || SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE" || !SCRIPT_URL.startsWith('http')) {
+        showLoginError('Setup required: Please set your Google Apps Script URL via ?scriptUrl=... in the address bar.');
+        return;
+      }
+
       loginBtn.disabled = true;
       loginBtn.textContent = 'Unlocking…';
       document.getElementById('loginErr').style.display = 'none';
@@ -1444,9 +1446,7 @@
                 localStorage.setItem(STORAGE_KEYS.ADMIN_PROFILE, JSON.stringify(ME));
                 document.getElementById('whoamiName').textContent = ME.name;
                 document.getElementById('whoamiRole').textContent = ME.role;
-                if (ME.role === 'Owner') {
-                  document.getElementById('manageAdminsBtn').style.display = 'inline-flex';
-                }
+                document.getElementById('manageAdminsBtn').style.display = (ME.role === 'Owner') ? 'inline-flex' : 'none';
               }
             }).catch(() => { });
         }
@@ -1455,9 +1455,7 @@
 
         document.getElementById('whoamiName').textContent = ME.name;
         document.getElementById('whoamiRole').textContent = ME.role;
-        if (ME.role === 'Owner') {
-          document.getElementById('manageAdminsBtn').style.display = 'inline-flex';
-        }
+        document.getElementById('manageAdminsBtn').style.display = (ME.role === 'Owner') ? 'inline-flex' : 'none';
 
         loginScreen.style.display = 'none';
         dashboard.style.display = 'block';
@@ -1870,7 +1868,12 @@
       document.getElementById('mTeam').innerHTML = `Team <b>${escapeHtml(c.teamName)}</b> · Table ${escapeHtml(c.teamNo)}`;
       document.getElementById('mCategory').textContent = c.category;
       document.getElementById('mVenue').textContent = c.venue;
-      document.getElementById('mTime').textContent = `Submitted: ${c.timestamp}`;
+      let formattedTime = c.timestamp || '';
+      try {
+        const d = new Date(c.timestamp);
+        if (!isNaN(d.getTime())) formattedTime = d.toLocaleString();
+      } catch (e) {}
+      document.getElementById('mTime').textContent = `Submitted: ${formattedTime}`;
       document.getElementById('mIssue').textContent = c.issue;
       document.getElementById('mRemarks').value = c.remarks || '';
       document.getElementById('mHandledBy').textContent = c.handledBy ? `Last handled by: ${c.handledBy}` : '';

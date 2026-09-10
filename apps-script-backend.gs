@@ -100,7 +100,15 @@ function removeCachedJson(key) {
 }
 
 function doPost(e) {
-  const data = JSON.parse(e.postData.contents);
+  let data;
+  try {
+    if (!e || !e.postData || !e.postData.contents) {
+      return jsonResponse({ result: 'error', message: 'Missing request payload' });
+    }
+    data = JSON.parse(e.postData.contents);
+  } catch (err) {
+    return jsonResponse({ result: 'error', message: 'Invalid JSON payload' });
+  }
 
   if (data.secret !== SHARED_SECRET) return jsonResponse({ result: 'unauthorized' });
   if (data.website) return jsonResponse({ result: 'rejected' });
@@ -110,7 +118,7 @@ function doPost(e) {
   if (cache.get(deviceId)) return jsonResponse({ result: 'cooldown' });
 
   const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
+  lock.waitLock(30000);
   try {
     const sheet = complaintsSheet();
     const ticketNum = sheet.getLastRow();
@@ -130,40 +138,42 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  const action = e.parameter.action;
+  e = e || { parameter: {} };
+  const params = e.parameter || {};
+  const action = params.action;
 
-  if (action === 'adminLogin') return adminLogin(e.parameter.key);
+  if (action === 'adminLogin') return adminLogin(params.key);
 
   if (action === 'list') {
-    const admin = requireAdmin(e.parameter.key);
+    const admin = requireAdmin(params.key);
     if (!admin) return jsonResponse({ error: 'unauthorized' });
-    const response = fetchComplaintsData(e.parameter.bust === '1');
+    const response = fetchComplaintsData(params.bust === '1');
     response.admin = { name: admin.name, role: admin.role };
     return jsonResponse(response);
   }
 
   if (action === 'update') {
-    const admin = requireAdmin(e.parameter.key);
+    const admin = requireAdmin(params.key);
     if (!admin) return jsonResponse({ error: 'unauthorized' });
-    return updateComplaint(e.parameter, admin.name);
+    return updateComplaint(params, admin.name);
   }
 
   if (action === 'listAdmins') {
-    const admin = requireOwner(e.parameter.key);
+    const admin = requireOwner(params.key);
     if (!admin) return jsonResponse({ error: 'unauthorized' });
     return listAdmins();
   }
 
   if (action === 'addAdmin') {
-    const admin = requireOwner(e.parameter.key);
+    const admin = requireOwner(params.key);
     if (!admin) return jsonResponse({ error: 'unauthorized' });
-    return addAdmin(e.parameter.newName, admin.name);
+    return addAdmin(params.newName, admin.name);
   }
 
   if (action === 'setAdminActive') {
-    const admin = requireOwner(e.parameter.key);
+    const admin = requireOwner(params.key);
     if (!admin) return jsonResponse({ error: 'unauthorized' });
-    return setAdminActive(e.parameter.targetKey, e.parameter.active === 'true');
+    return setAdminActive(params.targetKey, params.active === 'true');
   }
 
   if (action === 'ping') return jsonResponse({ status: 'ok', timestamp: new Date().toISOString() });
@@ -313,7 +323,7 @@ function updateComplaint(params, adminName) {
   if (!ticketId) return jsonResponse({ error: 'missing ticketId' });
 
   const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
+  lock.waitLock(30000);
   try {
     const sheet = complaintsSheet();
     const lastRow = sheet.getLastRow();
