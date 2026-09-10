@@ -10,6 +10,7 @@ A lightweight, high-performance issue-reporting portal for on-ground SIH hackath
 - `admin.html` - Authenticated organizer dashboard featuring SWR 0ms instant boot, background sync queue, audio chimes, status/venue filters, and live search.
 - `apps-script-backend.gs` - Google Apps Script Web App API backend with chunked caching, lock-safe writes, and admin role management.
 - `images/` - Logos and branding assets (`sih_logo_transparent.png`).
+- `CONTRIBUTORS.md` - Project contributors & AI pair programmer acknowledgements.
 
 ---
 
@@ -106,8 +107,12 @@ Your portal will be live at:
 
 ## 🤝 Contributors & Acknowledgements
 
-- **[DhigveerrajuG](https://github.com/DhigveerrajuG)** — Project Creator & Lead Developer
-- **[Antigravity](https://deepmind.google/) (Google DeepMind)** — AI Pair Programmer & Code Assistant
-- **[Claude](https://www.anthropic.com/claude)** (Anthropic) — AI Pair Programmer & Code Assistant
+This project is built and maintained through the collaboration of human ingenuity and AI pair programming:
 
+| Contributor | Role | Focus Areas |
+| :--- | :--- | :--- |
+| **[Dhigveerraju Gadde](https://github.com/DhigveerrajuG)** | 👤 Project Creator & Lead Developer | Project Architecture, Requirements, Testing & Deployment |
+| **[Antigravity](https://deepmind.google/)** (Google DeepMind) | 🤖 AI Pair Programmer | Architecture, Concurrency Locks, UI/UX & Security |
+| **[Claude](https://www.anthropic.com/claude)** (Anthropic) | 🤖 AI Pair Programmer | Feature Engineering, Refactoring & API Integration |
 
+For full details, roles, and contribution guidelines, see [CONTRIBUTORS.md](CONTRIBUTORS.md).
