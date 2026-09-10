@@ -1,3 +1,14 @@
+/**
+ * SIH Support Desk - Google Apps Script Backend API
+ * 
+ * Author & Maintainer: Dhigveerraju Gadde (@DhigveerrajuG)
+ * AI Pair Programmers & Collaborators:
+ *   - Antigravity (Google DeepMind)
+ *   - Claude (Anthropic)
+ * 
+ * Concurrency-safe spreadsheet storage, role-based auth, caching, and rate limiting.
+ */
+
 const SHARED_SECRET = "YOUR_SHARED_SECRET_HERE";
 
 const COOLDOWN_SECONDS = 10 * 60;

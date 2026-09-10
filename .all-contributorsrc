@@ -1,0 +1,50 @@
+{
+  "projectName": "GBlr26sIh",
+  "projectOwner": "DhigveerrajuG",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md",
+    "CONTRIBUTORS.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "DhigveerrajuG",
+      "name": "Dhigveerraju Gadde",
+      "avatar_url": "https://github.com/DhigveerrajuG.png",
+      "profile": "https://github.com/DhigveerrajuG",
+      "contributions": [
+        "code",
+        "design",
+        "doc",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "Antigravity",
+      "name": "Antigravity (Google DeepMind)",
+      "avatar_url": "https://deepmind.google/favicon.ico",
+      "profile": "https://deepmind.google/",
+      "contributions": [
+        "code",
+        "architecture",
+        "security",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "Claude",
+      "name": "Claude (Anthropic)",
+      "avatar_url": "https://www.anthropic.com/favicon.ico",
+      "profile": "https://www.anthropic.com/claude",
+      "contributions": [
+        "code",
+        "refactoring",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
