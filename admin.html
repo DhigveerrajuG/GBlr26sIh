@@ -42,8 +42,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Login Screen */
-    #loginScreen {
+        #loginScreen {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -162,8 +161,7 @@
       display: none;
     }
 
-    /* Main Dashboard */
-    #dashboard {
+        #dashboard {
       display: none;
       max-width: 1080px;
       margin: 0 auto;
@@ -253,8 +251,7 @@
       flex-wrap: wrap;
     }
 
-    /* Live Sync Pill */
-    .sync-pill {
+        .sync-pill {
       display: inline-flex;
       align-items: center;
       gap: 7px;
@@ -339,8 +336,7 @@
       display: none;
     }
 
-    /* Interactive Metric Stat Cards */
-    .metrics-grid {
+        .metrics-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
@@ -411,8 +407,7 @@
       color: var(--ink-dim);
     }
 
-    /* Status specific styles for metric cards */
-    .metric-card.pending-card::before {
+        .metric-card.pending-card::before {
       background: #374151;
     }
 
@@ -424,8 +419,7 @@
       background: #10B981;
     }
 
-    /* New ticket toast banner */
-    .new-ticket-toast {
+        .new-ticket-toast {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -471,8 +465,7 @@
       }
     }
 
-    /* Filters Row */
-    .filters-row {
+        .filters-row {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -480,8 +473,7 @@
       flex-wrap: wrap;
     }
 
-    /* Venue Filter Bar */
-    .venue-filter-bar {
+        .venue-filter-bar {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -553,8 +545,7 @@
       color: var(--card-edge);
     }
 
-    /* Search bar */
-    .search-wrap {
+        .search-wrap {
       position: relative;
       margin-bottom: 20px;
     }
@@ -595,8 +586,7 @@
       color: var(--ink);
     }
 
-    /* Ticket Rows */
-    .list {
+        .list {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -723,8 +713,7 @@
       color: #059669;
     }
 
-    /* Modals */
-    .backdrop {
+        .backdrop {
       display: none;
       position: fixed;
       inset: 0;
@@ -866,8 +855,7 @@
       box-shadow: 0 3px 10px -2px rgba(16, 185, 129, 0.4);
     }
 
-    /* Preset Remark Quick Buttons */
-    .preset-remarks {
+        .preset-remarks {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
@@ -983,8 +971,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Manage Admins modal */
-    .admin-list {
+        .admin-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -1105,8 +1092,7 @@
 
 <body>
 
-  <!-- Login Screen -->
-  <div id="loginScreen">
+    <div id="loginScreen">
     <div class="login-card">
       <div class="admin-title">
         <div class="admin-header-text">
@@ -1122,8 +1108,7 @@
     </div>
   </div>
 
-  <!-- Main Dashboard -->
-  <div id="dashboard">
+    <div id="dashboard">
     <header class="top-bar">
       <div>
         <div class="eyebrow">Live · SIH help desk</div>
@@ -1143,8 +1128,7 @@
       </div>
     </header>
 
-    <!-- Interactive Metric Stat Cards -->
-    <section class="metrics-grid" aria-label="Complaint Statistics">
+        <section class="metrics-grid" aria-label="Complaint Statistics">
       <div class="metric-card active" data-filter="all">
         <div class="metric-label">All Complaints</div>
         <div class="metric-num" id="statAll">0</div>
@@ -1199,8 +1183,7 @@
     </main>
   </div>
 
-  <!-- Ticket detail modal -->
-  <div class="backdrop" id="modalBackdrop">
+    <div class="backdrop" id="modalBackdrop">
     <div class="modal">
       <div class="modal-head">
         <div>
@@ -1240,8 +1223,7 @@
     </div>
   </div>
 
-  <!-- Manage admins modal (Owner only) -->
-  <div class="backdrop" id="adminsBackdrop">
+    <div class="backdrop" id="adminsBackdrop">
     <div class="modal">
       <div class="modal-head">
         <h2>Manage admins</h2>
@@ -1267,10 +1249,10 @@
   </div>
 
   <script type="module">
-    // ⚠️ Deployed Google Apps Script Web App URL
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRdMDsqHgWD-xkguwhQH9crAltqJm0-iAmiMQT29fkSmA2Fc3VMOH6vRSgtW86JXXG8w/exec";
 
-    // Storage keys for SWR caching & background sync
+    const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+
     const STORAGE_KEYS = {
       ADMIN_KEY: 'sih_admin_key',
       COMPLAINTS: 'sih_cache_complaints_v4',
@@ -1303,7 +1285,7 @@
     const searchInput = document.getElementById('searchInput');
     const searchClear = document.getElementById('searchClear');
 
-    // Load sync queue
+
     let pendingSyncQueue = [];
     try {
       pendingSyncQueue = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYNC_QUEUE) || '[]');
@@ -1311,7 +1293,7 @@
       pendingSyncQueue = [];
     }
 
-    // Sound Toggle state
+
     function updateSoundButton() {
       soundToggleBtn.textContent = soundEnabled ? '🔔 Sound On' : '🔕 Muted';
       soundToggleBtn.style.opacity = soundEnabled ? '1' : '0.7';
@@ -1324,7 +1306,7 @@
       updateSoundButton();
     });
 
-    // Audio Chime
+
     function playNewTicketChime() {
       if (!soundEnabled) return;
       try {
@@ -1334,8 +1316,8 @@
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.14); // A5
+        osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.14);
         gain.gain.setValueAtTime(0.12, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
         osc.connect(gain);
@@ -1345,7 +1327,7 @@
       } catch (e) { }
     }
 
-    // Sync status indicator
+
     function updateSyncStatus(customText = null, state = null) {
       if (!syncPill || !syncText) return;
       syncPill.classList.remove('syncing', 'queued', 'offline');
@@ -1384,11 +1366,11 @@
       } catch (e) { }
     }
 
-    // SWR Instant Boot
+
     function initInstantDashboard() {
       if (!MY_KEY) return;
 
-      // STEP 1: Load local storage cache immediately (0ms)
+
       const cachedComplaintsStr = localStorage.getItem(STORAGE_KEYS.COMPLAINTS);
       const cachedAdminStr = localStorage.getItem(STORAGE_KEYS.ADMIN_PROFILE);
 
@@ -1416,7 +1398,7 @@
         } catch (e) { }
       }
 
-      // STEP 2: Background revalidation
+
       refreshList(false);
       flushSyncQueue();
     }
@@ -1477,7 +1459,6 @@
         updateMetrics();
         updateSyncStatus('Synced just now');
       } catch (err) {
-        console.error('Login error:', err);
         showLoginError('Connection error. Please check your network and try again.');
       } finally {
         loginBtn.disabled = false;
@@ -1507,7 +1488,7 @@
       location.reload();
     });
 
-    // Pre-indexed search data
+
     function setComplaintsData(items) {
       complaints = items || [];
       for (let i = 0; i < complaints.length; i++) {
@@ -1516,8 +1497,8 @@
       }
     }
 
-    // Metrics & Badges
-    // Resilient venue matching helper
+
+
     function isVenueMatch(cVenue, selectedVenue) {
       if (!selectedVenue || selectedVenue.toLowerCase() === 'all') return true;
       if (!cVenue) return false;
@@ -1527,13 +1508,13 @@
 
       if (rawItem === rawTarget) return true;
 
-      // Clean emojis and punctuation for flexible comparison
+
       const cleanItem = rawItem.replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
       const cleanTarget = rawTarget.replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
 
       if (cleanItem === cleanTarget) return true;
 
-      // Differentiate "Gamma Space Square" from "Gamma Space" (and legacy "Gamma")
+
       if (cleanTarget === 'gamma space square') {
         return cleanItem.includes('square');
       }
@@ -1576,7 +1557,7 @@
       const sSolved = document.getElementById('statSolved');
       if (sSolved) sSolved.textContent = solvedCount;
 
-      // Update venue badge counters
+
       const bAll = document.getElementById('vBadgeAll');
       if (bAll) bAll.textContent = complaints.length;
       const bLib = document.getElementById('vBadgeLibrary');
@@ -1589,7 +1570,7 @@
       if (bGammaSpace) bGammaSpace.textContent = vGammaSpace;
     }
 
-    // Metric Cards as 1-click status filters
+
     document.querySelectorAll('.metric-card').forEach(card => {
       card.addEventListener('click', () => {
         const filter = card.dataset.filter;
@@ -1607,7 +1588,7 @@
       renderList();
     }
 
-    // Venue Filter pills click handler (delegated for reliability)
+
     const venueFilterBar = document.getElementById('venueFilterBar');
     if (venueFilterBar) {
       venueFilterBar.addEventListener('click', (e) => {
@@ -1620,7 +1601,7 @@
       });
     }
 
-    // Live Search with Clear
+
     let searchTimer;
     searchInput.addEventListener('input', () => {
       searchClear.style.display = searchInput.value ? 'block' : 'none';
@@ -1635,7 +1616,7 @@
       searchInput.focus();
     });
 
-    // Background Sync Queue
+
     function enqueueSync(ticketId, status, remarks) {
       const existingIndex = pendingSyncQueue.findIndex(x => x.ticketId === ticketId);
       const item = { ticketId, status, remarks, queuedAt: Date.now() };
@@ -1666,14 +1647,12 @@
           const data = await res.json();
 
           if (data.error === 'unauthorized') {
-            console.warn('Unauthorized during sync');
             break;
           }
 
           pendingSyncQueue.shift();
           saveSyncQueue();
         } catch (err) {
-          console.warn('Sync paused (network):', err);
           updateSyncStatus('Sync paused (network)', 'offline');
           break;
         }
@@ -1683,7 +1662,7 @@
       updateSyncStatus();
     }
 
-    // Silent Background Refresh
+
     async function refreshList(forceBust = false) {
       if (refreshInFlight || (!forceBust && document.hidden) || !MY_KEY) return;
       refreshInFlight = true;
@@ -1703,7 +1682,7 @@
         if (!data.error && data.complaints) {
           const inbound = data.complaints;
 
-          // Check for new tickets
+
           if (knownTicketIds.size > 0) {
             const newOnes = inbound.filter(x => !knownTicketIds.has(x.ticketId));
             if (newOnes.length > 0) {
@@ -1715,7 +1694,7 @@
 
           knownTicketIds = new Set(inbound.map(x => x.ticketId));
 
-          // Merge optimistic queue states
+
           if (pendingSyncQueue.length > 0) {
             const queueMap = new Map(pendingSyncQueue.map(q => [q.ticketId, q]));
             for (let i = 0; i < inbound.length; i++) {
@@ -1737,7 +1716,6 @@
           updateSyncStatus(`Synced at ${timeStr}`);
         }
       } catch (err) {
-        console.error('Refresh error:', err);
         updateSyncStatus('Offline (Cached)', 'offline');
       } finally {
         refreshInFlight = false;
@@ -1800,7 +1778,7 @@
         return statusMatch && venueMatch && searchMatch;
       });
 
-      // Chronological sorting (newest first)
+
       filtered.sort((a, b) => {
         const tA = a.timestamp ? new Date(a.timestamp).getTime() : 0;
         const tB = b.timestamp ? new Date(b.timestamp).getTime() : 0;
@@ -1861,7 +1839,7 @@
       }).join('');
     }
 
-    // Fast Event Delegation for Ticket Rows
+
     document.getElementById('list').addEventListener('click', (e) => {
       const row = e.target.closest('.ticket-row');
       if (row && row.dataset.ticket) {
@@ -1873,7 +1851,7 @@
       return (s || '').toString().replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
     }
 
-    // Modal Open & 0ms Auto-flip
+
     function openTicket(ticketId) {
       const c = complaints.find(x => x.ticketId === ticketId);
       if (!c) return;
@@ -1894,7 +1872,7 @@
 
       modalBackdrop.style.display = 'flex';
 
-      // Auto-flip Pending → Ongoing optimistically without blocking
+
       if ((c.status || 'Pending').toLowerCase() === 'pending') {
         c.status = 'Ongoing';
         selectedStatus = 'Ongoing';
@@ -1918,7 +1896,7 @@
       }
     });
 
-    // Preset Remarks click
+
     document.querySelectorAll('.preset-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         const textarea = document.getElementById('mRemarks');
@@ -1956,7 +1934,7 @@
       }
     });
 
-    // 0ms Optimistic Save
+
     document.getElementById('saveBtn').addEventListener('click', () => {
       if (!activeTicket) return;
       const remarks = document.getElementById('mRemarks').value.trim();
@@ -1980,7 +1958,7 @@
       enqueueSync(activeTicket.ticketId, selectedStatus, remarks);
     });
 
-    // Manage Admins
+
     document.getElementById('manageAdminsBtn').addEventListener('click', async () => {
       document.getElementById('newKeyBox').style.display = 'none';
       document.getElementById('newAdminName').value = '';
@@ -2021,7 +1999,6 @@
       `;
         }).join('');
       } catch (err) {
-        console.error('Error loading admins:', err);
         list.innerHTML = '<div class="empty">Error loading admins.</div>';
       }
     }
@@ -2036,7 +2013,6 @@
         await fetch(`${SCRIPT_URL}?action=setAdminActive&key=${encodeURIComponent(MY_KEY)}&targetKey=${encodeURIComponent(targetKey)}&active=${!currentlyActive}`);
         await loadAdmins();
       } catch (err) {
-        console.error('Failed to change admin status:', err);
         btn.disabled = false;
       }
     });
@@ -2060,14 +2036,13 @@
           await loadAdmins();
         }
       } catch (err) {
-        console.error('Add admin failed:', err);
       } finally {
         btn.disabled = false;
         btn.textContent = 'Generate access key';
       }
     });
 
-    // Start app
+
     initInstantDashboard();
   </script>
 </body>

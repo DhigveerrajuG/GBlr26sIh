@@ -1,22 +1,20 @@
-const SHARED_SECRET = "sih2026-internal-EClub";
+const SHARED_SECRET = "YOUR_SHARED_SECRET_HERE";
 
 const COOLDOWN_SECONDS = 10 * 60;
 
 const COMPLAINTS_SHEET = 'Complaints';
 const ADMINS_SHEET = 'Admins';
 const COMPLAINTS_CACHE_KEY = 'complaints_list_v2';
-const COMPLAINTS_CACHE_SECONDS = 60; // 60s TTL; invalidated on every new ticket or update
+const COMPLAINTS_CACHE_SECONDS = 60;
 const ADMIN_CACHE_PREFIX = 'admin_auth_v2_';
-const ADMIN_CACHE_SECONDS = 600; // 10 minutes cache for admin keys
+const ADMIN_CACHE_SECONDS = 600;
 
-/** @typedef {Object} ComplaintsColumns */
-const COL = { // Complaints sheet
+const COL = {
   TIMESTAMP: 1, TICKET: 2, TEAM_NAME: 3, TEAM_NO: 4, CATEGORY: 5,
   RESERVED: 6, ISSUE: 7, VENUE: 8, STATUS: 9, REMARKS: 10, UPDATED: 11, HANDLED_BY: 12
 };
 
-/** @typedef {Object.<string, number>} AdminsColumns */
-const ACOL = { // Admins sheet
+const ACOL = {
   NAME: 1,
   KEY: 2,
   ROLE: 3,
@@ -28,11 +26,10 @@ const ACOL = { // Admins sheet
 function complaintsSheet() {
   return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(COMPLAINTS_SHEET);
 }
+
 function adminsSheet() {
   return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ADMINS_SHEET);
 }
-
-// ---------- Cache helpers with safe chunking (>100KB protection) ----------
 
 function setCachedJson(key, data, ttlSeconds) {
   try {
@@ -52,9 +49,7 @@ function setCachedJson(key, data, ttlSeconds) {
       }
       cache.putAll(batch, ttlSeconds);
     }
-  } catch (err) {
-    console.warn('Cache write failed:', err);
-  }
+  } catch (err) { }
 }
 
 function getCachedJson(key) {
@@ -74,9 +69,7 @@ function getCachedJson(key) {
       }
       return JSON.parse(full);
     }
-  } catch (err) {
-    console.warn('Cache read failed:', err);
-  }
+  } catch (err) { }
   return null;
 }
 
@@ -92,18 +85,14 @@ function removeCachedJson(key) {
         cache.remove(key + '_' + i);
       }
     }
-  } catch (err) {
-    console.warn('Cache remove failed:', err);
-  }
+  } catch (err) { }
 }
-
-// ---------- Complaint submission (called from index.html) ----------
 
 function doPost(e) {
   const data = JSON.parse(e.postData.contents);
 
   if (data.secret !== SHARED_SECRET) return jsonResponse({ result: 'unauthorized' });
-  if (data.website) return jsonResponse({ result: 'rejected' }); // honeypot
+  if (data.website) return jsonResponse({ result: 'rejected' });
 
   const cache = CacheService.getScriptCache();
   const deviceId = data.deviceId || 'unknown';
@@ -128,8 +117,6 @@ function doPost(e) {
     lock.releaseLock();
   }
 }
-
-// ---------- GET router ----------
 
 function doGet(e) {
   const action = e.parameter.action;
@@ -173,8 +160,6 @@ function doGet(e) {
   return jsonResponse({ error: 'unknown action' });
 }
 
-// ---------- Admin identity & fast caching ----------
-
 function findAdminByKey(key) {
   if (!key) return null;
   const cleanKey = String(key).trim();
@@ -206,7 +191,6 @@ function findAdminByKey(key) {
       return adminData;
     }
   }
-  // Cache negative result for 60 seconds to avoid repeating sheet lookups on bad keys
   setCachedJson(cacheKey, { invalid: true }, 60);
   return null;
 }
@@ -267,7 +251,6 @@ function setAdminActive(targetKey, active) {
   if (admin.role === 'Owner') return jsonResponse({ error: 'cannot deactivate an Owner' });
   const sheet = adminsSheet();
   sheet.getRange(admin.row, ACOL.ACTIVE).setValue(active ? 'Yes' : 'No');
-  // Invalidate cached auth for this admin key
   removeCachedJson(ADMIN_CACHE_PREFIX + String(targetKey).trim());
   return jsonResponse({ result: 'success' });
 }
@@ -275,8 +258,6 @@ function setAdminActive(targetKey, active) {
 function generateAdminKey() {
   return 'SIH-' + Utilities.getUuid().split('-')[0].toUpperCase();
 }
-
-// ---------- Complaints: list + update with batching & caching ----------
 
 function fetchComplaintsData(bustCache) {
   if (!bustCache) {
@@ -291,9 +272,7 @@ function fetchComplaintsData(bustCache) {
   const out = [];
 
   if (lastRow > 1) {
-    // Read only populated data rows up to column 12 (skips empty spreadsheet rows)
     const values = sheet.getRange(2, 1, lastRow - 1, 12).getValues();
-    // Build array in reverse chronological order directly
     for (let i = values.length - 1; i >= 0; i--) {
       const row = values[i];
       if (!row[COL.TICKET - 1]) continue;
@@ -318,10 +297,6 @@ function fetchComplaintsData(bustCache) {
   return response;
 }
 
-function listComplaints() {
-  return jsonResponse(fetchComplaintsData(false));
-}
-
 function updateComplaint(params, adminName) {
   const ticketId = params.ticketId;
   if (!ticketId) return jsonResponse({ error: 'missing ticketId' });
@@ -333,7 +308,6 @@ function updateComplaint(params, adminName) {
     const lastRow = sheet.getLastRow();
     if (lastRow <= 1) return jsonResponse({ error: 'ticket not found' });
 
-    // Fetch ONLY column 2 (TICKET) to find target row quickly without loading all cells
     const ticketIds = sheet.getRange(1, COL.TICKET, lastRow, 1).getValues();
     const targetTicket = String(ticketId).trim().toUpperCase();
     let targetRowIndex = -1;
@@ -349,12 +323,10 @@ function updateComplaint(params, adminName) {
       return jsonResponse({ error: 'ticket not found' });
     }
 
-    // Read current status and remarks only for this row if not fully provided
     const current = sheet.getRange(targetRowIndex, COL.STATUS, 1, 2).getValues()[0];
     const newStatus = params.status || current[0];
     const newRemarks = params.remarks !== undefined ? params.remarks : current[1];
 
-    // Batch write contiguous columns (STATUS 9, REMARKS 10, UPDATED 11, HANDLED_BY 12) in 1 call
     sheet.getRange(targetRowIndex, COL.STATUS, 1, 4).setValues([[
       newStatus,
       newRemarks,

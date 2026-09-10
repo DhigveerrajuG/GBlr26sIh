@@ -87,3 +87,19 @@ Then visit:
 - Participant Portal: `http://localhost:8080/index.html`
 - Organizer Dashboard: `http://localhost:8080/admin.html`
 
+---
+
+## Deploying to GitHub Pages
+
+You can host the frontend for free directly on GitHub Pages:
+1. In your repository on GitHub, navigate to **Settings** → **Pages**.
+2. Under **Build and deployment**:
+   - **Source**: `Deploy from a branch`
+   - **Branch**: `main` (or your feature branch), folder `/ (root)`
+3. Click **Save**.
+
+Your portal will be live at:
+- **Participant Portal:** `https://<username>.github.io/<repo-name>/`
+- **Organizer Dashboard:** `https://<username>.github.io/<repo-name>/admin.html`
+
+
