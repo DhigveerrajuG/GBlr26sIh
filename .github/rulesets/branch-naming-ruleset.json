@@ -16,10 +16,10 @@
     {
       "type": "branch_name_pattern",
       "parameters": {
-        "name": "Conventional Branch Prefixes",
-        "pattern": "^(feat|fix|docs|style|refactor|perf|test|chore|hotfix)/.+",
+        "name": "Conventional Branch Naming",
         "negate": false,
-        "operator": "starts_with"
+        "operator": "regex_matches",
+        "pattern": "^(feat|fix|docs|style|refactor|perf|test|chore)/[a-z0-9._-]+$"
       }
     }
   ],

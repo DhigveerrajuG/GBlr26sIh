@@ -17,13 +17,13 @@ Participants submit complaints through `index.html`; organizers manage tickets i
 - `admin.html` - Authenticated organizer dashboard featuring SWR 0ms instant boot, background sync queue, audio chimes, status/venue filters, and live search.
 - `apps-script-backend.gs` - Google Apps Script Web App API backend with chunked caching, lock-safe writes, and admin role management.
 - `images/` - Logos and branding assets (`sih_logo_transparent.png`).
-- `COMMUNITY_STANDARDS.md` - Community standards overview, repository description & rulesets.
+- `COMMUNITY_STANDARDS.md` - Community standards overview, repository description & ruleset documentation.
 - `CONTRIBUTORS.md` - Project contributors & AI pair programmer acknowledgements.
 - `CONTRIBUTING.md` - Contribution guidelines and development workflow.
 - `CODE_OF_CONDUCT.md` - Contributor Covenant Code of Conduct.
 - `SECURITY.md` - Security policy and vulnerability disclosure instructions.
 - `SUPPORT.md` - Getting help, troubleshooting common issues, and community discussions.
-- `.github/rulesets/` - GitHub branch protection, CI status checks, and release tag rulesets.
+- `.github/rulesets/` - GitHub branch protection, CI checks, and release tag rulesets.
 - `LICENSE` - MIT License terms.
 
 ---

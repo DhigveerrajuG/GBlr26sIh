@@ -29,14 +29,15 @@ jobs:
             echo "✔ $file exists"
           done
 
-      - name: Validate JSON Files
+      - name: Validate JSON Files & Rulesets
         run: |
+          echo "Validating JSON schemas and rulesets..."
           python3 -c "import json; json.load(open('.all-contributorsrc'))"
-          python3 -c "import json; json.load(open('.github/rulesets/main-protection-ruleset.json'))"
-          python3 -c "import json; json.load(open('.github/rulesets/release-tags-ruleset.json'))"
-          python3 -c "import json; json.load(open('.github/rulesets/ci-status-check-ruleset.json'))"
-          python3 -c "import json; json.load(open('.github/rulesets/branch-naming-ruleset.json'))"
-          echo "✔ JSON files are valid"
+          for r in .github/rulesets/*.json; do
+            python3 -c "import json; json.load(open('$r'))"
+            echo "✔ Validated ruleset: $r"
+          done
+          echo "✔ All JSON files and rulesets are valid"
 
       - name: Secret Leak Prevention Check
         run: |
