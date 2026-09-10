@@ -139,7 +139,7 @@
       font-weight: 400;
     }
 
-    /* Ticket card */
+
     .ticket {
       background-color: var(--card);
       border: 1.5px solid var(--card-edge);
@@ -229,7 +229,7 @@
       font-weight: 500;
     }
 
-    /* Interactive Category & Venue Selection Grid */
+
     .category-pill-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -329,7 +329,7 @@
       margin-top: 5px;
     }
 
-    /* Action button */
+
     button[type="submit"] {
       width: 100%;
       background: var(--card-edge);
@@ -383,7 +383,7 @@
       }
     }
 
-    /* Messages & Digital Ticket Pass */
+
     .msg {
       display: none;
       margin-top: 16px;
@@ -428,7 +428,7 @@
       color: var(--ink);
     }
 
-    /* Digital Ticket Pass Card */
+
     .ticket-pass {
       display: none;
       margin-top: 18px;
@@ -528,7 +528,7 @@
       background: #005B52;
     }
 
-    /* Cooldown progress indicator */
+
     .cooldown-bar {
       display: none;
       margin-top: 10px;
@@ -587,7 +587,7 @@
       }
     }
 
-    /* Honeypot: invisible to real users */
+
     .hp-field {
       position: absolute;
       left: -9999px;
@@ -597,7 +597,7 @@
       pointer-events: none;
     }
 
-    /* Confetti canvas */
+
     #confettiCanvas {
       position: fixed;
       top: 0;
@@ -687,7 +687,7 @@
 
         <div class="msg" id="formMsg"></div>
 
-        <!-- Stylized Digital Ticket Pass Result -->
+
         <div class="ticket-pass" id="ticketPass">
           <div class="pass-top">
             <span class="pass-pill">Official Support Ticket</span>
@@ -726,17 +726,15 @@
   </div>
 
   <script>
-    // ⚠️ Deployed Google Apps Script Web App URL
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRdMDsqHgWD-xkguwhQH9crAltqJm0-iAmiMQT29fkSmA2Fc3VMOH6vRSgtW86JXXG8w/exec";
 
-    // ⚠️ Must match SHARED_SECRET in apps-script-backend.gs
-    const SHARED_SECRET = "sih2026-internal-" + "E" + "Club";
+    const SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+    const SHARED_SECRET = "YOUR_SHARED_SECRET_HERE";
 
-    const COOLDOWN_MS = 10 * 60 * 1000; // 10 minutes
+    const COOLDOWN_MS = 10 * 60 * 1000;
     const DEVICE_KEY = 'sih_device_id';
     const LAST_SUBMIT_KEY = 'sih_last_submit';
 
-    // Per-device persistent ID
+
     function getDeviceId() {
       let id = localStorage.getItem(DEVICE_KEY);
       if (!id) {
@@ -783,7 +781,7 @@
 
     let cooldownTimer = null;
 
-    // Category Pill Selection
+
     categoryPills.forEach(pill => {
       pill.addEventListener('click', () => {
         const cat = pill.dataset.cat;
@@ -798,7 +796,7 @@
       });
     });
 
-    // Venue Pill Selection
+
     venuePills.forEach(pill => {
       pill.addEventListener('click', () => {
         const v = pill.dataset.venue;
@@ -813,7 +811,7 @@
       });
     });
 
-    // Dynamic Character Counter
+
     issueTextarea.addEventListener('input', () => {
       const len = issueTextarea.value.length;
       charCount.textContent = len;
@@ -824,7 +822,7 @@
       }
     });
 
-    // Cooldown timer handler
+
     function refreshCooldownUI() {
       const remaining = msRemainingInCooldown();
       if (remaining > 0) {
@@ -860,16 +858,16 @@
       return false;
     }
 
-    // Pre-fill last known table number if saved
+
     const savedTable = localStorage.getItem('sih_last_tableNumber');
     if (savedTable && !document.getElementById('tableNumber').value) {
       document.getElementById('tableNumber').value = savedTable;
     }
 
-    // Check cooldown on page load
+
     refreshCooldownUI();
 
-    // Copy Ticket ID helper
+
     document.getElementById('copyPassBtn').addEventListener('click', () => {
       const id = document.getElementById('passTicketId').textContent;
       navigator.clipboard.writeText(id).then(() => {
@@ -879,7 +877,7 @@
       });
     });
 
-    // Form submission
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -889,7 +887,7 @@
       msg.textContent = '';
       ticketPass.style.display = 'none';
 
-      // Honeypot check
+
       const honeypot = document.getElementById('website').value;
       if (honeypot) {
         msg.className = 'msg ok';
@@ -898,13 +896,13 @@
         return;
       }
 
-      // Client-side validation for category and venue
+
       const selectedCategory = categoryInput.value.trim();
       if (!selectedCategory) {
         msg.className = 'msg err';
         msg.textContent = 'Please select an issue category above.';
         categoryGrid.classList.remove('shake');
-        void categoryGrid.offsetWidth; // trigger reflow
+        void categoryGrid.offsetWidth;
         categoryGrid.classList.add('has-error', 'shake');
         categoryGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
@@ -915,7 +913,7 @@
         msg.className = 'msg err';
         msg.textContent = 'Please select a venue location above.';
         venueGrid.classList.remove('shake');
-        void venueGrid.offsetWidth; // trigger reflow
+        void venueGrid.offsetWidth;
         venueGrid.classList.add('has-error', 'shake');
         venueGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
@@ -950,7 +948,7 @@
           msg.className = 'msg ok';
           msg.textContent = `Logged ✓ Your ticket ID is ${result.ticketId} — keep it for your records.`;
 
-          // Populate Digital Ticket Pass
+
           document.getElementById('passTicketId').textContent = result.ticketId;
           document.getElementById('passTeamName').textContent = payload.teamName;
           document.getElementById('passTableNo').textContent = payload.tableNumber;
@@ -959,7 +957,7 @@
           document.getElementById('passTime').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           ticketPass.style.display = 'block';
 
-          // Trigger confetti celebration
+
           launchConfetti();
 
           form.reset();
@@ -983,7 +981,7 @@
           btnText.textContent = 'Submit complaint →';
         }
       } catch (err) {
-        console.error('Submission error:', err);
+
         msg.className = 'msg err';
         msg.textContent = 'Could not submit — check your connection and try again.';
         btn.disabled = false;
@@ -993,7 +991,7 @@
       }
     });
 
-    // Lightweight Pure JS Confetti
+
     function launchConfetti() {
       const canvas = document.getElementById('confettiCanvas');
       if (!canvas) return;
@@ -1025,7 +1023,7 @@
         for (const p of pieces) {
           p.x += p.vx;
           p.y += p.vy;
-          p.vy += 0.28; // gravity
+          p.vy += 0.28;
           p.rotation += p.rotSpeed;
           p.opacity -= 0.015;
           if (p.opacity > 0) {
