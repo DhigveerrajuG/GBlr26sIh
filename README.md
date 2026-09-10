@@ -102,4 +102,12 @@ Your portal will be live at:
 - **Participant Portal:** `https://<username>.github.io/<repo-name>/`
 - **Organizer Dashboard:** `https://<username>.github.io/<repo-name>/admin.html`
 
+---
+
+## 🤝 Contributors & Acknowledgements
+
+- **[DhigveerrajuG](https://github.com/DhigveerrajuG)** — Project Creator & Lead Developer
+- **[Antigravity](https://deepmind.google/) (Google DeepMind)** — AI Pair Programmer & Code Assistant
+- **[Claude](https://www.anthropic.com/claude)** (Anthropic) — AI Pair Programmer & Code Assistant
+
 
