@@ -1,6 +1,13 @@
 # SIH Support Desk
 
-A lightweight, high-performance issue-reporting portal for on-ground SIH hackathon support. Participants submit complaints through `index.html`; organizers manage tickets in real time through `admin.html`. Data storage, concurrency locks, and authentication are powered by Google Apps Script and a linked Google Sheet.
+> **Lightweight, real-time issue-reporting portal and organizer dashboard for Smart India Hackathon (SIH) on-ground technical support, powered by Google Apps Script and Google Sheets.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
+[![Community Standards](https://img.shields.io/badge/Community%20Standards-100%25-brightgreen.svg)](CONTRIBUTING.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+Participants submit complaints through `index.html`; organizers manage tickets in real time through `admin.html`. Data storage, concurrency locks, and authentication are powered by Google Apps Script and a linked Google Sheet.
 
 ---
 
@@ -14,6 +21,8 @@ A lightweight, high-performance issue-reporting portal for on-ground SIH hackath
 - `CONTRIBUTING.md` - Contribution guidelines and development workflow.
 - `CODE_OF_CONDUCT.md` - Contributor Covenant Code of Conduct.
 - `SECURITY.md` - Security policy and vulnerability disclosure instructions.
+- `SUPPORT.md` - Getting help, troubleshooting common issues, and community discussions.
+- `.github/rulesets/` - GitHub branch protection and release tag rulesets.
 - `LICENSE` - MIT License terms.
 
 ---
@@ -129,6 +138,8 @@ We welcome contributions from the community!
 - 📖 **Contributing**: Please review our [Contributing Guidelines](CONTRIBUTING.md) to get started with setup, coding conventions, and PR submissions.
 - 📜 **Code of Conduct**: We follow the [Contributor Covenant](CODE_OF_CONDUCT.md) to foster an open and inclusive community.
 - 🛡️ **Security Policy**: Found a vulnerability? Check our [Security Policy](SECURITY.md) for responsible disclosure procedures.
+- 💬 **Support & Help**: Need assistance or troubleshooting advice? See our [Support Guide](SUPPORT.md).
+- 🔒 **Branch Governance**: See our [GitHub Ruleset](.github/rulesets/main-protection-ruleset.json) for default branch quality controls.
 
 ---
 

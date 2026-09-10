@@ -1,0 +1,47 @@
+name: Community Standards & Quality Gate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-repository:
+    name: Validate Standards & Code Integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify Community Standards Files
+        run: |
+          echo "Verifying mandatory community files..."
+          files=("README.md" "LICENSE" "CODE_OF_CONDUCT.md" "CONTRIBUTING.md" "SECURITY.md" "SUPPORT.md" "CONTRIBUTORS.md" ".all-contributorsrc")
+          for file in "${files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::error file=$file::Missing required community standards file: $file"
+              exit 1
+            fi
+            echo "✔ $file exists"
+          done
+
+      - name: Validate JSON Files
+        run: |
+          python3 -c "import json; json.load(open('.all-contributorsrc'))"
+          python3 -c "import json; json.load(open('.github/rulesets/main-protection-ruleset.json'))"
+          python3 -c "import json; json.load(open('.github/rulesets/release-tags-ruleset.json'))"
+          echo "✔ JSON files are valid"
+
+      - name: Secret Leak Prevention Check
+        run: |
+          echo "Checking for accidental live script secrets or Google Sheet URLs..."
+          # Fail if private SCRIPT_URL or sensitive credentials have been committed
+          if grep -rn "script.google.com/macros/s/AKfycb" index.html admin.html; then
+            echo "::error::Live production Google Apps Script URL detected in HTML files. Keep URLs parameterized!"
+            exit 1
+          fi
+          echo "✔ No leaked live credentials found"
