@@ -20,7 +20,7 @@ jobs:
       - name: Verify Community Standards Files
         run: |
           echo "Verifying mandatory community files..."
-          files=("README.md" "LICENSE" "CODE_OF_CONDUCT.md" "CONTRIBUTING.md" "SECURITY.md" "SUPPORT.md" "CONTRIBUTORS.md" ".all-contributorsrc")
+          files=("README.md" "COMMUNITY_STANDARDS.md" "LICENSE" "CODE_OF_CONDUCT.md" "CONTRIBUTING.md" "SECURITY.md" "SUPPORT.md" "CONTRIBUTORS.md" ".all-contributorsrc")
           for file in "${files[@]}"; do
             if [ ! -f "$file" ]; then
               echo "::error file=$file::Missing required community standards file: $file"
@@ -34,6 +34,8 @@ jobs:
           python3 -c "import json; json.load(open('.all-contributorsrc'))"
           python3 -c "import json; json.load(open('.github/rulesets/main-protection-ruleset.json'))"
           python3 -c "import json; json.load(open('.github/rulesets/release-tags-ruleset.json'))"
+          python3 -c "import json; json.load(open('.github/rulesets/ci-status-check-ruleset.json'))"
+          python3 -c "import json; json.load(open('.github/rulesets/branch-naming-ruleset.json'))"
           echo "✔ JSON files are valid"
 
       - name: Secret Leak Prevention Check

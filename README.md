@@ -17,12 +17,13 @@ Participants submit complaints through `index.html`; organizers manage tickets i
 - `admin.html` - Authenticated organizer dashboard featuring SWR 0ms instant boot, background sync queue, audio chimes, status/venue filters, and live search.
 - `apps-script-backend.gs` - Google Apps Script Web App API backend with chunked caching, lock-safe writes, and admin role management.
 - `images/` - Logos and branding assets (`sih_logo_transparent.png`).
+- `COMMUNITY_STANDARDS.md` - Community standards overview, repository description & rulesets.
 - `CONTRIBUTORS.md` - Project contributors & AI pair programmer acknowledgements.
 - `CONTRIBUTING.md` - Contribution guidelines and development workflow.
 - `CODE_OF_CONDUCT.md` - Contributor Covenant Code of Conduct.
 - `SECURITY.md` - Security policy and vulnerability disclosure instructions.
 - `SUPPORT.md` - Getting help, troubleshooting common issues, and community discussions.
-- `.github/rulesets/` - GitHub branch protection and release tag rulesets.
+- `.github/rulesets/` - GitHub branch protection, CI status checks, and release tag rulesets.
 - `LICENSE` - MIT License terms.
 
 ---
@@ -135,11 +136,12 @@ For full details, roles, and contribution guidelines, see [CONTRIBUTORS.md](CONT
 ## 👥 Community & Contributing
 
 We welcome contributions from the community!
+- 🌐 **Community Standards**: See our complete [Community Standards Profile & Checklist](COMMUNITY_STANDARDS.md).
 - 📖 **Contributing**: Please review our [Contributing Guidelines](CONTRIBUTING.md) to get started with setup, coding conventions, and PR submissions.
 - 📜 **Code of Conduct**: We follow the [Contributor Covenant](CODE_OF_CONDUCT.md) to foster an open and inclusive community.
 - 🛡️ **Security Policy**: Found a vulnerability? Check our [Security Policy](SECURITY.md) for responsible disclosure procedures.
 - 💬 **Support & Help**: Need assistance or troubleshooting advice? See our [Support Guide](SUPPORT.md).
-- 🔒 **Branch Governance**: See our [GitHub Ruleset](.github/rulesets/main-protection-ruleset.json) for default branch quality controls.
+- 🔒 **Branch Governance**: See our [GitHub Rulesets](.github/rulesets/) for default branch quality controls and status checks.
 
 ---
 
