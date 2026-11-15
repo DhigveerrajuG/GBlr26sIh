@@ -1,0 +1,21 @@
+{
+  "name": "sih-support-desk",
+  "version": "2.0.0",
+  "description": "Smart India Hackathon On-Ground Helpdesk & Issue Reporting Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node -e \"console.log('Testing server health check...'); require('./server.js'); setTimeout(() => process.exit(0), 1000);\""
+  },
+  "keywords": [
+    "sih",
+    "hackathon",
+    "support-desk",
+    "helpdesk",
+    "express",
+    "realtime"
+  ],
+  "author": "SIH Organizing Team",
+  "license": "MIT"
+}

@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#F0E0C1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <title>Admin Command Center — SIH Support Desk</title>
+
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Theme Styles -->
+  <link rel="stylesheet" href="css/theme.css">
+
+  <style>
+    /* Specific Admin Dashboard Layout */
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      background: var(--card-glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-primary) 0%, #005247 100%);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0, 115, 102, 0.25);
+    }
+
+    .user-details h2 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--teal-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .role-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .role-tag.owner {
+      background: var(--amber-light);
+      color: var(--amber-primary);
+      border: 1px solid var(--amber-primary);
+    }
+
+    .role-tag.admin {
+      background: var(--teal-light);
+      color: var(--teal-primary);
+      border: 1px solid var(--teal-primary);
+    }
+
+    /* KPI Metrics Cards */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--teal-primary);
+    }
+
+    .kpi-label {
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .kpi-num {
+      font-family: var(--font-mono);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--teal-primary);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .kpi-card.pending .kpi-num { color: var(--status-pending); }
+    .kpi-card.ongoing .kpi-num { color: var(--amber-primary); }
+    .kpi-card.solved .kpi-num { color: var(--status-solved); }
+
+    /* Admin Login Box */
+    #loginScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 75vh;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 440px;
+      background: #FFFFFF;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 34px 28px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+
+    .login-logo {
+      height: 60px;
+      width: auto;
+      margin-bottom: 14px;
+      object-fit: contain;
+    }
+
+    .login-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--teal-primary);
+      margin-bottom: 6px;
+    }
+
+    .login-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .demo-keys-hint {
+      margin-top: 20px;
+      padding: 12px;
+      background: #FAF8F5;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--card-border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .demo-keys-hint code {
+      font-family: var(--font-mono);
+      color: var(--teal-primary);
+      font-weight: 700;
+      background: rgba(0, 115, 102, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Dashboard view */
+    #dashboard {
+      display: none;
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-row {
+      margin-bottom: 14px;
+    }
+
+    .filters-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .status-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1.5px solid var(--card-border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--teal-primary);
+      color: var(--teal-primary);
+    }
+
+    .filter-chip.active {
+      background: var(--teal-primary);
+      color: #FFFFFF;
+      border-color: var(--teal-primary);
+      box-shadow: 0 2px 8px rgba(0, 115, 102, 0.3);
+    }
+
+    .filter-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .filter-chip.active .filter-badge {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Ticket Items Grid */
+    .tickets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .ticket-item {
+      background: #FFFFFF;
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .ticket-item:hover {
+      border-color: var(--teal-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .ticket-item-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .ticket-id {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--teal-primary);
+    }
+
+    .ticket-time {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--text-faint);
+    }
+
+    .ticket-team-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .ticket-meta-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .ticket-issue-preview {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      background: #FAF8F5;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0, 115, 102, 0.1);
+      margin-bottom: 12px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ticket-item-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .handled-by-tag {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--teal-primary);
+    }
+
+    /* Table View */
+    .tickets-table-wrap {
+      display: none;
+      background: #FFFFFF;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tickets-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .tickets-table th {
+      background: #FAF8F5;
+      padding: 12px 16px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
+    }
+
+    .tickets-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    .tickets-table tr:hover td {
+      background: var(--teal-light);
+      cursor: pointer;
+    }
+
+    /* Canned Response Chips */
+    .canned-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .canned-chip {
+      font-size: 0.74rem;
+      padding: 5px 11px;
+      background: #FFFFFF;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-full);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+
+    .canned-chip:hover {
+      border-color: var(--teal-primary);
+      color: var(--teal-primary);
+      background: var(--teal-light);
+    }
+
+    /* Status Control Buttons in Modal */
+    .status-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0 16px;
+    }
+
+    .status-picker-btn {
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 2px solid #E5E7EB;
+      background: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    .status-picker-btn:hover {
+      border-color: var(--teal-primary);
+    }
+
+    .status-picker-btn.active.pending {
+      border-color: var(--status-pending);
+      background: var(--status-pending-bg);
+      color: var(--status-pending);
+    }
+
+    .status-picker-btn.active.ongoing {
+      border-color: var(--amber-primary);
+      background: var(--amber-light);
+      color: var(--amber-primary);
+      box-shadow: 0 0 0 3px var(--amber-glow);
+    }
+
+    .status-picker-btn.active.solved {
+      border-color: var(--status-solved);
+      background: var(--status-solved-bg);
+      color: var(--status-solved);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+    }
+
+    /* Admin Key Row */
+    .admin-key-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-bg">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen">
+      <div class="login-box">
+        <img src="images/sih_logo_transparent.png" alt="SIH Logo" class="login-logo" onerror="this.style.display='none'">
+        <h1 class="login-title">Helpdesk Admin</h1>
+        <p class="login-desc">Enter your secret organizer or volunteer key to access live tickets and floor assignments.</p>
+
+        <form id="adminLoginForm" autocomplete="off">
+          <div class="form-group" style="text-align: left;">
+            <label class="form-label" for="loginKeyInput">Volunteer / Admin Access Code</label>
+            <input type="password" id="loginKeyInput" class="form-input" placeholder="e.g. VOL-ALEX or SIH-OWNER-2026" style="font-family: var(--font-mono); font-size: 1.05rem;" required autofocus>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-shimmer" id="loginSubmitBtn" style="width: 100%; padding: 14px; font-size: 1rem;">
+            <span>Unlock Dashboard</span>
+          </button>
+        </form>
+
+        <div class="demo-keys-hint">
+          <b>Default Access Codes:</b><br>
+          • Owner: <code onclick="fillKey('SIH-OWNER-2026')">SIH-OWNER-2026</code><br>
+          • Volunteer: <code onclick="fillKey('VOL-ALEX')">VOL-ALEX</code> · <code onclick="fillKey('VOL-PRIYA')">VOL-PRIYA</code> · <code onclick="fillKey('VOL-ROHAN')">VOL-ROHAN</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboard">
+      
+      <!-- Top Command Bar -->
+      <header class="admin-topbar">
+        <div class="user-profile">
+          <div class="user-avatar" id="avatarInitial">O</div>
+          <div class="user-details">
+            <h2>
+              <span id="adminNameDisplay">Organizer Lead</span>
+              <span class="role-tag owner" id="adminRoleTag">Owner</span>
+            </h2>
+            <div style="font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+              <span>Live Helpdesk Console</span>
+              <span>•</span>
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--teal-primary);">Auto-Sync Active</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn btn-outline" id="manageAdminsBtn" style="display: none; font-size: 0.82rem; padding: 7px 12px;">
+            Manage Volunteers
+          </button>
+          <button class="btn btn-outline" id="exportCsvBtn" style="font-size: 0.82rem; padding: 7px 12px;" title="Export tickets as CSV">
+            Export CSV
+          </button>
+          <button class="btn btn-outline" id="notifPermBtn" style="font-size: 0.82rem; padding: 7px 12px;" title="Enable Desktop/Mobile Notifications">
+            <span id="notifPermLabel">Alerts</span>
+          </button>
+          <button class="btn btn-outline" id="soundToggleBtn" style="font-size: 0.82rem; padding: 7px 12px;" title="Toggle Audio Chimes">
+            <span id="soundToggleLabel">Sound: On</span>
+          </button>
+          <button class="btn btn-outline" id="logoutBtn" style="color: var(--status-critical); font-size: 0.82rem; padding: 7px 12px;">
+            Log Out
+          </button>
+        </div>
+      </header>
+
+      <!-- KPI Metrics Overview -->
+      <section class="kpi-row">
+        <div class="kpi-card" data-kpi="all">
+          <div class="kpi-label">
+            <span>Total Tickets</span>
+          </div>
+          <div class="kpi-num" id="kpiTotal">0</div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Registered this session</span>
+        </div>
+
+        <div class="kpi-card pending" data-kpi="pending">
+          <div class="kpi-label">
+            <span>Pending</span>
+          </div>
+          <div class="kpi-num" id="kpiPending">0</div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Requires dispatch</span>
+        </div>
+
+        <div class="kpi-card ongoing" data-kpi="ongoing">
+          <div class="kpi-label">
+            <span>Ongoing</span>
+          </div>
+          <div class="kpi-num" id="kpiOngoing">0</div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Technician assigned</span>
+        </div>
+
+        <div class="kpi-card solved" data-kpi="solved">
+          <div class="kpi-label">
+            <span>Solved</span>
+          </div>
+          <div class="kpi-num" id="kpiSolved">0</div>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Successfully closed</span>
+        </div>
+      </section>
+
+      <!-- Search & Filters Bar -->
+      <section class="controls-panel">
+        <div class="search-row">
+          <input type="text" id="adminSearchInput" class="form-input" placeholder="Search ticket ID, team name, table number, venue, category, or remarks..." style="font-size: 0.92rem;">
+        </div>
+
+        <div class="filters-row">
+          <div class="status-filters" id="statusFilters">
+            <button class="filter-chip active" data-status="all">
+              All Tickets <span class="filter-badge" id="badgeAll">0</span>
+            </button>
+            <button class="filter-chip" data-status="pending">
+              Pending <span class="filter-badge" id="badgePending">0</span>
+            </button>
+            <button class="filter-chip" data-status="ongoing">
+              Ongoing <span class="filter-badge" id="badgeOngoing">0</span>
+            </button>
+            <button class="filter-chip" data-status="solved">
+              Solved <span class="filter-badge" id="badgeSolved">0</span>
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <select id="categoryFilter" class="form-select" style="padding: 6px 12px; font-size: 0.82rem; width: auto;">
+              <option value="all">All Categories</option>
+              <option value="Internet / Wi-Fi">Internet / Wi-Fi</option>
+              <option value="Power / Electrical">Power / Electrical</option>
+              <option value="Tech Support">Tech Support</option>
+              <option value="Hardware Components">Hardware Parts</option>
+              <option value="Other">Other / Logistics</option>
+            </select>
+
+            <div class="view-toggles" style="display: flex; gap: 4px;">
+              <button class="btn btn-outline" id="viewCardsBtn" title="Cards View" style="padding: 6px 12px; font-size: 0.82rem; font-weight: 600; background: var(--teal-light); color: var(--teal-primary);">
+                Cards
+              </button>
+              <button class="btn btn-outline" id="viewTableBtn" title="Table View" style="padding: 6px 12px; font-size: 0.82rem; font-weight: 600; background: #FFFFFF; color: var(--text-muted);">
+                Table
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tickets Grid (Card View) -->
+      <section class="tickets-grid" id="ticketsCardsContainer">
+        <!-- Ticket cards injected dynamically -->
+      </section>
+
+      <!-- Tickets Table View -->
+      <div class="tickets-table-wrap" id="ticketsTableContainer">
+        <table class="tickets-table">
+          <thead>
+            <tr>
+              <th>Ticket ID</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Team & Table</th>
+              <th>Category</th>
+              <th>Venue</th>
+              <th>Submitted</th>
+              <th>Handled By</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="ticketsTableBody">
+            <!-- Table rows injected dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div id="noTicketsBox" style="display: none; text-align: center; padding: 60px 20px; color: var(--text-muted);">
+        <h3 style="font-family: var(--font-display); color: var(--teal-primary);">No tickets found</h3>
+        <p style="font-size: 0.88rem; margin-top: 4px;">No tickets match your search or filter criteria.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TICKET INSPECTOR DRAWER / MODAL -->
+  <div class="modal-backdrop" id="ticketModal">
+    <div class="modal-dialog" style="max-width: 640px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 1.15rem; font-weight: 800; color: var(--teal-primary);" id="modalTicketId">
+            SIH-0000
+          </span>
+          <div style="font-size: 0.8rem; color: var(--text-muted);" id="modalTimeAgo">
+            Submitted 5 minutes ago
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeTicketModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Team and Table Location Banner -->
+        <div style="background: #FAF8F5; border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 16px;">
+          <div style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-main);" id="modalTeamName">
+            Team Alpha
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <span>Table: <b id="modalTableNo">Table 12</b></span>
+            <span>•</span>
+            <span>Venue: <b id="modalVenue">Main Hall</b></span>
+            <span>•</span>
+            <span>Category: <b id="modalCategory">Internet</b></span>
+          </div>
+        </div>
+
+        <!-- Issue Description -->
+        <div class="form-group">
+          <label class="form-label">Reported Issue Problem</label>
+          <div style="background: #FFFFFF; border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 14px; font-size: 0.92rem; line-height: 1.6; color: var(--text-main);" id="modalIssueText">
+            —
+          </div>
+        </div>
+
+        <!-- Status Change -->
+        <div class="form-group">
+          <label class="form-label">Update Status</label>
+          <div class="status-picker">
+            <button class="status-picker-btn pending" data-status="Pending">
+              Pending
+            </button>
+            <button class="status-picker-btn ongoing" data-status="Ongoing">
+              Ongoing
+            </button>
+            <button class="status-picker-btn solved" data-status="Solved">
+              Solved
+            </button>
+          </div>
+        </div>
+
+        <!-- Remarks -->
+        <div class="form-group">
+          <label class="form-label">
+            Volunteer Action & Remarks
+            <span class="form-hint">Visible to team</span>
+          </label>
+          <textarea id="modalRemarksInput" class="form-textarea" placeholder="Add update remarks (e.g., 'Switch port reset', 'Replacement ESP32 provided', 'Solved on floor')." style="min-height: 85px;"></textarea>
+          
+          <div class="canned-chips">
+            <span class="canned-chip" onclick="addCannedRemark('Volunteer dispatched to table.')">Volunteer Dispatched</span>
+            <span class="canned-chip" onclick="addCannedRemark('Replaced table spike guard surge protector.')">Spike Guard Replaced</span>
+            <span class="canned-chip" onclick="addCannedRemark('Rebooted Access Point; Wi-Fi connectivity verified.')">Wi-Fi AP Rebooted</span>
+            <span class="canned-chip" onclick="addCannedRemark('Tech mentor assisted with configuration.')">Mentor Assigned</span>
+            <span class="canned-chip" onclick="addCannedRemark('Issue verified and resolved with team lead.')">Resolved on Site</span>
+          </div>
+        </div>
+
+        <div style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted); margin-top: 10px;" id="modalLastHandled">
+          Last handled by: —
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeTicketModal()">Cancel</button>
+        <button class="btn btn-primary" id="saveTicketBtn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGE ADMINS MODAL (OWNER ONLY) -->
+  <div class="modal-backdrop" id="adminsModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Volunteer & Admin Access Codes</h3>
+        <button class="modal-close" onclick="closeAdminsModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+          Create a unique access code for each volunteer so their name is attached when they claim and resolve tickets.
+        </p>
+
+        <!-- Add new admin input -->
+        <div style="background: var(--bg-alt); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 14px; margin-bottom: 20px;">
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--teal-primary); margin-bottom: 8px;">ADD NEW VOLUNTEER</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+            <input type="text" id="newAdminNameInput" class="form-input" placeholder="Volunteer full name (e.g. Rahul Sharma)" style="flex: 1.2; min-width: 170px;">
+            <input type="text" id="newAdminKeyInput" class="form-input" placeholder="Custom code (e.g. VOL-RAHUL) or leave blank" style="flex: 1; min-width: 170px; text-transform: uppercase;">
+          </div>
+          <button class="btn btn-primary" id="createAdminBtn" style="width: 100%; padding: 10px; font-weight: 600;">
+            Create Volunteer Code
+          </button>
+        </div>
+
+        <!-- Newly generated key alert -->
+        <div id="newKeyAlert" style="display: none; background: var(--teal-light); border: 1.5px solid var(--teal-primary); border-radius: var(--radius-md); padding: 14px; margin-bottom: 18px;">
+          <span style="font-size: 0.78rem; font-weight: 700; color: var(--teal-primary);">NEW ACCESS CODE CREATED:</span>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px;">
+            <code style="font-family: var(--font-mono); font-size: 1.15rem; font-weight: 800; color: var(--teal-primary);" id="newKeyDisplay">VOL-XXXX</code>
+            <button class="btn btn-outline" id="copyNewKeyBtn" style="font-size: 0.78rem; padding: 4px 10px;">Copy</button>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 4px;">Share this code with the volunteer.</span>
+        </div>
+
+        <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+          <span>Active Volunteers & Organizers</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400;">Tap Copy to share code</span>
+        </label>
+        <div id="adminsListContainer">
+          <!-- Admin items injected dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeAdminsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Audio, UI Effects & Unified API Client -->
+  <script src="js/audio.js"></script>
+  <script src="js/ui-fx.js"></script>
+  <script src="js/api.js"></script>
+
+  <script>
+    // --- State Variables ---
+    let currentAdminKey = sessionStorage.getItem('sih_admin_key') || '';
+    let currentAdminInfo = { name: '', role: '' };
+    let complaintsList = [];
+    let currentFilterStatus = 'all';
+    let currentCategoryFilter = 'all';
+    let currentSearchQuery = '';
+    let currentActiveTicket = null;
+    let selectedModalStatus = 'Pending';
+    let isTableView = false;
+    let syncIntervalTimer = null;
+
+    // --- DOM Elements ---
+    const loginScreen = document.getElementById('loginScreen');
+    const dashboard = document.getElementById('dashboard');
+    const loginForm = document.getElementById('adminLoginForm');
+    const loginKeyInput = document.getElementById('loginKeyInput');
+    const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+
+    // Helper: Fill Demo Key
+    window.fillKey = function(k) {
+      loginKeyInput.value = k;
+      if (window.soundFX) window.soundFX.playClick();
+    };
+
+    // --- Sound Effects Toggle ---
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundToggleLabel = document.getElementById('soundToggleLabel');
+    soundToggleBtn.addEventListener('click', () => {
+      const active = window.soundFX.toggle();
+      if (soundToggleLabel) soundToggleLabel.textContent = active ? 'Sound: On' : 'Sound: Off';
+      showToast(active ? 'Sound Enabled' : 'Sound Muted', active ? 'Alert chimes are on' : 'Alert chimes muted', 'info');
+    });
+    if (soundToggleLabel) soundToggleLabel.textContent = window.soundFX.isEnabled() ? 'Sound: On' : 'Sound: Off';
+
+    // --- Login Handlers ---
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const key = loginKeyInput.value.trim();
+      if (!key) return;
+
+      loginSubmitBtn.disabled = true;
+      loginSubmitBtn.textContent = 'Verifying key...';
+
+      try {
+        const res = await window.sihApi.adminLogin(key);
+        if (res.valid) {
+          currentAdminKey = key;
+          currentAdminInfo = { name: res.name, role: res.role };
+          sessionStorage.setItem('sih_admin_key', key);
+
+          showToast('Welcome', `Logged in as ${res.name} (${res.role})`, 'success');
+          launchDashboard();
+        } else {
+          showToast('Access Denied', 'Invalid access key or access has been revoked.', 'error');
+          loginSubmitBtn.disabled = false;
+          loginSubmitBtn.textContent = 'Unlock Dashboard';
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        showToast('Connection Error', 'Could not reach server. Try default demo key.', 'error');
+        loginSubmitBtn.disabled = false;
+        loginSubmitBtn.textContent = 'Unlock Dashboard';
+      }
+    });
+
+    // Auto-login if key is already in session
+    if (currentAdminKey) {
+      window.sihApi.adminLogin(currentAdminKey).then(res => {
+        if (res.valid) {
+          currentAdminInfo = { name: res.name, role: res.role };
+          launchDashboard();
+        } else {
+          sessionStorage.removeItem('sih_admin_key');
+        }
+      });
+    }
+
+    // Launch Dashboard UI
+    function launchDashboard() {
+      loginScreen.style.display = 'none';
+      dashboard.style.display = 'block';
+
+      document.getElementById('adminNameDisplay').textContent = currentAdminInfo.name;
+      const roleTag = document.getElementById('adminRoleTag');
+      roleTag.textContent = currentAdminInfo.role;
+      roleTag.className = `role-tag ${currentAdminInfo.role.toLowerCase()}`;
+
+      document.getElementById('avatarInitial').textContent = currentAdminInfo.name.charAt(0).toUpperCase();
+
+      if (currentAdminInfo.role === 'Owner') {
+        document.getElementById('manageAdminsBtn').style.display = 'inline-flex';
+      }
+
+      refreshComplaints();
+
+      // Start periodic sync
+      if (!syncIntervalTimer) {
+        syncIntervalTimer = setInterval(() => {
+          if (!document.hidden) refreshComplaints(true);
+        }, 15000);
+      }
+
+      // Prompt for native browser notifications on login
+      requestAdminNotificationPermission();
+
+      // Connect SSE Live Stream for Instant New Ticket Notifications
+      window.sihApi.subscribeEvents((evt) => {
+        if (evt.type === 'ticket_created') {
+          notifyAdminNewTicket(evt.data);
+          refreshComplaints(true);
+        } else if (evt.type === 'ticket_updated') {
+          refreshComplaints(true);
+        }
+      });
+    }
+
+    // --- Admin Notification Engine ---
+    function requestAdminNotificationPermission() {
+      if ('Notification' in window) {
+        if (Notification.permission === 'default') {
+          Notification.requestPermission().then(p => {
+            updateNotifBtn(p);
+            if (p === 'granted') showToast('Alerts Active', 'Push notifications enabled for incoming tickets.', 'success');
+          });
+        } else {
+          updateNotifBtn(Notification.permission);
+        }
+      }
+    }
+
+    function updateNotifBtn(status) {
+      const btn = document.getElementById('notifPermBtn');
+      const label = document.getElementById('notifPermLabel');
+      if (!btn) return;
+      if (status === 'granted') {
+        btn.style.color = 'var(--teal-primary)';
+        btn.style.borderColor = 'var(--teal-primary)';
+        if (label) label.textContent = 'Alerts: On';
+        btn.title = 'Notifications Active';
+      } else if (status === 'denied') {
+        btn.style.color = 'var(--status-critical)';
+        if (label) label.textContent = 'Alerts: Blocked';
+        btn.title = 'Notifications Blocked';
+      }
+    }
+
+    document.getElementById('notifPermBtn').addEventListener('click', () => {
+      if ('Notification' in window) {
+        Notification.requestPermission().then(p => {
+          updateNotifBtn(p);
+          if (p === 'granted') showToast('Alerts Active', 'Push notifications enabled for new tickets.', 'success');
+          else if (p === 'denied') showToast('Permission Blocked', 'Allow notifications in browser settings.', 'warning');
+        });
+      } else {
+        showToast('Not Supported', 'Notification API not supported by browser.', 'warning');
+      }
+    });
+
+    let adminTitleFlashInterval = null;
+    function flashAdminDocTitle(text) {
+      if (document.hidden) {
+        let alt = false;
+        const originalTitle = 'Admin Command Center — SIH Support Desk';
+        if (adminTitleFlashInterval) clearInterval(adminTitleFlashInterval);
+        adminTitleFlashInterval = setInterval(() => {
+          document.title = alt ? text : originalTitle;
+          alt = !alt;
+        }, 1000);
+      }
+    }
+
+    window.addEventListener('focus', () => {
+      if (adminTitleFlashInterval) {
+        clearInterval(adminTitleFlashInterval);
+        adminTitleFlashInterval = null;
+        document.title = 'Admin Command Center — SIH Support Desk';
+      }
+    });
+
+    function notifyAdminNewTicket(ticket) {
+      // 1. Native System / Mobile Push Notification
+      if ('Notification' in window && Notification.permission === 'granted') {
+        try {
+          const notif = new Notification(`New Ticket: ${ticket.ticketId}`, {
+            body: `Team: ${ticket.teamName} (${ticket.teamNo || 'Table'})\nVenue: ${ticket.venue}\nCategory: ${ticket.category}\n"${ticket.issue}"`,
+            icon: 'images/sih_logo_transparent.png',
+            tag: ticket.ticketId,
+            requireInteraction: true
+          });
+          notif.onclick = () => {
+            window.focus();
+            openTicketInspector(ticket.ticketId);
+          };
+        } catch (e) {
+          console.warn('Native admin notification error:', e);
+        }
+      }
+
+      // 2. Mobile Device Vibration
+      if (navigator.vibrate) {
+        navigator.vibrate([220, 100, 220, 100, 350]);
+      }
+
+      // 3. Audio Alarm Chime
+      if (window.soundFX) {
+        window.soundFX.playAlert();
+      }
+
+      // 4. In-App Slide-in Toast
+      showToast('New Ticket Created', `${ticket.ticketId} from ${ticket.teamName} (${ticket.teamNo || 'Table'})`, 'warning', 8000);
+
+      // 5. Flashing Document Title
+      flashAdminDocTitle(`[NEW TICKET] ${ticket.ticketId}`);
+    }
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionStorage.removeItem('sih_admin_key');
+      window.location.reload();
+    });
+
+    // --- Load and Render Complaints ---
+    async function refreshComplaints(silent = false) {
+      try {
+        const list = await window.sihApi.listComplaints(currentAdminKey);
+        complaintsList = list || [];
+        updateKpis();
+        renderComplaints();
+        if (!silent) showToast('Sync Complete', 'Tickets up to date.', 'info');
+      } catch (err) {
+        console.error('Error refreshing complaints:', err);
+      }
+    }
+
+    // Update KPI stats
+    function updateKpis() {
+      const total = complaintsList.length;
+      const pending = complaintsList.filter(c => (c.status || '').toLowerCase() === 'pending').length;
+      const ongoing = complaintsList.filter(c => (c.status || '').toLowerCase() === 'ongoing').length;
+      const solved = complaintsList.filter(c => (c.status || '').toLowerCase() === 'solved').length;
+
+      document.getElementById('kpiTotal').textContent = total;
+      document.getElementById('kpiPending').textContent = pending;
+      document.getElementById('kpiOngoing').textContent = ongoing;
+      document.getElementById('kpiSolved').textContent = solved;
+
+      document.getElementById('badgeAll').textContent = total;
+      document.getElementById('badgePending').textContent = pending;
+      document.getElementById('badgeOngoing').textContent = ongoing;
+      document.getElementById('badgeSolved').textContent = solved;
+    }
+
+    // Filter Logic & Rendering
+    function getFilteredTickets() {
+      const q = currentSearchQuery.trim().toLowerCase();
+      return complaintsList.filter(c => {
+        // Status filter
+        const statusMatch = currentFilterStatus === 'all' || (c.status || '').toLowerCase() === currentFilterStatus;
+        
+        // Category filter
+        const catMatch = currentCategoryFilter === 'all' || (c.category || '').toLowerCase() === currentCategoryFilter.toLowerCase();
+
+        // Search text
+        const text = [
+          c.ticketId,
+          c.teamName,
+          c.teamNo,
+          c.venue,
+          c.category,
+          c.issue,
+          c.remarks,
+          c.handledBy
+        ].join(' ').toLowerCase();
+
+        const searchMatch = !q || text.includes(q);
+
+        return statusMatch && catMatch && searchMatch;
+      });
+    }
+
+    function renderComplaints() {
+      const filtered = getFilteredTickets();
+      const cardsContainer = document.getElementById('ticketsCardsContainer');
+      const tableBody = document.getElementById('ticketsTableBody');
+      const emptyBox = document.getElementById('noTicketsBox');
+
+      if (filtered.length === 0) {
+        emptyBox.style.display = 'block';
+        cardsContainer.innerHTML = '';
+        tableBody.innerHTML = '';
+        return;
+      }
+      emptyBox.style.display = 'none';
+
+      // 1. Render Cards
+      cardsContainer.innerHTML = filtered.map(t => {
+        const status = (t.status || 'Pending').toLowerCase();
+        const dateObj = new Date(t.timestamp);
+        const timeStr = isNaN(dateObj) ? t.timestamp : dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        return `
+          <div class="ticket-item" onclick="openTicketInspector('${t.ticketId}')">
+            <div class="ticket-item-head">
+              <span class="ticket-id">${escapeHtml(t.ticketId)}</span>
+              <span class="ticket-time">${timeStr}</span>
+            </div>
+
+            <div class="ticket-team-title">${escapeHtml(t.teamName)}</div>
+            <div class="ticket-meta-tag">
+              <span><b>${escapeHtml(t.teamNo || 'Table')}</b></span>
+              <span>•</span>
+              <span>${escapeHtml(t.venue || 'Hall')}</span>
+              <span>•</span>
+              <span>${escapeHtml(t.category || 'General')}</span>
+            </div>
+
+            <div class="ticket-issue-preview">${escapeHtml(t.issue)}</div>
+
+            <div class="ticket-item-footer" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="status-pill ${status}">${t.status || 'Pending'}</span>
+                <span class="handled-by-tag">${t.handledBy ? escapeHtml(t.handledBy) : 'Unassigned'}</span>
+              </div>
+              ${status === 'pending' ? `
+                <button type="button" class="btn btn-primary" onclick="claimTicket('${t.ticketId}', event)" style="font-size: 0.76rem; padding: 5px 12px; border-radius: var(--radius-sm); font-weight: 600;">
+                  Claim Ticket
+                </button>
+              ` : status === 'ongoing' ? `
+                <button type="button" class="btn btn-outline" onclick="quickSolveTicket('${t.ticketId}', event)" style="font-size: 0.76rem; padding: 5px 10px; border-radius: var(--radius-sm); color: var(--status-solved); border-color: var(--status-solved); font-weight: 600;">
+                  Mark Solved
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 2. Render Table Rows
+      tableBody.innerHTML = filtered.map(t => {
+        const status = (t.status || 'Pending').toLowerCase();
+        const dateObj = new Date(t.timestamp);
+        const timeStr = isNaN(dateObj) ? t.timestamp : dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        return `
+          <tr onclick="openTicketInspector('${t.ticketId}')">
+            <td><b style="font-family: var(--font-mono); color: var(--teal-primary);">${t.ticketId}</b></td>
+            <td><span class="status-pill ${status}">${t.status || 'Pending'}</span></td>
+            <td>${t.priority || 'Normal'}</td>
+            <td><b>${escapeHtml(t.teamName)}</b> (${escapeHtml(t.teamNo)})</td>
+            <td>${escapeHtml(t.category)}</td>
+            <td>${escapeHtml(t.venue)}</td>
+            <td style="font-family: var(--font-mono); font-size: 0.8rem;">${timeStr}</td>
+            <td>${escapeHtml(t.handledBy || '—')}</td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                ${status === 'pending' ? `
+                  <button type="button" class="btn btn-primary" style="font-size: 0.72rem; padding: 3px 8px;" onclick="claimTicket('${t.ticketId}', event)">Claim</button>
+                ` : status === 'ongoing' ? `
+                  <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px; color: var(--status-solved); border-color: var(--status-solved);" onclick="quickSolveTicket('${t.ticketId}', event)">Solve</button>
+                ` : ''}
+                <button type="button" class="btn btn-outline" style="font-size: 0.72rem; padding: 3px 8px;" onclick="openTicketInspector('${t.ticketId}')">Inspect</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // --- Search & Filters Event Listeners ---
+    let searchDebounce = null;
+    document.getElementById('adminSearchInput').addEventListener('input', (e) => {
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(() => {
+        currentSearchQuery = e.target.value;
+        renderComplaints();
+      }, 150);
+    });
+
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentFilterStatus = chip.dataset.status;
+        renderComplaints();
+        if (window.soundFX) window.soundFX.playClick();
+      });
+    });
+
+    // KPI Card Click Quick Filter
+    document.querySelectorAll('.kpi-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const kpi = card.dataset.kpi;
+        const matchingChip = document.querySelector(`.filter-chip[data-status="${kpi}"]`);
+        if (matchingChip) matchingChip.click();
+      });
+    });
+
+    document.getElementById('categoryFilter').addEventListener('change', (e) => {
+      currentCategoryFilter = e.target.value;
+      renderComplaints();
+    });
+
+    // View Switcher (Cards vs Table)
+    const viewCardsBtn = document.getElementById('viewCardsBtn');
+    const viewTableBtn = document.getElementById('viewTableBtn');
+    const cardsWrap = document.getElementById('ticketsCardsContainer');
+    const tableWrap = document.getElementById('ticketsTableContainer');
+
+    viewCardsBtn.addEventListener('click', () => {
+      cardsWrap.style.display = 'grid';
+      tableWrap.style.display = 'none';
+      viewCardsBtn.style.background = 'var(--teal-light)';
+      viewCardsBtn.style.color = 'var(--teal-primary)';
+      viewTableBtn.style.background = '#FFFFFF';
+      viewTableBtn.style.color = 'var(--text-muted)';
+    });
+
+    viewTableBtn.addEventListener('click', () => {
+      cardsWrap.style.display = 'none';
+      tableWrap.style.display = 'block';
+      viewTableBtn.style.background = 'var(--teal-light)';
+      viewTableBtn.style.color = 'var(--teal-primary)';
+      viewCardsBtn.style.background = '#FFFFFF';
+      viewCardsBtn.style.color = 'var(--text-muted)';
+    });
+
+    // --- Ticket Inspector Modal ---
+    window.openTicketInspector = async function(ticketId) {
+      const ticket = complaintsList.find(t => t.ticketId === ticketId);
+      if (!ticket) return;
+      currentActiveTicket = ticket;
+
+      document.getElementById('modalTicketId').textContent = ticket.ticketId;
+      document.getElementById('modalTeamName').textContent = ticket.teamName;
+      document.getElementById('modalTableNo').textContent = ticket.teamNo;
+      document.getElementById('modalVenue').textContent = ticket.venue;
+      document.getElementById('modalCategory').textContent = ticket.category;
+      document.getElementById('modalIssueText').textContent = ticket.issue;
+      document.getElementById('modalRemarksInput').value = ticket.remarks || '';
+      document.getElementById('modalLastHandled').textContent = ticket.handledBy ? `Last updated by: ${ticket.handledBy}` : 'Not yet handled.';
+
+      // Auto-advance Pending to Ongoing on opening by admin
+      if ((ticket.status || 'Pending').toLowerCase() === 'pending') {
+        selectedModalStatus = 'Ongoing';
+        await window.sihApi.updateTicket(currentAdminKey, ticket.ticketId, 'Ongoing', ticket.remarks || '', currentAdminInfo.name);
+        ticket.status = 'Ongoing';
+        ticket.handledBy = currentAdminInfo.name;
+        renderComplaints();
+        updateKpis();
+      } else {
+        selectedModalStatus = ticket.status || 'Pending';
+      }
+
+      updateStatusPickerButtons(selectedModalStatus);
+      document.getElementById('ticketModal').classList.add('open');
+      if (window.soundFX) window.soundFX.playClick();
+    };
+
+    window.closeTicketModal = function() {
+      document.getElementById('ticketModal').classList.remove('open');
+    };
+
+    function updateStatusPickerButtons(st) {
+      document.querySelectorAll('.status-picker-btn').forEach(b => {
+        b.classList.remove('active');
+        if (b.dataset.status.toLowerCase() === st.toLowerCase()) {
+          b.classList.add('active');
+        }
+      });
+    }
+
+    document.querySelectorAll('.status-picker-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedModalStatus = btn.dataset.status;
+        updateStatusPickerButtons(selectedModalStatus);
+        if (window.soundFX) window.soundFX.playClick();
+      });
+    });
+
+    window.claimTicket = async function(ticketId, event) {
+      if (event) event.stopPropagation();
+      const volunteerName = currentAdminInfo.name || 'Floor Volunteer';
+      const ticket = complaintsList.find(t => t.ticketId === ticketId);
+      if (!ticket) return;
+
+      try {
+        ticket.status = 'Ongoing';
+        ticket.handledBy = volunteerName;
+        renderComplaints();
+        updateKpis();
+        if (window.soundFX) window.soundFX.playClick();
+        showToast('Ticket Claimed', `Assigned to ${volunteerName} (${ticket.teamNo || 'Table'})`, 'success');
+
+        await window.sihApi.updateTicket(currentAdminKey, ticketId, 'Ongoing', ticket.remarks || '', volunteerName);
+      } catch (err) {
+        showToast('Error', 'Could not claim ticket. Check connection.', 'error');
+        fetchComplaints();
+      }
+    };
+
+    window.quickSolveTicket = function(ticketId, event) {
+      if (event) event.stopPropagation();
+      openTicketInspector(ticketId);
+      selectedModalStatus = 'Solved';
+      updateStatusPickerButtons('Solved');
+      const input = document.getElementById('modalRemarksInput');
+      if (input && !input.value) {
+        input.value = 'Resolved on-site by volunteer.';
+      }
+    };
+
+    window.addCannedRemark = function(txt) {
+      const input = document.getElementById('modalRemarksInput');
+      input.value = (input.value ? input.value + ' ' : '') + txt;
+      if (txt.includes('Resolved') || txt.includes('Replaced') || txt.includes('verified')) {
+        selectedModalStatus = 'Solved';
+        updateStatusPickerButtons('Solved');
+      }
+      if (window.soundFX) window.soundFX.playClick();
+    };
+
+    document.getElementById('saveTicketBtn').addEventListener('click', async () => {
+      if (!currentActiveTicket) return;
+      const remarks = document.getElementById('modalRemarksInput').value.trim();
+      const saveBtn = document.getElementById('saveTicketBtn');
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      try {
+        await window.sihApi.updateTicket(
+          currentAdminKey,
+          currentActiveTicket.ticketId,
+          selectedModalStatus,
+          remarks,
+          currentAdminInfo.name
+        );
+
+        currentActiveTicket.status = selectedModalStatus;
+        currentActiveTicket.remarks = remarks;
+        currentActiveTicket.handledBy = currentAdminInfo.name;
+
+        showToast('Changes Saved', `${currentActiveTicket.ticketId} marked as ${selectedModalStatus}`, 'success');
+        closeTicketModal();
+        renderComplaints();
+        updateKpis();
+      } catch (err) {
+        console.error('Error saving:', err);
+        showToast('Error', 'Failed to save ticket updates.', 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Changes';
+      }
+    });
+
+    // --- Owner: Manage Admins Modal ---
+    const manageAdminsBtn = document.getElementById('manageAdminsBtn');
+    const adminsModal = document.getElementById('adminsModal');
+
+    manageAdminsBtn.addEventListener('click', async () => {
+      document.getElementById('newKeyAlert').style.display = 'none';
+      document.getElementById('newAdminNameInput').value = '';
+      adminsModal.classList.add('open');
+      await loadAdminsList();
+    });
+
+    window.closeAdminsModal = function() {
+      adminsModal.classList.remove('open');
+    };
+
+    async function loadAdminsList() {
+      const container = document.getElementById('adminsListContainer');
+      container.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 15px;">Loading admin roster...</div>';
+
+      try {
+        const res = await window.sihApi.listAdmins(currentAdminKey);
+        const list = res.admins || [];
+
+        if (list.length === 0) {
+          container.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 15px;">No admins found.</div>';
+          return;
+        }
+
+        container.innerHTML = list.map(a => `
+          <div class="admin-key-row ${a.active ? '' : 'inactive'}" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--card-border); ${a.active ? '' : 'opacity: 0.6;'}">
+            <div>
+              <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
+                ${escapeHtml(a.name)}
+                <span class="role-tag ${(a.role || 'volunteer').toLowerCase()}" style="font-size: 0.68rem;">${escapeHtml(a.role || 'Volunteer')}</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                <code style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; background: var(--teal-light); color: var(--teal-primary); padding: 2px 8px; border-radius: 4px;">${escapeHtml(a.key)}</code>
+                <button type="button" class="btn btn-outline" onclick="copyVolunteerCode('${escapeHtml(a.key)}')" style="font-size: 0.72rem; padding: 2px 8px;">Copy</button>
+                ${a.active ? '' : '<span style="color: var(--status-critical); font-size: 0.75rem;">(Deactivated)</span>'}
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 6px;">
+              ${a.role !== 'Owner' ? `
+                <button class="btn btn-outline" style="font-size: 0.75rem; padding: 5px 10px; color: ${a.active ? 'var(--status-critical)' : 'var(--status-solved)'};" onclick="toggleAdminKey('${a.key}', ${a.active})">
+                  ${a.active ? 'Deactivate' : 'Restore'}
+                </button>
+              ` : '<span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Superadmin</span>'}
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<div style="color: var(--status-critical);">Failed to load admin list.</div>';
+      }
+    }
+
+    window.copyVolunteerCode = function(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Code Copied', `Access code ${code} copied to clipboard.`, 'success');
+      });
+    };
+
+    document.getElementById('createAdminBtn').addEventListener('click', async () => {
+      const name = document.getElementById('newAdminNameInput').value.trim();
+      const customKey = (document.getElementById('newAdminKeyInput') ? document.getElementById('newAdminKeyInput').value.trim().toUpperCase() : '');
+      if (!name) {
+        showToast('Name Required', 'Enter volunteer full name.', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('createAdminBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creating...';
+
+      try {
+        const res = await window.sihApi.addAdmin(currentAdminKey, name, customKey);
+        if (res.result === 'success') {
+          document.getElementById('newKeyDisplay').textContent = res.key;
+          document.getElementById('newKeyAlert').style.display = 'block';
+          document.getElementById('newAdminNameInput').value = '';
+          if (document.getElementById('newAdminKeyInput')) document.getElementById('newAdminKeyInput').value = '';
+          showToast('Code Created', `Access code created for ${res.name}`, 'success');
+          await loadAdminsList();
+        } else if (res.error) {
+          showToast('Error', res.error, 'error');
+        }
+      } catch (err) {
+        showToast('Error', 'Could not create volunteer code.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create Volunteer Code';
+      }
+    });
+
+    document.getElementById('copyNewKeyBtn').addEventListener('click', () => {
+      const key = document.getElementById('newKeyDisplay').textContent;
+      navigator.clipboard.writeText(key).then(() => {
+        showToast('Copied', 'Access code copied to clipboard', 'success');
+      });
+    });
+
+    window.toggleAdminKey = async function(key, currentlyActive) {
+      try {
+        await window.sihApi.setAdminActive(currentAdminKey, key, !currentlyActive);
+        showToast('Updated', `Admin access ${currentlyActive ? 'deactivated' : 'restored'}`, 'info');
+        await loadAdminsList();
+      } catch (err) {
+        showToast('Error', 'Could not toggle admin access.', 'error');
+      }
+    };
+
+    // --- CSV Export ---
+    document.getElementById('exportCsvBtn').addEventListener('click', () => {
+      if (complaintsList.length === 0) {
+        showToast('No Data', 'No complaints to export.', 'warning');
+        return;
+      }
+
+      const headers = ['Ticket ID', 'Timestamp', 'Team Name', 'Table Number', 'Category', 'Priority', 'Venue', 'Status', 'Handled By', 'Remarks', 'Issue Details'];
+      const rows = complaintsList.map(c => [
+        `"${c.ticketId}"`,
+        `"${c.timestamp}"`,
+        `"${(c.teamName || '').replace(/"/g, '""')}"`,
+        `"${(c.teamNo || '').replace(/"/g, '""')}"`,
+        `"${(c.category || '').replace(/"/g, '""')}"`,
+        `"${(c.priority || 'Normal')}"`,
+        `"${(c.venue || '').replace(/"/g, '""')}"`,
+        `"${c.status || 'Pending'}"`,
+        `"${(c.handledBy || '').replace(/"/g, '""')}"`,
+        `"${(c.remarks || '').replace(/"/g, '""')}"`,
+        `"${(c.issue || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `SIH_Complaints_Report_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Export Started', 'CSV downloaded successfully.', 'success');
+    });
+  </script>
+</body>
+</html>
