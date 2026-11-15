@@ -172,28 +172,6 @@
       margin-bottom: 24px;
     }
 
-    .demo-keys-hint {
-      margin-top: 20px;
-      padding: 12px;
-      background: #FAF8F5;
-      border-radius: var(--radius-sm);
-      border: 1px dashed var(--card-border);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      text-align: left;
-      line-height: 1.6;
-    }
-
-    .demo-keys-hint code {
-      font-family: var(--font-mono);
-      color: var(--teal-primary);
-      font-weight: 700;
-      background: rgba(0, 115, 102, 0.08);
-      padding: 2px 6px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
     /* Dashboard view */
     #dashboard {
       display: none;
@@ -510,8 +488,8 @@
 
         <form id="adminLoginForm" autocomplete="off">
           <div class="form-group" style="text-align: left;">
-            <label class="form-label" for="loginKeyInput">Volunteer / Admin Access Code</label>
-            <input type="password" id="loginKeyInput" class="form-input" placeholder="e.g. VOL-ALEX or SIH-OWNER-2026" style="font-family: var(--font-mono); font-size: 1.05rem;" required autofocus>
+            <label class="form-label" for="loginKeyInput">Access Code</label>
+            <input type="password" id="loginKeyInput" class="form-input" placeholder="Enter your access code" style="font-family: var(--font-mono); font-size: 1.05rem;" required autofocus>
           </div>
 
           <button type="submit" class="btn btn-primary btn-shimmer" id="loginSubmitBtn" style="width: 100%; padding: 14px; font-size: 1rem;">
@@ -519,11 +497,9 @@
           </button>
         </form>
 
-        <div class="demo-keys-hint">
-          <b>Default Access Codes:</b><br>
-          • Owner: <code onclick="fillKey('SIH-OWNER-2026')">SIH-OWNER-2026</code><br>
-          • Volunteer: <code onclick="fillKey('VOL-ALEX')">VOL-ALEX</code> · <code onclick="fillKey('VOL-PRIYA')">VOL-PRIYA</code> · <code onclick="fillKey('VOL-ROHAN')">VOL-ROHAN</code>
-        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 18px; line-height: 1.4;">
+          Restricted access for registered event organizers and assigned floor volunteers.
+        </p>
       </div>
     </div>
 
@@ -841,12 +817,6 @@
     const loginKeyInput = document.getElementById('loginKeyInput');
     const loginSubmitBtn = document.getElementById('loginSubmitBtn');
 
-    // Helper: Fill Demo Key
-    window.fillKey = function(k) {
-      loginKeyInput.value = k;
-      if (window.soundFX) window.soundFX.playClick();
-    };
-
     // --- Sound Effects Toggle ---
     const soundToggleBtn = document.getElementById('soundToggleBtn');
     const soundToggleLabel = document.getElementById('soundToggleLabel');
@@ -882,7 +852,7 @@
         }
       } catch (err) {
         console.error('Login error:', err);
-        showToast('Connection Error', 'Could not reach server. Try default demo key.', 'error');
+        showToast('Connection Error', 'Could not reach server. Please check your connection.', 'error');
         loginSubmitBtn.disabled = false;
         loginSubmitBtn.textContent = 'Unlock Dashboard';
       }

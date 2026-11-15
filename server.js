@@ -579,7 +579,6 @@ server.listen(PORT, () => {
   console.log(`📋 Participant Portal : http://localhost:${PORT}/index.html`);
   console.log(`🛡️ Admin Dashboard    : http://localhost:${PORT}/admin.html`);
   console.log(`⚡ API Health Check   : http://localhost:${PORT}/api/health`);
-  console.log(`🔑 Owner Key          : SIH-OWNER-2026`);
-  console.log(`🔑 Admin Key          : SIH-ADMIN-2026`);
+  console.log(`🔒 Authentication     : Configured via environment / database`);
   console.log(`======================================================\n`);
 });
