@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Questions & Community Support
+    url: https://github.com/DhigveerrajuG/GBlr26sIh/discussions
+    about: Ask questions, share ideas, and discuss usage with the maintainers and community.
+  - name: 🛡️ Security Vulnerability Reporting
+    url: https://github.com/DhigveerrajuG/GBlr26sIh/security/advisories/new
+    about: Privately report a security vulnerability to the project maintainers.

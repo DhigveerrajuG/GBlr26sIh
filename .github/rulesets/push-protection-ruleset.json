@@ -1,0 +1,31 @@
+{
+  "name": "Push Protection & File Safety Guardrails",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "include": [
+        "~ALL"
+      ],
+      "exclude": []
+    }
+  },
+  "rules": [
+    {
+      "type": "file_path_restriction",
+      "parameters": {
+        "name": "Block Sensitive Files and Secret Stores",
+        "negate": false,
+        "operator": "regex_matches",
+        "pattern": "(^|/)(\\.env|credentials\\.json|service-account.*\\.json|id_rsa|.*\\.pem)$"
+      }
+    },
+    {
+      "type": "max_file_size",
+      "parameters": {
+        "max_file_size": 20971520
+      }
+    }
+  ],
+  "bypass_actors": []
+}
