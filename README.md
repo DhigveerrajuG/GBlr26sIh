@@ -82,17 +82,15 @@ python test_system.py
 
 ---
 
-## 🔑 Default Access Keys for Testing
+## 🔑 Default Access Keys for Setup
 
 | Role | Name | Access Key |
 | :--- | :--- | :--- |
 | **Superadmin (Lead Organizer)** | Organizer Lead | `SIH-OWNER-2026` |
-| **Floor Volunteer** | Floor Volunteer Alex | `VOL-ALEX-2026` |
-| **Floor Volunteer** | Floor Volunteer Priya | `VOL-PRIYA-2026` |
-| **Tech Mentor** | Mentor Dr. Ramesh | `MNT-RAMESH-2026` |
-| **Tech Mentor** | Mentor Sarah | `MNT-SARAH-2026` |
+| **Floor Volunteer** | Floor Volunteer | `VOL-ALEX-2026` |
+| **Tech Mentor** | Tech Mentor | `MNT-RAMESH-2026` |
 
 ---
 
 ## 📄 License
-Restrictive Proprietary License. Copyright &copy; 2026 DhigveerrajuG &amp; VDC Venture Development Centre, GITAM University Bengaluru. All Rights Reserved. Unauthorized copying, modification, distribution, or commercial exploitation is strictly prohibited. See [LICENSE](LICENSE) for details.
+Restrictive Proprietary License. Copyright &copy; 2026 DhigveerrajuG. Developed by DhigveerrajuG for VDC, GITAM University Bengaluru. All Rights Reserved. Unauthorized copying, modification, distribution, or commercial exploitation is strictly prohibited. See [LICENSE](LICENSE) for details.

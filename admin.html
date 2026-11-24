@@ -44,20 +44,11 @@
         <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">Enter your assigned floor access key.</p>
 
         <form id="adminLoginForm" autocomplete="off">
-          <div class="form-group" style="margin-bottom:12px;">
-            <input type="password" id="adminAccessKey" class="form-input" placeholder="e.g. VOL-ALEX-2026" required autofocus>
+          <div class="form-group" style="margin-bottom:14px;">
+            <input type="password" id="adminAccessKey" class="form-input" placeholder="Enter floor access key" required autofocus>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;margin-bottom:14px;">Sign In</button>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
         </form>
-
-        <div style="border-top:1px solid var(--border-color);padding-top:12px;">
-          <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;">Quick Sign In:</div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            <button class="chip quick-key-chip" data-key="VOL-ALEX-2026">Volunteer Alex</button>
-            <button class="chip quick-key-chip" data-key="SIH-OWNER-2026">Lead Organizer</button>
-            <button class="chip quick-key-chip" data-key="MNT-RAMESH-2026">Mentor Ramesh</button>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -153,6 +144,12 @@
 
       <!-- Tickets List -->
       <div id="ticketsContainer"></div>
+
+      <!-- Attribution Footer -->
+      <footer class="app-footer" style="margin-top: 36px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center;">
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
+        <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Smart India Hackathon 2026 &bull; Floor Desk Command Center</p>
+      </footer>
     </section>
   </div>
 

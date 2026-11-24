@@ -380,59 +380,12 @@ def update_device_cooldown(device_id: str):
         """, (device_id, now_iso))
         conn.commit()
 
+# Registered Table-to-Team, Leader & Venue mapping for instant autofill.
+# Add your actual hackathon table allocations here:
+# Format: "table_number": {"team_name": "Team Name", "leader_name": "Leader Name", "venue": "Venue Name"}
 KNOWN_TEAMS_MAP = {
-    "1": {"team_name": "CyberSentinels", "leader_name": "Aarav Sharma", "venue": "Main Arena — Hall A"},
-    "2": {"team_name": "ByteForce", "leader_name": "Priya Patel", "venue": "Main Arena — Hall A"},
-    "3": {"team_name": "VisionAI", "leader_name": "Rohan Verma", "venue": "Main Arena — Hall A"},
-    "4": {"team_name": "CloudPioneers", "leader_name": "Sneha Reddy", "venue": "Main Arena — Hall A"},
-    "5": {"team_name": "AlgoRhythm", "leader_name": "Vikram Malhotra", "venue": "Main Arena — Hall A"},
-    "6": {"team_name": "DataDynamos", "leader_name": "Ananya Iyer", "venue": "Main Arena — Hall A"},
-    "7": {"team_name": "PixelCrafters", "leader_name": "Kabir Mehta", "venue": "Main Arena — Hall A"},
-    "8": {"team_name": "EcoVanguard", "leader_name": "Diya Nair", "venue": "Hardware Lab 104"},
-    "9": {"team_name": "RoboTech", "leader_name": "Aditya Joshi", "venue": "Hardware Lab 104"},
-    "10": {"team_name": "CircuitBreakers", "leader_name": "Pooja Hegde", "venue": "Hardware Lab 104"},
-    "11": {"team_name": "SensorStack", "leader_name": "Karthik Rao", "venue": "Hardware Lab 104"},
-    "12": {"team_name": "EmbeddedPulse", "leader_name": "Meera Sen", "venue": "Hardware Lab 105"},
-    "13": {"team_name": "MicroMinds", "leader_name": "Arjun Das", "venue": "Hardware Lab 105"},
-    "14": {"team_name": "CodeCrafters", "leader_name": "Rohan Gupta", "venue": "Main Arena — Hall A"},
-    "15": {"team_name": "DevDynasty", "leader_name": "Neha Kapoor", "venue": "Main Arena — Hall B"},
-    "16": {"team_name": "BinaryBeasts", "leader_name": "Siddharth Jain", "venue": "Main Arena — Hall B"},
-    "17": {"team_name": "LogicLords", "leader_name": "Tanvi Saxena", "venue": "Main Arena — Hall B"},
-    "18": {"team_name": "TechTitans", "leader_name": "Varun Bhat", "venue": "Main Arena — Hall B"},
-    "19": {"team_name": "StackMasters", "leader_name": "Ishita Roy", "venue": "Main Arena — Hall B"},
-    "20": {"team_name": "SiliconWizards", "leader_name": "Manish Tiwari", "venue": "Hardware Lab 105"},
-    "21": {"team_name": "AutoBots", "leader_name": "Ritika Ghosh", "venue": "Hardware Lab 105"},
-    "22": {"team_name": "SmartGrid AI", "leader_name": "Gaurav Kulkarni", "venue": "Main Arena — Hall A"},
-    "23": {"team_name": "AgriSense", "leader_name": "Divya Pillai", "venue": "Workshop Area"},
-    "24": {"team_name": "DroneVision", "leader_name": "Abhishek Bose", "venue": "Workshop Area"},
-    "25": {"team_name": "GreenPulse", "leader_name": "Kavya Menon", "venue": "Main Stage"},
-    "26": {"team_name": "MedTech AI", "leader_name": "Sanjay Singhania", "venue": "Main Arena — Hall B"},
-    "27": {"team_name": "HealthSync", "leader_name": "Preeti Desai", "venue": "Main Arena — Hall B"},
-    "28": {"team_name": "AeroDrones", "leader_name": "Nikhil Chawla", "venue": "Workshop Area"},
-    "29": {"team_name": "SmartCity Labs", "leader_name": "Swati Agarwal", "venue": "Main Stage"},
-    "30": {"team_name": "DataVanguard", "leader_name": "Harsh Vardhan", "venue": "Main Arena — Hall B"},
-    "31": {"team_name": "FinTech Pioneers", "leader_name": "Deepak Choudhury", "venue": "Main Arena — Hall B"},
-    "32": {"team_name": "NeuralByte", "leader_name": "Anushka Pandey", "venue": "Main Arena — Hall B"},
-    "33": {"team_name": "DeepLearners", "leader_name": "Rahul Mittal", "venue": "Main Arena — Hall B"},
-    "34": {"team_name": "BioInformatics", "leader_name": "Shreya Mukherjee", "venue": "Main Arena — Hall C"},
-    "35": {"team_name": "AgriTech Innovators", "leader_name": "Kunal Bansal", "venue": "Workshop Area"},
-    "36": {"team_name": "SolarGrid", "leader_name": "Pooja Kulkarni", "venue": "Workshop Area"},
-    "37": {"team_name": "CleanEnergy", "leader_name": "Rajesh Kannan", "venue": "Workshop Area"},
-    "38": {"team_name": "QuantumBit", "leader_name": "Alok Nanda", "venue": "Main Arena — Hall C"},
-    "39": {"team_name": "CyberShield", "leader_name": "Simran Kaur", "venue": "Main Arena — Hall C"},
-    "40": {"team_name": "ZeroDay Hunters", "leader_name": "Mohit Suri", "venue": "Main Arena — Hall C"},
-    "41": {"team_name": "BlockChain Titans", "leader_name": "Ritu Chauhan", "venue": "Main Arena — Hall C"},
-    "42": {"team_name": "Web3 Pioneers", "leader_name": "Naveen Prasad", "venue": "Main Arena — Hall C"},
-    "43": {"team_name": "NeuroNet", "leader_name": "Gayatri Krishnan", "venue": "Main Arena — Hall C"},
-    "44": {"team_name": "AI Vanguard", "leader_name": "Vivek Anand", "venue": "Main Arena — Hall C"},
-    "45": {"team_name": "NexGen Coders", "leader_name": "Suresh Raina", "venue": "Main Arena — Hall C"},
-    "46": {"team_name": "CloudArchitects", "leader_name": "Kiran Bedi", "venue": "Main Arena — Hall C"},
-    "47": {"team_name": "EdgeCompute", "leader_name": "Tarun Bajaj", "venue": "Hardware Lab 105"},
-    "48": {"team_name": "ChipMasters", "leader_name": "Bhavna Sethi", "venue": "Hardware Lab 104"},
-    "49": {"team_name": "IoT Nexus", "leader_name": "Sameer Varma", "venue": "Hardware Lab 104"},
-    "50": {"team_name": "RoboWarriors", "leader_name": "Pranav Mohan", "venue": "Hardware Lab 105"},
-    "51": {"team_name": "QuantumLeap", "leader_name": "Aakash Chopra", "venue": "Main Arena — Hall C"},
-    "99": {"team_name": "AutomatedTestTeam", "leader_name": "Alex Mercer", "venue": "Hardware Lab 104"}
+    # Add your team allocations here later:
+    # "1": {"team_name": "Team Name", "leader_name": "Leader Name", "venue": "Main Arena — Hall A"},
 }
 
 def create_ticket(team_name: str, team_no: str, category: str, issue: str, venue: str, priority: str = 'Normal', device_id: str = '', track: str = 'software', leader_name: str = '', photo: str = '') -> Dict[str, Any]:
