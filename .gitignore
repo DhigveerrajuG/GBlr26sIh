@@ -13,3 +13,9 @@ desktop.ini
 *.tmp
 *.log
 scratch/
+__pycache__/
+*.py[cod]
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
