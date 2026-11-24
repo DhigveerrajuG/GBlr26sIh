@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#007366">
   <link rel="icon" type="image/png" href="images/sih_logo_transparent.png">
   <title>Command Center — SIH 2026</title>
@@ -21,7 +21,7 @@
     <!-- Header -->
     <header class="header">
       <div class="header-brand">
-        <img src="images/sih_logo_transparent.png" alt="SIH" class="header-logo" onerror="this.style.display='none'">
+        <img src="images/sih_logo_transparent.png" alt="SIH" class="header-logo">
         <div class="header-text">
           <h1>Command Center</h1>
           <p>SIH 2026 Floor Desk</p>
@@ -45,6 +45,7 @@
 
         <form id="adminLoginForm" autocomplete="off">
           <div class="form-group" style="margin-bottom:14px;">
+            <label for="adminAccessKey" class="sr-only">Floor access key</label>
             <input type="password" id="adminAccessKey" class="form-input" placeholder="Enter floor access key" required autofocus>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
@@ -75,8 +76,9 @@
 
         <!-- Search & Venue Inline Row -->
         <div class="search-venue-row">
+          <label for="searchTickets" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Search tickets</label>
           <input type="text" id="searchTickets" class="form-input search-input" placeholder="Search table, team, or issue...">
-          <select id="filterVenue" class="form-select venue-select">
+          <select id="filterVenue" class="form-select venue-select" aria-label="Filter tickets by venue">
             <option value="all">All Venues</option>
             <option value="Hall A">Hall A</option>
             <option value="Hall B">Hall B</option>
@@ -147,7 +149,7 @@
 
       <!-- Attribution Footer -->
       <footer class="app-footer" style="margin-top: 36px; padding: 20px 0; border-top: 1px solid var(--border-color); text-align: center;">
-        <p style="font-size: 0.8rem; color: var(--text-muted);">Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Developed by <strong>Dhigveer Raju G</strong> for VDC, GITAM University Bengaluru</p>
         <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Smart India Hackathon 2026 &bull; Floor Desk Command Center</p>
       </footer>
     </section>
@@ -168,7 +170,7 @@
 
       <form id="resolveTicketForm">
         <div class="form-group">
-          <label class="form-label">Status</label>
+          <label class="form-label" for="modalStatusSelect">Status</label>
           <select id="modalStatusSelect" class="form-select">
             <option value="Pending">Pending</option>
             <option value="Ongoing">Ongoing</option>
@@ -177,17 +179,19 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Quick Notes</label>
-          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;">
-            <button type="button" class="chip" data-remark="Spike Guard Replaced">Spike Guard</button>
-            <button type="button" class="chip" data-remark="Wi-Fi AP Rebooted">Wi-Fi Fixed</button>
-            <button type="button" class="chip" data-remark="Spare Component Issued">Parts Issued</button>
-            <button type="button" class="chip" data-remark="Resolved On-Site">On-Site Fix</button>
-          </div>
+          <fieldset style="border:0;padding:0;margin:0;">
+            <legend class="form-label">Quick Notes</legend>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;">
+              <button type="button" class="chip" data-remark="Spike Guard Replaced">Spike Guard</button>
+              <button type="button" class="chip" data-remark="Wi-Fi AP Rebooted">Wi-Fi Fixed</button>
+              <button type="button" class="chip" data-remark="Spare Component Issued">Parts Issued</button>
+              <button type="button" class="chip" data-remark="Resolved On-Site">On-Site Fix</button>
+            </div>
+          </fieldset>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Remarks</label>
+          <label class="form-label" for="modalRemarksInput">Remarks</label>
           <textarea id="modalRemarksInput" class="form-textarea" rows="2" placeholder="Notes for the team..."></textarea>
         </div>
 
@@ -209,7 +213,9 @@
 
       <form id="createUserForm" style="background:var(--bg-subtle);padding:10px;border-radius:var(--radius-sm);margin-bottom:14px;">
         <div class="grid-2" style="margin-bottom:8px;">
+          <label for="newUserName" class="sr-only">Name</label>
           <input type="text" id="newUserName" class="form-input" placeholder="Name" required>
+          <label for="newUserRole" class="sr-only">Role</label>
           <select id="newUserRole" class="form-select">
             <option value="volunteer">Volunteer</option>
             <option value="mentor">Mentor</option>
@@ -217,7 +223,9 @@
           </select>
         </div>
         <div class="grid-2" style="margin-bottom:8px;">
-          <input type="text" id="newUserDept" class="form-input" placeholder="Area (Hall A, Lab...)">
+          <label for="newUserDept" class="sr-only">Area</label>
+          <input type="text" id="newUserDept" class="form-input" placeholder="Area (Hall A, Lab...)" aria-label="Area">
+          <label for="newUserCustomKey" class="sr-only">Custom access key</label>
           <input type="text" id="newUserCustomKey" class="form-input" placeholder="Key (or auto)">
         </div>
         <button type="submit" class="btn btn-primary btn-sm" style="width:100%;">Create Key</button>
@@ -235,7 +243,7 @@
         <button class="btn-icon" data-close-modal="photoViewModal">&times;</button>
       </div>
       <div style="max-height:480px; overflow:auto; border-radius:var(--radius-sm); border:1px solid var(--border-color); background:var(--bg-subtle); padding:8px;">
-        <img id="photoModalImg" src="" alt="Issue Photo" style="max-width:100%; height:auto; border-radius:var(--radius-sm); display:block; margin:0 auto;">
+        <img id="photoModalImg" src="" alt="Issue" style="max-width:100%; height:auto; border-radius:var(--radius-sm); display:block; margin:0 auto;">
       </div>
     </div>
   </div>
