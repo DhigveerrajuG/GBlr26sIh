@@ -11,6 +11,7 @@ Developed by **DhigveerrajuG** for VDC, GITAM University Bengaluru.
 A lightweight, zero-dependency floor support platform designed for high-density hackathons. Participants submit table issues with photo evidence and track resolution status in real time. Floor volunteers and organizers triage, claim, and resolve tickets from an authenticated mobile command console.
 
 ### Key Capabilities
+- **GITAM Brand Theme**: Visual identity built on the official **GITAM University logo & brand guidelines** (Primary GITAM Green `#007366` and Antique Beige `#F4E4C9` with clean, accessible light surfaces).
 - **Participant Portal (`index.html`, `report.html`)**:
   - Instant ticket reporting with optional photo/screenshot attachment.
   - 3-way autofill across Table Number, Team Name, and Team Leader.

@@ -1,15 +1,23 @@
 /* ==========================================================================
-   SIH SUPPORT DESK — GREEN & WHITE THEME
-   Clean, modern, emerald green & crisp white palette
+   SIH SUPPORT DESK — GITAM UNIVERSITY PALETTE
+   Design system based on official GITAM University brand guidelines:
+   - Primary Brand Color: GITAM Green (#007366)
+   - Secondary / Accent: Antique Beige (#F4E4C9)
+   - Supporting Palette: Kind Coral (#DD736E), Mellow Yellow (#E0B541), Wide Blue (#5E95CD)
    ========================================================================== */
 
 :root {
-  /* Brand Green Colors */
-  --primary-green: #007366;
+  /* Official GITAM University Brand Palette */
+  --primary-green: #007366;           /* Official GITAM Green */
   --primary-green-hover: #005A50;
   --primary-green-dark: #00433B;
   --primary-green-light: #E0F2EF;
   --primary-green-glow: rgba(0, 115, 102, 0.2);
+
+  --gitam-beige: #F4E4C9;             /* Official GITAM Antique Beige */
+  --gitam-coral: #DD736E;             /* Official GITAM Kind Coral */
+  --gitam-yellow: #E0B541;            /* Official GITAM Mellow Yellow */
+  --gitam-blue: #5E95CD;              /* Official GITAM Wide Blue */
 
   /* Legacy alias for compatibility */
   --teal-primary: var(--primary-green);
