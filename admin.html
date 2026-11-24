@@ -45,6 +45,7 @@
 
         <form id="adminLoginForm" autocomplete="off">
           <div class="form-group" style="margin-bottom:12px;">
+            <label for="adminAccessKey" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Floor access key</label>
             <input type="password" id="adminAccessKey" class="form-input" placeholder="e.g. VOL-ALEX-2026" required autofocus>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
@@ -212,7 +213,7 @@
           <select id="newUserRole" class="form-select">
             <option value="volunteer">Volunteer</option>
             <option value="mentor">Mentor</option>
-            <option value="superadmin">Admin</option>
+            <option value="superadmin">Superadmin</option>
           </select>
         </div>
         <div class="grid-2" style="margin-bottom:8px;">
