@@ -1,1458 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#F0E0C1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="SIH Support">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="mobile-web-app-capable" content="yes">
-  <title>SIH Support Desk — On-Ground Helpdesk & Issue Resolution</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#007366">
+  <link rel="icon" type="image/png" href="images/sih_logo_transparent.png">
+  <title>Facing a Problem? — SIH Helpdesk</title>
 
-  <!-- Preconnect and Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Core Theme Styles -->
   <link rel="stylesheet" href="css/theme.css">
-
-  <style>
-    /* Hero Section Dimensions & Typography */
-    .hero-section {
-      text-align: center;
-      margin-bottom: 22px;
-      padding: 8px 0 2px;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
-      color: var(--teal-primary);
-      text-transform: uppercase;
-      font-weight: 700;
-      background: rgba(0, 115, 102, 0.08);
-      padding: 5px 14px;
-      border-radius: var(--radius-full);
-      margin-bottom: 12px;
-      border: 1px solid rgba(0, 115, 102, 0.18);
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.65rem, 5vw, 2.35rem);
-      font-weight: 800;
-      color: var(--teal-primary);
-      line-height: 1.2;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      max-width: 580px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-
-    /* Tab Panel Wrapper & Dimensions */
-    .tabs-wrapper {
-      max-width: 640px;
-      margin: 0 auto 20px;
-      width: 100%;
-    }
-
-    .tab-nav {
-      display: flex;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 5px;
-      border-radius: var(--radius-full);
-      border: 1.5px solid var(--card-border);
-      box-shadow: var(--shadow-sm);
-      gap: 6px;
-    }
-
-    .tab-btn {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.88rem;
-      font-weight: 700;
-      padding: 10px 14px;
-      border-radius: var(--radius-full);
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      white-space: nowrap;
-      user-select: none;
-      -webkit-user-select: none;
-      text-align: center;
-    }
-
-    .tab-btn:hover {
-      color: var(--teal-primary);
-    }
-
-    .tab-btn.active {
-      background: var(--teal-primary);
-      color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(0, 115, 102, 0.28);
-    }
-
-    @media (max-width: 540px) {
-      .tabs-wrapper {
-        margin-bottom: 16px;
-      }
-
-      .tab-nav {
-        border-radius: 14px;
-        padding: 4px;
-        gap: 4px;
-      }
-
-      .tab-btn {
-        padding: 9px 4px;
-        font-size: 0.8rem;
-        border-radius: 10px;
-      }
-    }
-
-    /* Tab content panels */
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-      animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    /* Clean Venue Selector Cards */
-    .venue-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .venue-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px 6px;
-      border-radius: var(--radius-md);
-      border: 1.5px solid var(--card-border);
-      background: #FFFFFF;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      user-select: none;
-      -webkit-user-select: none;
-      min-height: 48px;
-    }
-
-    .venue-card:hover {
-      border-color: var(--teal-primary);
-      background: var(--teal-light);
-    }
-
-    .venue-card.selected {
-      border-color: var(--teal-primary);
-      background: var(--teal-light);
-      box-shadow: 0 0 0 2px var(--teal-primary);
-    }
-
-    .venue-card .venue-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.25;
-    }
-
-    .venue-card.selected .venue-name {
-      color: var(--teal-dark);
-    }
-
-    .venue-card .venue-sub {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      line-height: 1.1;
-    }
-
-    .venue-card.selected .venue-sub {
-      color: var(--teal-primary);
-      font-weight: 500;
-    }
-
-    /* Clean Category Selector */
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .category-card {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px 8px;
-      border-radius: var(--radius-md);
-      border: 1.5px solid var(--card-border);
-      background: #FFFFFF;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      user-select: none;
-      min-height: 44px;
-    }
-
-    .category-card:hover {
-      border-color: var(--teal-primary);
-      background: var(--teal-light);
-    }
-
-    .category-card.selected {
-      border-color: var(--teal-primary);
-      background: var(--teal-light);
-      box-shadow: 0 0 0 2px var(--teal-primary);
-    }
-
-    .category-card .cat-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text-main);
-      line-height: 1.25;
-    }
-
-    /* Character Counter */
-    .char-counter {
-      text-align: right;
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      color: var(--text-faint);
-      margin-top: 4px;
-    }
-
-    /* Live Cooldown Card */
-    .cooldown-alert {
-      display: none;
-      background: var(--amber-light);
-      border: 1.5px solid var(--amber-primary);
-      border-radius: var(--radius-md);
-      padding: 14px 18px;
-      margin: 0 auto 18px;
-      max-width: 640px;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .cooldown-alert.active {
-      display: flex;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .cooldown-timer {
-      font-family: var(--font-mono);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--amber-primary);
-      white-space: nowrap;
-    }
-
-    /* Tracker Stepper */
-    .stepper-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      margin: 32px 16px 40px;
-    }
-
-    .stepper-line {
-      position: absolute;
-      top: 50%;
-      left: 10%;
-      right: 10%;
-      height: 4px;
-      background: #E5E7EB;
-      z-index: 1;
-      transform: translateY(-50%);
-    }
-
-    .stepper-progress {
-      position: absolute;
-      top: 50%;
-      left: 10%;
-      width: 0%;
-      height: 4px;
-      background: var(--teal-primary);
-      z-index: 2;
-      transform: translateY(-50%);
-      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .step-node {
-      position: relative;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .step-circle {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      border: 3px solid #D1D5DB;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #9CA3AF;
-      box-shadow: var(--shadow-sm);
-      transition: all var(--transition-normal);
-    }
-
-    .step-node.completed .step-circle {
-      border-color: var(--teal-primary);
-      background: var(--teal-primary);
-      color: #FFFFFF;
-    }
-
-    .step-node.active .step-circle {
-      border-color: var(--amber-primary);
-      background: #FFFFFF;
-      color: var(--amber-primary);
-      box-shadow: 0 0 0 5px var(--amber-glow);
-    }
-
-    .step-label {
-      margin-top: 10px;
-      font-family: var(--font-display);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .step-node.completed .step-label,
-    .step-node.active .step-label {
-      color: var(--teal-primary);
-    }
-
-    /* Ticket Pass Card */
-    .ticket-pass {
-      background: linear-gradient(145deg, #FFFFFF 0%, #F8FAF9 100%);
-      border: 2px dashed var(--teal-primary);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      position: relative;
-      margin-top: 16px;
-    }
-
-    .ticket-pass-id {
-      font-family: var(--font-mono);
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: var(--teal-primary);
-      letter-spacing: 0.05em;
-    }
-
-    /* Floor guide card */
-    .guide-card {
-      background: #FFFFFF;
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 18px 20px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .guide-card-header {
-      margin-bottom: 10px;
-    }
-
-    .guide-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      color: var(--teal-primary);
-      margin-bottom: 2px;
-    }
-
-    .guide-card p,
-    .guide-card li {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .guide-card ul {
-      padding-left: 20px;
-      margin-top: 8px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
-
 <body>
+  <div class="app-shell">
 
-  <!-- Ambient Light Orbs -->
-  <div class="ambient-bg">
-    <div class="ambient-orb orb-1"></div>
-    <div class="ambient-orb orb-2"></div>
-    <div class="ambient-orb orb-3"></div>
-  </div>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <img src="images/sih_logo_transparent.png" alt="SIH" class="header-logo" onerror="this.style.display='none'">
+        <div class="header-text">
+          <h1>SIH Helpdesk</h1>
+          <p>Smart India Hackathon 2026</p>
+        </div>
+      </div>
+    </header>
 
-  <div class="app-container">
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <img src="images/sih_logo_transparent.png" alt="Smart India Hackathon"
-        style="height: 56px; width: auto; margin-bottom: 10px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0, 115, 102, 0.15));"
-        onerror="this.style.display='none'">
-      <div class="hero-eyebrow">Smart India Hackathon · Support Desk</div>
-      <h1 class="hero-title">SIH Support Desk</h1>
-      <p class="hero-desc">
-        Submit technical, electrical, or connectivity issues directly to organizers. Tickets are tracked and resolved in
-        real time.
+    <!-- Casual Greeting Hero Card (Start of Page) -->
+    <section class="hero-greeting">
+      <div class="hero-badge">
+        Live On-Ground Support
+      </div>
+      <h2 class="hero-title">
+        Facing a Problem?
+      </h2>
+      <p class="hero-lead">
+        Got an issue with Wi-Fi, power sockets, components, or need technical mentor guidance? Report it below and our floor volunteers will attend to your table right away.
       </p>
-    </section>
 
-    <!-- Tabs Navigation Bar -->
-    <div class="tabs-wrapper">
-      <nav class="tab-nav" aria-label="Support Navigation">
-        <button class="tab-btn active" data-tab="reportTab">Report Issue</button>
-        <button class="tab-btn" data-tab="trackTab">Track Ticket</button>
-        <button class="tab-btn" data-tab="guideTab">Floor Guide</button>
-      </nav>
-    </div>
-
-    <!-- Cooldown Alert (if device recently submitted) -->
-    <div class="cooldown-alert" id="cooldownBanner">
-      <div style="flex: 1;">
-        <div style="font-weight: 700; color: var(--amber-primary); font-size: 0.92rem;">
-          Recent Ticket Logged From This Device
-        </div>
-        <div style="font-size: 0.84rem; color: var(--text-muted); margin-top: 2px;">
-          Your previous request has been dispatched to floor volunteers. You can submit another application in:
-        </div>
+      <!-- Highlights -->
+      <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;">
+        <span class="chip">Quick Volunteer Dispatch</span>
+        <span class="chip">~2 Min Response</span>
+        <span class="chip">All Arena Halls</span>
       </div>
-      <div class="cooldown-timer" id="cooldownTimerDisplay">09:45</div>
-    </div>
 
-    <!-- TAB 1: Report Complaint Form -->
-    <section class="tab-panel active" id="reportTab">
-      <div class="card" style="max-width: 640px; margin: 0 auto;">
-
-        <form id="ticketForm" autocomplete="off">
-
-          <!-- Bot Honeypot -->
-          <div class="honeypot-field" aria-hidden="true">
-            <label for="website">Leave empty</label>
-            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-          </div>
-
-          <!-- Team and Table -->
-          <div class="grid-2">
-            <div class="form-group">
-              <label class="form-label" for="teamName">
-                Team Name <span class="req">*</span>
-              </label>
-              <input type="text" id="teamName" name="teamName" class="form-input" placeholder="e.g. CodeCraft Alpha"
-                required autocapitalize="words" enterkeyhint="next">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="tableNumber">
-                Table Number <span class="req">*</span>
-              </label>
-              <input type="text" id="tableNumber" name="tableNumber" class="form-input" placeholder="e.g. Table 24"
-                required autocapitalize="words" enterkeyhint="next">
-            </div>
-          </div>
-
-          <!-- Category Selection -->
-          <div class="form-group">
-            <label class="form-label">
-              Issue Category <span class="req">*</span>
-              <span class="form-hint">Choose closest match</span>
-            </label>
-            <div class="category-grid" id="categoryGrid">
-              <div class="category-card selected" data-cat="Wi-Fi">
-                <span class="cat-name">Wi-Fi</span>
-              </div>
-              <div class="category-card" data-cat="Power / Electrical">
-                <span class="cat-name">Power / Electrical</span>
-              </div>
-              <div class="category-card" data-cat="Tech Support">
-                <span class="cat-name">Tech Support</span>
-              </div>
-              <div class="category-card" data-cat="Hardware Components">
-                <span class="cat-name">Hardware Parts</span>
-              </div>
-            </div>
-            <input type="hidden" id="categoryInput" name="category" value="Internet / Wi-Fi">
-          </div>
-
-          <!-- Venue Details -->
-          <div class="form-group">
-            <label class="form-label">
-              Venue / Hall Location <span class="req">*</span>
-              <span class="form-hint">Choose your location</span>
-            </label>
-            <div class="venue-grid" id="venueGrid">
-              <div class="venue-card" data-venue="Main Arena, Hall A" role="button" tabindex="0">
-                <span class="venue-name">Hall A</span>
-                <span class="venue-sub">Main Arena</span>
-              </div>
-              <div class="venue-card" data-venue="Main Arena, Hall B" role="button" tabindex="0">
-                <span class="venue-name">Hall B</span>
-                <span class="venue-sub">Main Arena</span>
-              </div>
-              <div class="venue-card" data-venue="Main Arena, Hall C" role="button" tabindex="0">
-                <span class="venue-name">Hall C</span>
-                <span class="venue-sub">Main Arena</span>
-              </div>
-              <div class="venue-card" data-venue="Hardware Lab, 1st Floor" role="button" tabindex="0">
-                <span class="venue-name">Hardware Lab</span>
-                <span class="venue-sub">1st Floor</span>
-              </div>
-              <div class="venue-card" data-venue="Auditorium Stage Area" role="button" tabindex="0">
-                <span class="venue-name">Stage Area</span>
-                <span class="venue-sub">Auditorium</span>
-              </div>
-            </div>
-            <input type="hidden" id="venue" name="venue" value="">
-          </div>
-
-          <!-- Issue Description -->
-          <div class="form-group">
-            <label class="form-label" for="issue">
-              Detailed Description <span class="req">*</span>
-            </label>
-            <textarea id="issue" name="issue" class="form-textarea"
-              placeholder="Describe the issue clearly (e.g. table power socket tripped, Wi-Fi dropping, or need ESP32 from hardware desk)."
-              required maxlength="500" autocapitalize="sentences"></textarea>
-            <div class="char-counter" id="charCounter">0 / 500 characters</div>
-          </div>
-
-          <!-- Submit Button -->
-          <button type="submit" class="btn btn-primary btn-shimmer" id="submitBtn"
-            style="width: 100%; padding: 14px; font-size: clamp(0.88rem, 3.8vw, 1.05rem); margin-top: 10px; white-space: normal; line-height: 1.35;">
-            <span id="submitBtnText">Submit Complaint</span>
-          </button>
-
-          <!-- Normal Simple Reset Link (Down of Submit Button) -->
-          <div style="text-align: center; margin-top: 12px;">
-            <button type="button" id="clearPredefinedBtn"
-              style="background: transparent; border: none; font-family: var(--font-body); font-size: 0.86rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px; text-decoration: none;">
-              Need to change table or team? <span
-                style="color: #2563EB; font-weight: 600; text-decoration: underline;">Reset</span>
-            </button>
-          </div>
-
-          <p style="text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 12px;">
-            Submissions are monitored in real time by SIH floor volunteers.
-          </p>
-        </form>
-      </div>
-    </section>
-
-    <!-- TAB 2: Live Ticket Tracker -->
-    <section class="tab-panel" id="trackTab">
-      <div class="card" style="max-width: 640px; margin: 0 auto;">
-        <h2
-          style="font-family: var(--font-display); font-size: 1.35rem; color: var(--teal-primary); margin-bottom: 6px;">
-          Live Ticket Tracker
-        </h2>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-          Track resolution progress in real time. Watch status updates and remarks from the assigned volunteer.
-        </p>
-
-        <!-- Search Ticket Box -->
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-          <input type="text" id="trackTicketInput" class="form-input" placeholder="Enter Ticket ID (e.g. SIH-0001)"
-            style="font-family: var(--font-mono); text-transform: uppercase;" autocapitalize="characters"
-            autocomplete="off" autocorrect="off" enterkeyhint="search">
-          <button class="btn btn-primary" id="trackSearchBtn" style="padding: 0 22px;">
-            Track
-          </button>
-        </div>
-
-        <!-- Recent Tickets Chips -->
-        <div id="recentTicketsWrap" style="margin-bottom: 22px; display: none;">
-          <span
-            style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 8px;">
-            Recent tickets from this device:
-          </span>
-          <div id="recentTicketsList" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-        </div>
-
-        <!-- Tracker Display Card -->
-        <div id="trackerResult" style="display: none;">
-          <div class="ticket-pass">
-            <div
-              style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
-              <div>
-                <span class="ticket-pass-id" id="trackResultId">SIH-0000</span>
-                <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-top: 4px;"
-                  id="trackResultTeam">
-                  Team Name
-                </div>
-              </div>
-              <div id="trackResultPill">
-                <span class="status-pill pending">Pending</span>
-              </div>
-            </div>
-
-            <!-- Stepper -->
-            <div class="stepper-container">
-              <div class="stepper-line"></div>
-              <div class="stepper-progress" id="trackProgressLine"></div>
-
-              <div class="step-node" id="step1">
-                <div class="step-circle">1</div>
-                <div class="step-label">Received</div>
-              </div>
-
-              <div class="step-node" id="step2">
-                <div class="step-circle">2</div>
-                <div class="step-label">In Progress</div>
-              </div>
-
-              <div class="step-node" id="step3">
-                <div class="step-circle">3</div>
-                <div class="step-label">Resolved</div>
-              </div>
-            </div>
-
-            <!-- Detail Grid -->
-            <div
-              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; background: #FFFFFF; border-radius: var(--radius-md); padding: 16px; border: 1px solid var(--card-border);">
-              <div>
-                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">CATEGORY</span>
-                <span style="font-weight: 600;" id="trackResultCat">—</span>
-              </div>
-              <div>
-                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">LOCATION</span>
-                <span style="font-weight: 600;" id="trackResultVenue">—</span>
-              </div>
-              <div>
-                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">SUBMITTED AT</span>
-                <span style="font-weight: 600; font-family: var(--font-mono); font-size: 0.85rem;"
-                  id="trackResultTime">—</span>
-              </div>
-              <div>
-                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">ASSIGNED TO</span>
-                <span style="font-weight: 600; color: var(--teal-primary);" id="trackResultHandler">Helpdesk Floor
-                  Team</span>
-              </div>
-            </div>
-
-            <!-- Problem statement -->
-            <div style="margin-top: 14px;">
-              <span
-                style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">ISSUE
-                REPORTED:</span>
-              <p style="font-size: 0.92rem; color: var(--text-main); margin-top: 4px; background: #FFFFFF; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--card-border);"
-                id="trackResultIssue">—</p>
-            </div>
-
-            <!-- Volunteer remarks box -->
-            <div style="margin-top: 14px;" id="trackRemarksBox">
-              <span
-                style="font-size: 0.75rem; font-weight: 700; color: var(--teal-primary); text-transform: uppercase;">LATEST
-                REMARKS / ACTIONS TAKEN:</span>
-              <p style="font-size: 0.92rem; color: var(--teal-dark); margin-top: 4px; background: var(--teal-light); padding: 12px; border-radius: var(--radius-sm); border: 1px solid rgba(0, 115, 102, 0.2);"
-                id="trackResultRemarks">
-                Awaiting volunteer assignment.
-              </p>
-            </div>
-
-            <div style="display: flex; justify-content: flex-end; margin-top: 18px;">
-              <button class="btn btn-outline" onclick="refreshCurrentTrackedTicket()"
-                style="font-size: 0.82rem; padding: 6px 14px;">
-                Refresh Status
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="trackerEmpty" style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
-          <div style="font-weight: 600; font-size: 1rem; color: var(--text-main);">No Ticket Selected</div>
-          <div style="font-size: 0.84rem; margin-top: 4px;">Enter your ticket ID above to view live progress.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 3: Floor Guide & Live Desk Status -->
-    <section class="tab-panel" id="guideTab">
-      <div style="max-width: 640px; margin: 0 auto;">
-
-        <div class="card" style="margin-bottom: 16px;">
-          <h2 style="font-family: var(--font-display); font-size: 1.35rem; color: var(--teal-primary); margin-bottom: 6px;">
-            Floor Guide & Desk Status
-          </h2>
-          <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">
-            Live desk locations, component walk-in rules, official Wi-Fi credentials, and emergency procedures.
-          </p>
-        </div>
-
-        <div class="guide-grid" style="display: grid; grid-template-columns: 1fr; gap: 14px;">
-
-          <!-- Central Helpdesk -->
-          <div class="guide-card">
-            <div class="guide-card-header" style="display: flex; align-items: center; justify-content: space-between;">
-              <h3 style="margin: 0; font-size: 1.05rem;">Central Helpdesk</h3>
-              <span class="status-pill solved" style="font-size: 0.72rem; padding: 3px 8px;">OPEN 24/7</span>
-            </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Ground Floor Main Lobby</span>
-            <ul style="margin-top: 10px; margin-bottom: 0; padding-left: 18px; font-size: 0.86rem; line-height: 1.6;">
-              <li>Floor volunteer coordination & general inquiries.</li>
-              <li>Table re-assignments & power cord extension routing.</li>
-              <li>Submit a ticket in this portal for volunteer dispatch to your table.</li>
-            </ul>
-          </div>
-
-          <!-- Hardware Lab -->
-          <div class="guide-card">
-            <div class="guide-card-header" style="display: flex; align-items: center; justify-content: space-between;">
-              <h3 style="margin: 0; font-size: 1.05rem;">Hardware Lab</h3>
-              <span class="status-pill ongoing" style="font-size: 0.72rem; padding: 3px 8px;">WALK-IN WITH ID</span>
-            </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">1st Floor, Room 104</span>
-            <p style="font-size: 0.86rem; color: var(--text-main); margin-top: 8px; margin-bottom: 6px; font-weight: 500;">
-              Hardware components must be collected in-person with Team ID. Volunteers do not deliver components to tables.
-            </p>
-            <ul style="margin: 0; padding-left: 18px; font-size: 0.84rem; line-height: 1.6; color: var(--text-muted);">
-              <li>Available: Arduino Uno, ESP32, Raspberry Pi 4, sensors, soldering tools.</li>
-              <li>Component return required at hackathon conclusion.</li>
-            </ul>
-          </div>
-
-          <!-- Wi-Fi Network -->
-          <div class="guide-card">
-            <div class="guide-card-header" style="display: flex; align-items: center; justify-content: space-between;">
-              <h3 style="margin: 0; font-size: 1.05rem;">Hackathon Wi-Fi (5GHz)</h3>
-              <span class="status-pill solved" style="font-size: 0.72rem; padding: 3px 8px;">ACTIVE</span>
-            </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Dedicated high-speed participant connection</span>
-            <div style="background: var(--teal-light); border: 1px solid rgba(0, 115, 102, 0.2); border-radius: var(--radius-sm); padding: 10px 14px; margin-top: 10px; font-size: 0.85rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <span><b>SSID:</b> <code>SIH-Participant-5G</code></span>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span><b>Password:</b> <code id="wifiPassText">SIH#GrandFinale2026</code></span>
-                <button type="button" class="btn btn-outline" onclick="copyWifiPassword()" style="font-size: 0.72rem; padding: 3px 8px;">Copy</button>
-              </div>
-            </div>
-            <ul style="margin-top: 8px; margin-bottom: 0; padding-left: 18px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
-              <li>DNS: <code>1.1.1.1</code> / <code>8.8.8.8</code></li>
-              <li>If you encounter drops, submit an <i>Internet / Wi-Fi</i> ticket.</li>
-            </ul>
-          </div>
-
-          <!-- Power & Electrical Safety -->
-          <div class="guide-card">
-            <div class="guide-card-header" style="display: flex; align-items: center; justify-content: space-between;">
-              <h3 style="margin: 0; font-size: 1.05rem;">Power & Electrical Safety</h3>
-              <span class="status-pill critical" style="font-size: 0.72rem; padding: 3px 8px;">EMERGENCY DISPATCH</span>
-            </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Table surge protectors & main lines</span>
-            <ul style="margin-top: 10px; margin-bottom: 0; padding-left: 18px; font-size: 0.86rem; line-height: 1.6;">
-              <li>Each table has one 4-socket surge protector. Do not connect heavy external appliances.</li>
-              <li><b>Sparks or burning smell:</b> Turn off the table master switch immediately and submit a <i>Power</i> ticket.</li>
-            </ul>
-          </div>
-
-          <!-- Medical & Emergency -->
-          <div class="guide-card">
-            <div class="guide-card-header" style="display: flex; align-items: center; justify-content: space-between;">
-              <h3 style="margin: 0; font-size: 1.05rem;">First Aid & Medical</h3>
-              <span class="status-pill solved" style="font-size: 0.72rem; padding: 3px 8px;">ON-SITE</span>
-            </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 2px;">Room 002 (Near Cafeteria)</span>
-            <ul style="margin-top: 10px; margin-bottom: 0; padding-left: 18px; font-size: 0.86rem; line-height: 1.6;">
-              <li>Paramedic staff on duty 24/7 for first aid, basic medicines, and blood pressure checks.</li>
-              <li>For immediate physical assistance, inform the nearest volunteer at any hall door.</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Bottom Site Navigation Bar -->
-    <footer class="site-nav" style="max-width: 640px; margin: 36px auto 0;">
-      <a href="index.html" class="brand-group">
-        <img src="images/sih_logo_transparent.png" alt="Smart India Hackathon" class="brand-logo"
-          onerror="this.style.display='none'">
-        <div class="brand-titles">
-          <span class="brand-title">SIH Support Desk</span>
-          <span class="brand-subtitle">Floor Helpdesk System</span>
-        </div>
-      </a>
-
-      <div class="nav-actions">
-        <a href="admin.html" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 14px;">
-          Admin Login
+      <!-- Report Issue Option (Redirects to form filling page) -->
+      <div style="margin-bottom: 26px;">
+        <a href="report.html" class="hero-cta" id="btnReportIssue">
+          Report an Issue &rarr;
         </a>
       </div>
+
+      <!-- Attribution Credit -->
+      <div class="hero-credit" style="font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 18px; max-width: 480px; margin: 0 auto;">
+        Developed by <strong>VDC Venture Development Centre</strong>, GITAM University Bengaluru
+      </div>
+    </section>
+
+    <!-- Live Hackathon Milestones / Timeline Tracker -->
+    <section class="timeline-tracker" style="margin-top: 24px; padding: 22px 24px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px;">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary-green); background: var(--primary-green-light); padding: 4px 10px; border-radius: var(--radius-full);">36-Hour Arena Schedule</span>
+          <h3 style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-top: 6px;">
+            Hackathon Milestones &amp; Live Timeline
+          </h3>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 0.74rem; color: var(--text-muted); display: block; text-transform: uppercase; letter-spacing: 0.05em;">Code Freeze In</span>
+          <span id="freezeCountdown" style="font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem; color: var(--primary-green);">14h 45m 20s</span>
+        </div>
+      </div>
+
+      <!-- Current Active Phase Callout -->
+      <div style="background: var(--bg-subtle); border-left: 3px solid var(--primary-green); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <span style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; color: var(--primary-green); letter-spacing: 0.05em;">Current Phase</span>
+            <div id="currentMilestoneTitle" style="font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-top: 2px;">
+              Mentoring Round 1 &mdash; Table-to-Table Review
+            </div>
+            <div id="currentMilestoneDesc" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
+              Evaluators and mentors visiting tables 1&ndash;52. Keep problem architecture diagrams ready.
+            </div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; background: var(--primary-green-light); color: var(--primary-green); padding: 4px 10px; border-radius: var(--radius-full);">Active Now</span>
+        </div>
+      </div>
+
+      <!-- Milestones List -->
+      <div id="milestonesList" style="display: grid; gap: 10px;"></div>
+    </section>
+
+    <!-- Arena Wi-Fi & Central Helpdesk Info -->
+    <div style="margin-top: 24px; padding: 20px 24px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <span style="font-size: 0.84rem; color: var(--text-muted);">Arena Wi-Fi:</span>
+          <span style="font-family: var(--font-mono); font-weight: 600; font-size: 0.92rem; margin-left: 6px;">SIH_2026_ARENA_5G</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <code style="font-family: var(--font-mono); font-size: 0.84rem; background: var(--bg-subtle); padding: 5px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">SIH2026@Arena!5G</code>
+          <button class="btn btn-outline btn-sm" id="copyWifiBtn">Copy</button>
+        </div>
+      </div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+        <strong>Central Helpdesk:</strong> Ground floor atrium (24/7) &bull; Safety: report damaged sockets immediately.
+      </div>
+    </div>
+
+    <!-- Attribution Footer -->
+    <footer class="app-footer">
+      <p>Developed by <strong>VDC Venture Development Centre</strong>, GITAM University Bengaluru</p>
+      <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk</p>
     </footer>
 
   </div>
 
-  <!-- Success Confirmation Modal -->
-  <div class="modal-backdrop" id="successModal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 class="modal-title">Ticket Submitted</h3>
-        <button class="modal-close" onclick="closeSuccessModal()">&times;</button>
-      </div>
-      <div class="modal-body" style="text-align: center;">
-        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
-          Your issue has been logged and sent to on-ground volunteers.
-        </p>
-
-        <div
-          style="background: var(--teal-light); border: 2px dashed var(--teal-primary); border-radius: var(--radius-md); padding: 16px; margin-bottom: 18px;">
-          <span
-            style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--teal-primary); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px;">
-            OFFICIAL TICKET ID
-          </span>
-          <div style="font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: var(--teal-primary);"
-            id="modalTicketId">
-            SIH-0000
-          </div>
-          <button class="btn btn-outline" id="copyTicketBtn"
-            style="font-size: 0.8rem; padding: 6px 14px; margin-top: 8px;">
-            Copy Ticket ID
-          </button>
-        </div>
-
-        <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;">
-          A volunteer is being assigned to your table. You can monitor progress on the <b>Track Ticket</b> tab.
-        </p>
-      </div>
-      <div class="modal-footer" style="justify-content: center; gap: 12px;">
-        <button class="btn btn-primary" onclick="switchToTrackerFromModal()">
-          Open Tracker
-        </button>
-        <button class="btn btn-outline" onclick="closeSuccessModal()">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Container -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- Audio, API & UI Logic Scripts -->
-  <script src="js/audio.js"></script>
+  <script src="js/config.js"></script>
   <script src="js/ui-fx.js"></script>
-  <script src="js/api.js"></script>
-
   <script>
-    // --- State & Constants ---
-    const COOLDOWN_DURATION = 3 * 60 * 1000; // 3 minutes
-    const LAST_SUBMIT_KEY = 'sih_last_submit';
-    const RECENT_TICKETS_KEY = 'sih_recent_tickets';
-
-    // Persistent device keys for pre-defining details on re-scan
-    const DEVICE_TEAM_KEY = 'sih_device_teamName';
-    const DEVICE_TABLE_KEY = 'sih_device_tableNumber';
-    const DEVICE_VENUE_KEY = 'sih_device_venue';
-
-    let currentTrackedId = null;
-    let cooldownInterval = null;
-
-    // --- DOM Elements ---
-    const form = document.getElementById('ticketForm');
-    const teamNameInput = document.getElementById('teamName');
-    const tableNumberInput = document.getElementById('tableNumber');
-    const venueInput = document.getElementById('venue');
-    const clearPredefinedBtn = document.getElementById('clearPredefinedBtn');
-
-    const submitBtn = document.getElementById('submitBtn');
-    const submitBtnText = document.getElementById('submitBtnText');
-    const charCounter = document.getElementById('charCounter');
-    const issueTextarea = document.getElementById('issue');
-    const cooldownBanner = document.getElementById('cooldownBanner');
-    const cooldownTimerDisplay = document.getElementById('cooldownTimerDisplay');
-
-    // --- Tab Navigation ---
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-
-        btn.classList.add('active');
-        const target = document.getElementById(btn.dataset.tab);
-        if (target) target.classList.add('active');
-      });
+    // Wi-Fi Copy
+    document.getElementById('copyWifiBtn')?.addEventListener('click', () => {
+      window.ui.copyText('SIH2026@Arena!5G', 'Wi-Fi Password copied!');
     });
 
-    // --- Venue Selection Cards ---
-    const venueCards = document.querySelectorAll('.venue-card');
+    // Live Hackathon Milestones & Timeline
+    (function initTimeline() {
+      const milestones = [
+        { time: '09:00 AM (Day 1)', title: 'Kickoff & Problem Selection', desc: 'Team table allotment & challenge kickoff', status: 'completed' },
+        { time: '04:00 PM (Day 1)', title: 'Mentoring Round 1', desc: 'Mandatory table evaluation & architecture validation', status: 'active' },
+        { time: '08:30 PM (Day 1)', title: 'Dinner & Mid-Way Check', desc: 'Dining Hall (Ground Floor). Hardware checkpoint', status: 'upcoming' },
+        { time: '12:00 AM (Day 2)', title: 'Midnight Review & Refreshments', desc: 'Energy drinks & code sanity check', status: 'upcoming' },
+        { time: '06:00 AM (Day 2)', title: 'Mentoring Round 2', desc: 'Final bug fixes, cloud deployment & UI polish', status: 'upcoming' },
+        { time: '11:00 AM (Day 2)', title: 'Final Code Freeze', desc: 'GitHub lock & PPT submission on portal', status: 'upcoming' },
+        { time: '01:00 PM (Day 2)', title: 'Grand Jury Pitching', desc: 'Main Stage presentations & winner announcement', status: 'upcoming' }
+      ];
 
-    function selectVenue(val) {
-      if (!val) {
-        venueInput.value = '';
-        venueCards.forEach(c => c.classList.remove('selected'));
-        return;
-      }
-      venueInput.value = val;
-      let matched = false;
-      venueCards.forEach(card => {
-        const v = card.dataset.venue || '';
-        if (v === val || v.toLowerCase() === val.toLowerCase() || v.toLowerCase().includes(val.toLowerCase()) || val.toLowerCase().includes(v.toLowerCase())) {
-          card.classList.add('selected');
-          venueInput.value = v;
-          matched = true;
-        } else {
-          card.classList.remove('selected');
-        }
-      });
-      saveDeviceDetails();
-    }
+      const listEl = document.getElementById('milestonesList');
+      if (!listEl) return;
 
-    venueCards.forEach(card => {
-      card.addEventListener('click', () => {
-        selectVenue(card.dataset.venue);
-      });
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          selectVenue(card.dataset.venue);
-        }
-      });
-    });
+      listEl.innerHTML = milestones.map(m => {
+        let badgeStyle = 'background: var(--bg-subtle); color: var(--text-muted);';
+        let badgeLabel = 'Upcoming';
+        let rowBorder = 'border-color: var(--border-color);';
+        let activeBg = '';
 
-    // --- Venue Helper ---
-    window.setVenue = function (venueText) {
-      selectVenue(venueText);
-    };
-
-    // --- Copy Wi-Fi Password Helper ---
-    window.copyWifiPassword = function () {
-      navigator.clipboard.writeText('SIH#GrandFinale2026').then(() => {
-        showToast('Password Copied', 'Wi-Fi password copied to clipboard.', 'success');
-      });
-    };
-
-    // --- Category Selection Cards ---
-    const categoryCards = document.querySelectorAll('.category-card');
-    const categoryInput = document.getElementById('categoryInput');
-
-    categoryCards.forEach(card => {
-      card.addEventListener('click', () => {
-        categoryCards.forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        categoryInput.value = card.dataset.cat;
-      });
-    });
-
-    // --- Character Counter ---
-    issueTextarea.addEventListener('input', () => {
-      const len = issueTextarea.value.length;
-      charCounter.textContent = `${len} / 500 characters`;
-      if (len > 450) {
-        charCounter.style.color = 'var(--status-critical)';
-      } else {
-        charCounter.style.color = 'var(--text-faint)';
-      }
-    });
-
-    // --- Device Details Auto-Persistence (Predefined on Re-scan) ---
-    function loadDeviceDetails() {
-      const savedTeam = localStorage.getItem(DEVICE_TEAM_KEY) || localStorage.getItem('sih_saved_teamName') || '';
-      const savedTable = localStorage.getItem(DEVICE_TABLE_KEY) || localStorage.getItem('sih_saved_tableNumber') || '';
-      const savedVenue = localStorage.getItem(DEVICE_VENUE_KEY) || localStorage.getItem('sih_saved_venue') || '';
-
-      if (savedTeam) teamNameInput.value = savedTeam;
-      if (savedTable) tableNumberInput.value = savedTable;
-      if (savedVenue) selectVenue(savedVenue);
-    }
-
-    function saveDeviceDetails() {
-      const tName = teamNameInput.value.trim();
-      const tNum = tableNumberInput.value.trim();
-      const vLoc = venueInput.value.trim();
-
-      if (tName) {
-        localStorage.setItem(DEVICE_TEAM_KEY, tName);
-        localStorage.setItem('sih_saved_teamName', tName);
-      }
-      if (tNum) {
-        localStorage.setItem(DEVICE_TABLE_KEY, tNum);
-        localStorage.setItem('sih_saved_tableNumber', tNum);
-      }
-      if (vLoc) {
-        localStorage.setItem(DEVICE_VENUE_KEY, vLoc);
-        localStorage.setItem('sih_saved_venue', vLoc);
-      }
-    }
-
-    // Auto-save live as user types team name or table number
-    [teamNameInput, tableNumberInput].forEach(inp => {
-      inp.addEventListener('input', saveDeviceDetails);
-      inp.addEventListener('change', saveDeviceDetails);
-    });
-
-    // Clear / Reset Button (Down of Submit Button)
-    clearPredefinedBtn.addEventListener('click', () => {
-      localStorage.removeItem(DEVICE_TEAM_KEY);
-      localStorage.removeItem(DEVICE_TABLE_KEY);
-      localStorage.removeItem(DEVICE_VENUE_KEY);
-      localStorage.removeItem('sih_saved_teamName');
-      localStorage.removeItem('sih_saved_tableNumber');
-      localStorage.removeItem('sih_saved_venue');
-
-      teamNameInput.value = '';
-      tableNumberInput.value = '';
-      venueInput.value = '';
-      venueCards.forEach(c => c.classList.remove('selected'));
-      issueTextarea.value = '';
-      charCounter.textContent = '0 / 500 characters';
-
-      // Reset category to default
-      categoryCards.forEach(c => c.classList.remove('selected'));
-      const defaultCatCard = document.querySelector('.category-card[data-cat="Internet / Wi-Fi"]');
-      if (defaultCatCard) defaultCatCard.classList.add('selected');
-      categoryInput.value = 'Internet / Wi-Fi';
-
-      teamNameInput.focus();
-      showToast('Form Reset', 'Team and table inputs cleared.', 'info');
-    });
-
-    // Initialize predefined details on page load
-    loadDeviceDetails();
-
-    // --- Cooldown Management ---
-    function checkCooldown() {
-      const last = parseInt(localStorage.getItem(LAST_SUBMIT_KEY) || '0', 10);
-      const elapsed = Date.now() - last;
-      const remaining = Math.max(0, COOLDOWN_DURATION - elapsed);
-
-      if (remaining > 0) {
-        cooldownBanner.classList.add('active');
-        const min = Math.floor(remaining / 60000);
-        const sec = Math.floor((remaining % 60000) / 1000);
-        const timeStr = min > 0 ? `${min}m ${sec.toString().padStart(2, '0')}s` : `${sec}s`;
-        cooldownTimerDisplay.textContent = `${min}m ${sec.toString().padStart(2, '0')}s`;
-        submitBtn.disabled = true;
-        submitBtnText.textContent = `Submit another application in ${timeStr}`;
-
-        if (!cooldownInterval) {
-          cooldownInterval = setInterval(checkCooldown, 1000);
-        }
-        return true;
-      } else {
-        cooldownBanner.classList.remove('active');
-        submitBtn.disabled = false;
-        submitBtnText.textContent = 'Submit Complaint';
-        if (cooldownInterval) {
-          clearInterval(cooldownInterval);
-          cooldownInterval = null;
-        }
-        return false;
-      }
-    }
-
-    checkCooldown();
-
-    // --- Form Submission ---
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      if (checkCooldown()) {
-        const last = parseInt(localStorage.getItem(LAST_SUBMIT_KEY) || '0', 10);
-        const remaining = Math.max(0, COOLDOWN_DURATION - (Date.now() - last));
-        const min = Math.floor(remaining / 60000);
-        const sec = Math.floor((remaining % 60000) / 1000);
-        const timeStr = min > 0 ? `${min}m ${sec.toString().padStart(2, '0')}s` : `${sec}s`;
-        showToast('Please Wait', `Submit another application in ${timeStr}.`, 'warning');
-        return;
-      }
-
-      // Honeypot check
-      const hp = document.getElementById('website').value;
-      if (hp) {
-        showToast('Ticket Sent', 'Your ticket has been dispatched.', 'success');
-        form.reset();
-        return;
-      }
-
-      const teamName = teamNameInput.value.trim();
-      const tableNumber = tableNumberInput.value.trim();
-      const category = categoryInput.value;
-      const venue = venueInput.value.trim();
-      const issue = issueTextarea.value.trim();
-
-      if (!teamName || !tableNumber || !issue || !venue) {
-        if (!venue) {
-          showToast('Select Venue', 'Please select your venue location from the given boxes.', 'warning');
-        } else {
-          showToast('Missing Fields', 'Please complete all required fields.', 'error');
-        }
-        return;
-      }
-
-      // Ensure details are permanently saved for future scans with this device
-      saveDeviceDetails();
-
-      submitBtn.disabled = true;
-      submitBtnText.textContent = 'Submitting complaint...';
-
-      try {
-        const payload = {
-          deviceId: getDeviceId(),
-          teamName,
-          tableNumber,
-          category,
-          priority: 'Normal',
-          venue,
-          issue
-        };
-
-        const result = await window.sihApi.submitTicket(payload);
-
-        if (result.result === 'success') {
-          // Record submit time for cooldown
-          localStorage.setItem(LAST_SUBMIT_KEY, Date.now().toString());
-
-          // Save to recent tickets list
-          saveRecentTicket(result.ticketId);
-          saveTicketKnownStatus(result.ticketId, 'Pending');
-
-          // Request native browser notification permission for status alerts
-          requestUserNotificationPermission();
-
-          // Confetti celebration
-          launchConfetti();
-
-          // Show success pass modal
-          document.getElementById('modalTicketId').textContent = result.ticketId;
-          document.getElementById('successModal').classList.add('open');
-
-          // Reset only issue description, KEEPING team name, table number & venue predefined
-          issueTextarea.value = '';
-          charCounter.textContent = '0 / 500 characters';
-
-          showToast('Ticket Dispatched', `Ticket ${result.ticketId} assigned to helpdesk floor.`, 'success');
-
-          checkCooldown();
-        } else if (result.result === 'cooldown') {
-          showToast('Please Wait', 'Submit another application shortly.', 'warning');
-          checkCooldown();
-        } else {
-          showToast('Submission Issue', result.message || 'Unable to register ticket right now.', 'error');
-          submitBtn.disabled = false;
-          submitBtnText.textContent = 'Submit Complaint';
-        }
-      } catch (err) {
-        console.error('Error submitting:', err);
-        showToast('Network Error', 'Check your connection or see on-ground volunteers.', 'error');
-        submitBtn.disabled = false;
-        submitBtnText.textContent = 'Submit Complaint';
-      }
-    });
-
-    // --- Success Modal Controls ---
-    window.closeSuccessModal = function () {
-      document.getElementById('successModal').classList.remove('open');
-    };
-
-    window.switchToTrackerFromModal = function () {
-      const ticketId = document.getElementById('modalTicketId').textContent;
-      closeSuccessModal();
-      document.querySelector('[data-tab="trackTab"]').click();
-      document.getElementById('trackTicketInput').value = ticketId;
-      loadTicketStatus(ticketId);
-    };
-
-    document.getElementById('copyTicketBtn').addEventListener('click', () => {
-      const id = document.getElementById('modalTicketId').textContent;
-      navigator.clipboard.writeText(id).then(() => {
-        showToast('Copied', `${id} copied to clipboard`, 'success');
-      });
-    });
-
-    // --- Recent Tickets Tracker Helpers ---
-    function saveRecentTicket(id) {
-      let list = JSON.parse(localStorage.getItem(RECENT_TICKETS_KEY) || '[]');
-      if (!list.includes(id)) {
-        list.unshift(id);
-        if (list.length > 5) list = list.slice(0, 5);
-        localStorage.setItem(RECENT_TICKETS_KEY, JSON.stringify(list));
-      }
-      renderRecentTickets();
-    }
-
-    function renderRecentTickets() {
-      const list = JSON.parse(localStorage.getItem(RECENT_TICKETS_KEY) || '[]');
-      const wrap = document.getElementById('recentTicketsWrap');
-      const container = document.getElementById('recentTicketsList');
-
-      if (list.length === 0) {
-        wrap.style.display = 'none';
-        return;
-      }
-
-      wrap.style.display = 'block';
-      container.innerHTML = list.map(id => `
-        <button class="btn btn-outline" style="font-family: var(--font-mono); font-size: 0.78rem; padding: 4px 10px;" onclick="searchRecentTicket('${id}')">
-          ${id}
-        </button>
-      `).join('');
-    }
-
-    window.searchRecentTicket = function (id) {
-      document.getElementById('trackTicketInput').value = id;
-      loadTicketStatus(id);
-    };
-
-    renderRecentTickets();
-
-    // --- Track Ticket Logic ---
-    document.getElementById('trackSearchBtn').addEventListener('click', () => {
-      const id = document.getElementById('trackTicketInput').value.trim();
-      if (!id) {
-        showToast('Enter Ticket ID', 'Please enter a ticket code like SIH-0001', 'warning');
-        return;
-      }
-      loadTicketStatus(id);
-    });
-
-    document.getElementById('trackTicketInput').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') document.getElementById('trackSearchBtn').click();
-    });
-
-    async function loadTicketStatus(id) {
-      currentTrackedId = id;
-      const resultBox = document.getElementById('trackerResult');
-      const emptyBox = document.getElementById('trackerEmpty');
-
-      try {
-        const ticket = await window.sihApi.getTicket(id);
-
-        if (!ticket) {
-          showToast('Not Found', `No complaint found matching ID ${id}`, 'error');
-          resultBox.style.display = 'none';
-          emptyBox.style.display = 'block';
-          return;
+        if (m.status === 'completed') {
+          badgeStyle = 'background: #E5E7EB; color: #4B5563;';
+          badgeLabel = 'Completed';
+        } else if (m.status === 'active') {
+          badgeStyle = 'background: var(--primary-green-light); color: var(--primary-green); font-weight: 700;';
+          badgeLabel = 'In Progress';
+          rowBorder = 'border-color: var(--primary-green); border-width: 1.5px;';
+          activeBg = 'background: var(--bg-surface);';
         }
 
-        emptyBox.style.display = 'none';
-        resultBox.style.display = 'block';
+        return `
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 12px 14px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); ${rowBorder} ${activeBg}">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); min-width: 125px; margin-top: 1px;">
+                ${m.time}
+              </span>
+              <div>
+                <strong style="font-size: 0.9rem; color: var(--text-main); display: block;">${m.title}</strong>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">${m.desc}</span>
+              </div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: var(--radius-full); ${badgeStyle}">
+              ${badgeLabel}
+            </span>
+          </div>
+        `;
+      }).join('');
 
-        document.getElementById('trackResultId').textContent = ticket.ticketId;
-        document.getElementById('trackResultTeam').textContent = `${ticket.teamName} · ${ticket.teamNo || 'Table'}`;
-        document.getElementById('trackResultCat').textContent = ticket.category;
-        document.getElementById('trackResultVenue').textContent = ticket.venue;
-
-        const dateObj = new Date(ticket.timestamp);
-        document.getElementById('trackResultTime').textContent = isNaN(dateObj) ? ticket.timestamp : dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        document.getElementById('trackResultIssue').textContent = ticket.issue;
-        document.getElementById('trackResultHandler').textContent = ticket.handledBy || 'Helpdesk Floor Team';
-
-        const remarksEl = document.getElementById('trackResultRemarks');
-        if (ticket.remarks) {
-          remarksEl.textContent = ticket.remarks;
-        } else {
-          remarksEl.textContent = (ticket.status === 'Solved') ? 'Resolved and confirmed with team.' : 'Awaiting floor volunteer assignment.';
-        }
-
-        // Stepper & Pill update
-        const status = (ticket.status || 'Pending').toLowerCase();
-        const pillWrap = document.getElementById('trackResultPill');
-        const progressLine = document.getElementById('trackProgressLine');
-        const s1 = document.getElementById('step1');
-        const s2 = document.getElementById('step2');
-        const s3 = document.getElementById('step3');
-
-        // Reset steps
-        s1.className = 'step-node';
-        s2.className = 'step-node';
-        s3.className = 'step-node';
-
-        if (status === 'pending') {
-          pillWrap.innerHTML = '<span class="status-pill pending">Pending</span>';
-          s1.className = 'step-node active';
-          progressLine.style.width = '10%';
-        } else if (status === 'ongoing') {
-          pillWrap.innerHTML = '<span class="status-pill ongoing">In Progress</span>';
-          s1.className = 'step-node completed';
-          s2.className = 'step-node active';
-          progressLine.style.width = '50%';
-        } else if (status === 'solved') {
-          pillWrap.innerHTML = '<span class="status-pill solved">Resolved</span>';
-          s1.className = 'step-node completed';
-          s2.className = 'step-node completed';
-          s3.className = 'step-node completed';
-          progressLine.style.width = '80%';
-        }
-      } catch (err) {
-        console.error('Error fetching ticket:', err);
-        showToast('Error', 'Could not refresh ticket status.', 'error');
+      // Live Code Freeze Countdown (Simulated relative to 36-hour schedule)
+      const countdownEl = document.getElementById('freezeCountdown');
+      if (countdownEl) {
+        let totalSeconds = 14 * 3600 + 45 * 60 + 20;
+        setInterval(() => {
+          if (totalSeconds > 0) totalSeconds--;
+          const hrs = Math.floor(totalSeconds / 3600);
+          const mins = Math.floor((totalSeconds % 3600) / 60);
+          const secs = totalSeconds % 60;
+          countdownEl.textContent = `${hrs}h ${mins < 10 ? '0' : ''}${mins}m ${secs < 10 ? '0' : ''}${secs}s`;
+        }, 1000);
       }
-    }
-
-    window.refreshCurrentTrackedTicket = function () {
-      if (currentTrackedId) loadTicketStatus(currentTrackedId);
-    };
-
-    // --- User Notification Engine ---
-    function requestUserNotificationPermission() {
-      if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission().then(perm => {
-          if (perm === 'granted') {
-            showToast('Notifications Active', 'You will be notified when volunteers update your ticket.', 'info');
-          }
-        });
-      }
-    }
-
-    function getTicketKnownStatuses() {
-      try {
-        return JSON.parse(localStorage.getItem('sih_ticket_status_map') || '{}');
-      } catch {
-        return {};
-      }
-    }
-
-    function saveTicketKnownStatus(ticketId, status) {
-      const map = getTicketKnownStatuses();
-      map[ticketId] = status;
-      localStorage.setItem('sih_ticket_status_map', JSON.stringify(map));
-    }
-
-    let userTitleFlashInterval = null;
-    function flashUserDocTitle(text) {
-      if (document.hidden) {
-        let alt = false;
-        const originalTitle = 'SIH Support Desk — On-Ground Helpdesk & Issue Resolution';
-        if (userTitleFlashInterval) clearInterval(userTitleFlashInterval);
-        userTitleFlashInterval = setInterval(() => {
-          document.title = alt ? text : originalTitle;
-          alt = !alt;
-        }, 1200);
-      }
-    }
-
-    window.addEventListener('focus', () => {
-      if (userTitleFlashInterval) {
-        clearInterval(userTitleFlashInterval);
-        userTitleFlashInterval = null;
-        document.title = 'SIH Support Desk — On-Ground Helpdesk & Issue Resolution';
-      }
-    });
-
-    function notifyUserTicketUpdate(ticket) {
-      const statusTitle = ticket.status === 'Solved' ? 'Resolved' : (ticket.status === 'Ongoing' ? 'In Progress' : ticket.status);
-      const prevMap = getTicketKnownStatuses();
-      const prevStatus = prevMap[ticket.ticketId];
-
-      // Update cached status
-      saveTicketKnownStatus(ticket.ticketId, ticket.status);
-
-      // 1. Browser Native Push Notification
-      if ('Notification' in window && Notification.permission === 'granted') {
-        try {
-          const notif = new Notification(`Ticket ${ticket.ticketId}: ${statusTitle}`, {
-            body: ticket.remarks ? `Update: ${ticket.remarks}` : `Your issue status has changed to ${statusTitle}.`,
-            icon: 'images/sih_logo_transparent.png',
-            tag: `sih-ticket-${ticket.ticketId}`,
-            requireInteraction: true
-          });
-          notif.onclick = () => {
-            window.focus();
-            document.querySelector('[data-tab="trackTab"]').click();
-            searchRecentTicket(ticket.ticketId);
-          };
-        } catch (e) {
-          console.warn('Native notification error:', e);
-        }
-      }
-
-      // 2. Mobile Device Vibration
-      if (navigator.vibrate) {
-        navigator.vibrate([180, 80, 180]);
-      }
-
-      // 3. Audio Chime
-      if (window.soundFX) {
-        if (ticket.status === 'Solved') window.soundFX.playSuccess();
-        else window.soundFX.playChime();
-      }
-
-      // 4. In-App Toast
-      const remarksText = ticket.remarks ? ` — "${ticket.remarks}"` : '';
-      showToast(`Ticket ${ticket.ticketId} Updated`, `Status: ${statusTitle}${remarksText}`, ticket.status === 'Solved' ? 'success' : 'info', 7000);
-
-      // 5. Document Title Alert
-      flashUserDocTitle(`Ticket ${ticket.ticketId}: ${statusTitle}`);
-
-      // 6. Live Stepper Update if currently tracking
-      if (currentTrackedId === ticket.ticketId) {
-        loadTicketStatus(ticket.ticketId);
-      }
-    }
-
-    // Live Real-Time Push Listener via Server-Sent Events (SSE)
-    window.sihApi.subscribeEvents((evt) => {
-      if (evt.type === 'ticket_updated') {
-        const myRecent = JSON.parse(localStorage.getItem(RECENT_TICKETS_KEY) || '[]');
-        if (evt.data && (evt.data.ticketId === currentTrackedId || myRecent.includes(evt.data.ticketId))) {
-          notifyUserTicketUpdate(evt.data);
-        }
-      }
-    });
-
-    // Background Status Polling Fallback (checks recent open tickets every 12 seconds)
-    setInterval(async () => {
-      const myRecent = JSON.parse(localStorage.getItem(RECENT_TICKETS_KEY) || '[]');
-      if (myRecent.length === 0) return;
-
-      const knownMap = getTicketKnownStatuses();
-      for (const tId of myRecent.slice(0, 3)) {
-        try {
-          const t = await window.sihApi.getTicket(tId);
-          if (t && knownMap[tId] && knownMap[tId] !== t.status) {
-            notifyUserTicketUpdate(t);
-          } else if (t && !knownMap[tId]) {
-            saveTicketKnownStatus(tId, t.status);
-          }
-        } catch { }
-      }
-    }, 12000);
+    })();
   </script>
 </body>
-
 </html>

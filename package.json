@@ -4,9 +4,10 @@
   "description": "Smart India Hackathon On-Ground Helpdesk & Issue Reporting Platform",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "test": "node -e \"console.log('Testing server health check...'); require('./server.js'); setTimeout(() => process.exit(0), 1000);\""
+    "start": "python server.py",
+    "start:node": "node server.js",
+    "start:py": "python server.py",
+    "test": "python test_system.py"
   },
   "keywords": [
     "sih",
@@ -16,6 +17,6 @@
     "express",
     "realtime"
   ],
-  "author": "SIH Organizing Team",
-  "license": "MIT"
+  "author": "DhigveerrajuG & VDC GITAM Bengaluru",
+  "license": "SEE LICENSE IN LICENSE"
 }
