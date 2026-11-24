@@ -184,9 +184,39 @@ class SIHApiClient {
     return this.request('/api/admin/audit');
   }
 
-  getExportUrl() {
-    const token = this.getAuthToken();
-    return `/api/export?token=${encodeURIComponent(token)}`;
+  async downloadExport() {
+    const url = (window.SIH_CONFIG.API_BASE || '') + '/api/export';
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${this.getAuthToken()}`,
+        'X-Device-Id': this.deviceId
+      }
+    });
+
+    if (!response.ok) {
+      const contentType = response.headers.get('content-type') || '';
+      const data = contentType.includes('application/json')
+        ? await response.json()
+        : null;
+      const error = new Error(data && data.error
+        ? data.error
+        : `HTTP ${response.status}: ${response.statusText}`);
+      error.status = response.status;
+      throw error;
+    }
+
+    const blob = await response.blob();
+    const disposition = response.headers.get('content-disposition') || '';
+    const filenameMatch = disposition.match(/filename="([^"]+)"/i);
+    const filename = filenameMatch ? filenameMatch[1] : 'sih_tickets_export.csv';
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(downloadUrl);
   }
 
   // --- Real-time Server-Sent Events (SSE) ---

@@ -720,8 +720,12 @@ class AdminConsole {
       }
     });
 
-    document.getElementById('btnExportCsv')?.addEventListener('click', () => {
-      window.location.href = window.api.getExportUrl();
+    document.getElementById('btnExportCsv')?.addEventListener('click', async () => {
+      try {
+        await window.api.downloadExport();
+      } catch (err) {
+        window.ui.showToast(`Export failed: ${err.message}`, 'error');
+      }
     });
   }
 
