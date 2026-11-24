@@ -44,6 +44,12 @@ class ParticipantPortal {
     if (cat) {
       cat.innerHTML = `<option value="" disabled selected>Select issue type...</option>` +
         window.SIH_CONFIG.CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+
+      const paramCat = new URLSearchParams(window.location.search).get('cat');
+      if (paramCat) {
+        const found = window.SIH_CONFIG.CATEGORIES.find(c => c.toLowerCase().includes(paramCat.toLowerCase()));
+        if (found) cat.value = found;
+      }
     }
   }
 
@@ -515,6 +521,10 @@ class ParticipantPortal {
     if (sl && l) l.value = sl;
     if (sv && v) {
       for (let o of v.options) {
+        if (o.value === sv) { v.value = sv; break; }
+      }
+    }
+  }
         if (o.value === sv) { v.value = sv; break; }
       }
     }

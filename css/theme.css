@@ -26,21 +26,20 @@
   --accent-green: #10B981;
   --accent-green-light: #D1FAE5;
 
-  /* Clean White / Light Surfaces & Ambient Gradient */
-  --bg-gradient: linear-gradient(135deg, #eef7f4 0%, #d1eae2 40%, #f0e0c1 80%, #d1eae2 100%);
-  --bg-primary: #eef7f4;
+  /* Clean White / Light Surfaces & Atmospheric GITAM Gradient */
+  --bg-gradient: linear-gradient(135deg, #EBF5F2 0%, #F4F9F7 35%, #FAF7F0 75%, #F6EDE0 100%);
+  --bg-primary: #F8FAF9;
   --bg-secondary: #FFFFFF;
   --bg-surface: #FFFFFF;
-  --bg-surface-glass: rgba(255, 255, 255, 0.96);
-  --bg-subtle: rgba(209, 234, 226, 0.35);
-  --border-color: #d1eae2;
-  --border-hover: var(--primary-green);
+  --bg-surface-glass: rgba(255, 255, 255, 0.94);
+  --bg-subtle: #F0F6F4;
+  --border-color: #E2ECE8;
   --border-focus: var(--primary-green);
 
   /* Typography Colors */
-  --text-main: #004d44;
-  --text-secondary: #2d554e;
-  --text-muted: #5a7d75;
+  --text-main: #133834;
+  --text-secondary: #3D5A54;
+  --text-muted: #6B8B84;
   --text-inverse: #FFFFFF;
 
   /* Status Colors */
@@ -59,20 +58,15 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Shape & Geometry */
-  --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* Elevation & Glow */
-  --shadow-xs: 0 1px 2px rgba(0, 115, 102, 0.04);
-  --shadow-sm: 0 2px 6px rgba(0, 115, 102, 0.05);
-  --shadow-md: 0 6px 18px rgba(0, 115, 102, 0.08);
-  --shadow-lg: 0 12px 32px rgba(0, 115, 102, 0.12);
-  --shadow-card: 0 4px 20px rgba(0, 115, 102, 0.06);
-  --shadow-hover: 0 16px 36px rgba(0, 115, 102, 0.14);
+  /* Elevation */
+  --shadow-sm: 0 1px 3px rgba(0, 115, 102, 0.05);
+  --shadow-md: 0 4px 14px rgba(0, 115, 102, 0.08);
+  --shadow-lg: 0 10px 30px rgba(0, 115, 102, 0.12);
 
   /* Animation Timings */
   --transition-fast: 0.15s ease;
@@ -100,7 +94,7 @@ body {
   background-attachment: fixed;
   color: var(--text-main);
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.55;
   transition: background var(--transition-normal), color var(--transition-normal);
 }
 

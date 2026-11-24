@@ -16,26 +16,22 @@
   <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-  <div class="app-shell narrow">
+  <div class="app-shell">
 
     <!-- Top Back Navigation -->
-    <div style="margin-bottom: 28px;">
-      <a href="index.html" class="btn btn-outline btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; border-radius:var(--radius-md); padding:8px 16px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        Back to Home
-      </a>
+    <div style="margin-bottom: 24px;">
+      <a href="index.html" class="btn btn-outline btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">&larr; Back to Home</a>
     </div>
 
     <!-- Main Helpdesk Form Container -->
-    <div id="helpdeskCard" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-xl); padding:38px 36px; box-shadow:var(--shadow-card); margin-bottom:32px;">
+    <div id="helpdeskCard">
 
-      <div style="margin-bottom:28px;">
-        <span style="font-family:var(--font-mono); font-size:0.76rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--primary-green); background:rgba(209,234,226,0.5); padding:4px 12px; border-radius:var(--radius-full);">Participant Portal</span>
-        <h2 style="font-family:var(--font-display); font-size:1.65rem; font-weight:700; color:var(--primary-green); margin-top:8px; margin-bottom:6px;">
-          Submit Table Request
+      <div style="margin-bottom:24px;">
+        <h2 style="font-family:var(--font-display);font-size:1.45rem;font-weight:700;color:var(--primary-green);margin-bottom:6px;">
+          Report an Issue
         </h2>
-        <p style="font-size:0.92rem; color:var(--text-muted); margin:0; line-height:1.5;">
-          Fill in your table details and an on-ground floor volunteer will be dispatched immediately.
+        <p style="font-size:0.92rem;color:var(--text-muted);margin:0;line-height:1.5;">
+          Fill in your table details and a volunteer will be dispatched to assist you immediately.
         </p>
       </div>
 
@@ -140,26 +136,26 @@
     </div>
 
     <!-- Arena Wi-Fi & Central Helpdesk Info -->
-    <div class="portal-section-box" style="padding:22px 28px; margin-top:24px;">
+    <div style="margin-top:28px; padding:20px 24px; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-md);">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
         <div>
-          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:500;">Arena Wi-Fi:</span>
-          <span style="font-family:var(--font-mono); font-weight:700; font-size:0.96rem; margin-left:6px; color:var(--text-main);">[Arena Wi-Fi SSID]</span>
+          <span style="font-size:0.84rem; color:var(--text-muted);">Arena Wi-Fi:</span>
+          <span style="font-family:var(--font-mono); font-weight:600; font-size:0.92rem; margin-left:6px;">[Arena Wi-Fi SSID]</span>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
-          <code style="font-family:var(--font-mono); font-size:0.86rem; background:rgba(209,234,226,0.4); padding:6px 12px; border-radius:var(--radius-sm); border:1px solid var(--border-color); color:var(--text-main);">[Password]</code>
+          <code style="font-family:var(--font-mono); font-size:0.84rem; background:var(--bg-subtle); padding:5px 10px; border-radius:var(--radius-sm); border:1px solid var(--border-color);">[Password]</code>
           <button class="btn btn-outline btn-sm" id="copyWifiBtn">Copy</button>
         </div>
       </div>
-      <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:12px; border-top:1px solid var(--border-color); padding-top:10px; line-height:1.6;">
+      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:12px; border-top:1px solid var(--border-color); padding-top:10px;">
         <strong>Central Helpdesk:</strong> Ground floor atrium (24/7) &bull; Safety: report damaged sockets immediately.
       </div>
     </div>
 
     <!-- Attribution Footer -->
     <footer class="app-footer">
-      <p style="font-size:0.92rem; color:var(--text-main);">Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
-      <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk &bull; Venture Development Centre</p>
+      <p>Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
+      <p style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk</p>
     </footer>
 
   </div>
