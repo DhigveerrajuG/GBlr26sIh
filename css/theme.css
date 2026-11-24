@@ -4,12 +4,17 @@
    Built on official GITAM University Brand Guidelines:
    - Primary: GITAM Green (#007366)
    - Gradient: Mint & Cream (#EEF7F4, #D1EAE2, #F0E0C1)
+   SIH SUPPORT DESK — GITAM UNIVERSITY PALETTE
+   Design system based on official GITAM University brand guidelines:
+   - Primary Brand Color: GITAM Green (#007366)
+   - Secondary / Accent: Antique Beige (#F4E4C9)
    - Supporting Palette: Kind Coral (#DD736E), Mellow Yellow (#E0B541), Wide Blue (#5E95CD)
    ========================================================================== */
 
 :root {
   /* Official GITAM University Brand Palette */
   --primary-green: #007366;           /* GITAM Teal / Green */
+  --primary-green: #007366;           /* Official GITAM Green */
   --primary-green-hover: #005A50;
   --primary-green-dark: #00433B;
   --primary-green-light: #D1EAE2;     /* University Mint */
@@ -26,6 +31,12 @@
   --gitam-blue: #5E95CD;
 
   /* Legacy aliases for backwards compatibility */
+  --gitam-beige: #F4E4C9;             /* Official GITAM Antique Beige */
+  --gitam-coral: #DD736E;             /* Official GITAM Kind Coral */
+  --gitam-yellow: #E0B541;            /* Official GITAM Mellow Yellow */
+  --gitam-blue: #5E95CD;              /* Official GITAM Wide Blue */
+
+  /* Legacy alias for compatibility */
   --teal-primary: var(--primary-green);
   --teal-light: var(--primary-green-light);
   --accent-green: #10B981;

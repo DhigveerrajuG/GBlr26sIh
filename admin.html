@@ -242,6 +242,16 @@
               <option value="superadmin">Superadmin</option>
             </select>
           </div>
+      <form id="createUserForm" style="background:var(--bg-subtle);padding:10px;border-radius:var(--radius-sm);margin-bottom:14px;">
+        <div class="grid-2" style="margin-bottom:8px;">
+          <label for="newUserName" class="sr-only">Name</label>
+          <input type="text" id="newUserName" class="form-input" placeholder="Name" required>
+          <label for="newUserRole" class="sr-only">Role</label>
+          <select id="newUserRole" class="form-select">
+            <option value="volunteer">Volunteer</option>
+            <option value="mentor">Mentor</option>
+            <option value="">Superadmin</option>
+          </select>
         </div>
         <div class="form-grid-2" style="margin-bottom:12px;">
           <div>
