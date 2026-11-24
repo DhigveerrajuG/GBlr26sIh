@@ -519,10 +519,6 @@ class ParticipantPortal {
       }
     }
   }
-        if (o.value === sv) { v.value = sv; break; }
-      }
-    }
-  }
 
   async checkCooldown() {
     const key = window.SIH_CONFIG.STORAGE_KEYS.COOLDOWN_UNTIL;

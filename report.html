@@ -15,254 +15,151 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
-<body class="homepage-gradient">
+<body>
   <div class="app-shell narrow">
 
-    <!-- Top Navigation Row with Back Link -->
-    <div class="nav-back-row">
-      <a href="index.html" class="nav-back-btn" id="btnBackHome">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m15 18-6-6 6-6"></path>
-        </svg>
-        <span>Back to Home</span>
+    <!-- Top Back Navigation -->
+    <div style="margin-bottom: 28px;">
+      <a href="index.html" class="btn btn-outline btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; border-radius:var(--radius-md); padding:8px 16px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Home
       </a>
     </div>
 
-    <!-- Title Section -->
-    <div style="margin-bottom: 28px; text-align: left;">
-      <h1 style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--primary-green); line-height: 1.2; margin-bottom: 6px;">
-        Report an Issue
-      </h1>
-      <p style="font-size: 1.02rem; color: var(--text-secondary); margin: 0;">
-        Get help from our on-ground team. Volunteers will attend to your table promptly.
-      </p>
-    </div>
+    <!-- Main Helpdesk Form Container -->
+    <div id="helpdeskCard" style="background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-xl); padding:38px 36px; box-shadow:var(--shadow-card); margin-bottom:32px;">
 
-    <!-- Cooldown Banner (Active Cooldown) -->
-    <div id="cooldownCard" style="display:none; background: #FFFFFF; border: 2px solid var(--primary-green); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <strong style="font-size: 0.95rem; color: var(--primary-green);">Cooldown Active</strong>
-        </div>
-        <span id="cooldownCountdown" style="font-family: var(--font-mono); font-weight: 700; color: var(--primary-green); font-size: 1rem;">3m 00s</span>
+      <div style="margin-bottom:28px;">
+        <span style="font-family:var(--font-mono); font-size:0.76rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--primary-green); background:rgba(209,234,226,0.5); padding:4px 12px; border-radius:var(--radius-full);">Participant Portal</span>
+        <h2 style="font-family:var(--font-display); font-size:1.65rem; font-weight:700; color:var(--primary-green); margin-top:8px; margin-bottom:6px;">
+          Submit Table Request
+        </h2>
+        <p style="font-size:0.92rem; color:var(--text-muted); margin:0; line-height:1.5;">
+          Fill in your table details and an on-ground floor volunteer will be dispatched immediately.
+        </p>
       </div>
-      <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 10px;">
-        Please wait before submitting another request. Volunteers are already attending to your active complaint.
-      </p>
-      <div style="height: 6px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden;">
-        <div id="cooldownProgressBar" style="height: 100%; width: 100%; background: var(--primary-green); transition: width 1s linear;"></div>
-      </div>
-    </div>
 
-    <!-- Submission Success Banner -->
-    <div id="submissionSuccessCard" style="display:none; background: #FFFFFF; border: 2px solid #059669; border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 24px; box-shadow: var(--shadow-md);">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 36px; height: 36px; border-radius: 50%; background: #D1FAE5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
-          ✓
-        </div>
-        <div>
-          <strong style="font-size: 0.96rem; color: #059669;">Request Submitted (<span id="successTicketId"></span>)</strong>
-          <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
-            Desk volunteers have been notified and assigned to your table.
+      <!-- Cooldown Banner (Visible during active cooldown) -->
+      <div id="cooldownCard" style="display:none; background:var(--primary-green-light); border:1.5px solid var(--primary-green); border-radius:var(--radius-md); padding:14px 16px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <strong style="font-size:0.88rem; color:var(--text-main);">Cooldown Active</strong>
           </div>
+          <span id="cooldownCountdown" style="font-family:var(--font-mono); font-weight:700; color:var(--primary-green); font-size:0.95rem;">5m 00s</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:8px;">
+          Please wait before submitting another request. Volunteers are already attending to your active complaint.
+        </p>
+        <div style="height:5px; background:rgba(0,115,102,0.18); border-radius:3px; overflow:hidden;">
+          <div id="cooldownProgressBar" style="height:100%; width:100%; background:var(--primary-green); transition:width 1s linear;"></div>
         </div>
       </div>
-    </div>
 
-    <!-- Main White Card Container -->
-    <div class="card" id="helpdeskCard">
-
-      <!-- Card Header: Title + Scan Team QR Button -->
-      <div class="card-header-row">
-        <div class="card-header-title-wrap">
-          <div class="card-header-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 2 11 13"></path>
-              <path d="m22 2-7 20-4-9-9-4 20-7z"></path>
-            </svg>
-          </div>
-          <div class="card-header-text">
-            <h3>Issue Details</h3>
-            <p>Please provide as much detail as possible to help us assist you quickly.</p>
+      <!-- Submission Success Banner -->
+      <div id="submissionSuccessCard" style="display:none; background:var(--primary-green-light); border:1.5px solid var(--primary-green); border-radius:var(--radius-md); padding:14px 16px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div>
+              <strong style="font-size:0.9rem; color:var(--text-main);">Request Submitted (<span id="successTicketId"></span>)</strong>
+              <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:2px;">Desk volunteers have been notified and assigned to your table.</div>
+            </div>
           </div>
         </div>
-
-        <button type="button" class="btn btn-outline btn-sm" id="btnOpenScanQr" style="gap: 6px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="5" height="5" x="3" y="3" rx="1"></rect>
-            <rect width="5" height="5" x="16" y="3" rx="1"></rect>
-            <rect width="5" height="5" x="3" y="16" rx="1"></rect>
-            <path d="M21 16h-3a2 2 0 0 0-2 2v3"></path>
-            <path d="M21 21v.01"></path>
-          </svg>
-          Scan Team QR
-        </button>
       </div>
 
       <!-- Complaint Form -->
-      <form id="ticketForm" autocomplete="off">
-
-        <!-- Row 1: Student / Leader Name & Registration ID -->
-        <div class="form-grid-2">
+      <form id="ticketForm" autocomplete="off" class="stagger">
+        <div class="grid-2">
+          <!-- Table No. (Autofills team, leader & venue) -->
           <div class="form-group">
-            <label class="form-label" for="leaderName">
-              <span>Leader / Student Name <span class="required">*</span></span>
-            </label>
-            <input type="text" id="leaderName" list="leaderSuggestions" class="form-input" placeholder="Your full name" required>
-            <datalist id="leaderSuggestions"></datalist>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="teamNo">
-              <span>Table Number <span class="required">*</span></span>
-            </label>
-            <input type="text" id="teamNo" list="tableSuggestions" class="form-input" placeholder="e.g. 14, Table 14, A-12" required>
+            <label class="form-label" for="teamNo">Table No. <span class="required">*</span></label>
+            <input type="text" id="teamNo" list="tableSuggestions" class="form-input" placeholder="e.g. 14 or Table 14" required>
             <datalist id="tableSuggestions"></datalist>
             <div id="autofillNotice" style="display:none; font-size:0.78rem; color:var(--primary-green); font-weight:600; margin-top:5px;">
               Auto-filled: <span id="autofillTeamName"></span>
             </div>
           </div>
-        </div>
 
-        <!-- Row 2: Team Name & Venue -->
-        <div class="form-grid-2">
+          <!-- Team Name (Autofills table, leader & venue) -->
           <div class="form-group">
-            <label class="form-label" for="teamName">
-              <span>Team Name <span class="required">*</span></span>
-            </label>
-            <input type="text" id="teamName" list="teamSuggestions" class="form-input" placeholder="Your team name" required>
+            <label class="form-label" for="teamName">Team Name <span class="required">*</span></label>
+            <input type="text" id="teamName" list="teamSuggestions" class="form-input" placeholder="e.g. CodeCrafters" required>
             <datalist id="teamSuggestions"></datalist>
           </div>
+        </div>
 
+        <div class="grid-2">
+          <!-- Team Leader Name (Autofills table, team & venue) -->
           <div class="form-group">
-            <label class="form-label" for="venueSelect">
-              <span>Venue / Hall <span class="required">*</span></span>
-            </label>
+            <label class="form-label" for="leaderName">Team Leader Name <span class="required">*</span></label>
+            <input type="text" id="leaderName" list="leaderSuggestions" class="form-input" placeholder="e.g. Rohan Gupta" required>
+            <datalist id="leaderSuggestions"></datalist>
+          </div>
+
+          <!-- Venue / Hall -->
+          <div class="form-group">
+            <label class="form-label" for="venueSelect">Venue / Hall <span class="required">*</span></label>
             <select id="venueSelect" class="form-select" required></select>
           </div>
         </div>
 
-        <!-- Row 3: Issue Type Category -->
         <div class="form-group">
-          <label class="form-label" for="category">
-            <span>Issue Type <span class="required">*</span></span>
-          </label>
+          <label class="form-label" for="category">Issue Type <span class="required">*</span></label>
           <select id="category" class="form-select" required></select>
         </div>
 
-        <!-- Row 4: Issue Description with Character Counter -->
         <div class="form-group">
-          <label class="form-label" for="issue">
-            <span>Issue Description <span class="required">*</span></span>
-          </label>
-          <textarea id="issue" class="form-textarea" maxlength="500" placeholder="Please describe your issue in detail. Include any error messages, hardware parts needed, or specific help you require..." required></textarea>
-          <div class="char-counter" id="charCounter">0 / 500 characters</div>
+          <label class="form-label" for="issue">What do you need help with? <span class="required">*</span></label>
+          <textarea id="issue" class="form-textarea" rows="3" placeholder="Briefly describe the problem..." required></textarea>
         </div>
 
         <!-- Optional Photo or Screenshot Attachment -->
-        <div class="form-group" style="margin-bottom: 24px;">
+        <div class="form-group" style="margin-bottom: 22px;">
           <label class="form-label" for="photoInput">
-            <span>Photo or Screenshot <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Optional &mdash; damaged socket, hardware error, or Wi-Fi screen)</span></span>
+            Photo or Screenshot <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Optional — damaged socket, component error, or Wi-Fi screen)</span>
           </label>
-          <input type="file" id="photoInput" accept="image/*" class="form-input" style="padding: 10px 14px; font-size: 0.88rem; cursor: pointer;">
-          <div id="photoPreviewContainer" style="display:none; margin-top: 10px; align-items: center; gap: 12px; padding: 10px 14px; background: var(--bg-subtle); border-radius: var(--radius-sm); border: 1.5px solid var(--border-color);">
-            <img id="photoPreviewImg" src="" alt="Issue Preview" style="width: 52px; height: 52px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+          <input type="file" id="photoInput" accept="image/*" class="form-input" style="padding: 9px 12px; font-size: 0.88rem; cursor: pointer;">
+          <div id="photoPreviewContainer" style="display:none; margin-top: 10px; align-items: center; gap: 12px; padding: 10px 14px; background: var(--bg-subtle); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+            <img id="photoPreviewImg" src="" alt="Issue Preview" style="width: 54px; height: 54px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
             <div style="flex: 1; min-width: 0;">
-              <div id="photoPreviewName" style="font-size: 0.84rem; font-weight: 600; color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
-              <div id="photoPreviewSize" style="font-size: 0.75rem; color: var(--text-muted);"></div>
+              <div id="photoPreviewName" style="font-size: 0.82rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+              <div id="photoPreviewSize" style="font-size: 0.74rem; color: var(--text-muted);"></div>
             </div>
             <button type="button" id="btnRemovePhoto" class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 0.78rem;">Remove</button>
           </div>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" id="submitTicketBtn" style="width:100%; min-height:50px; font-size:1.02rem; font-weight:600; gap:8px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 2 11 13"></path>
-            <path d="m22 2-7 20-4-9-9-4 20-7z"></path>
-          </svg>
-          Submit Request
-        </button>
+        <button type="submit" class="btn btn-primary" id="submitTicketBtn" style="width:100%; margin-top:12px; min-height:48px; font-size:1.02rem; font-weight:600;">Submit Request</button>
 
         <!-- Simple normal Reset Button -->
         <div style="text-align:center; margin-top:14px;">
           <button type="button" id="resetFormBtn" class="btn-link">Reset form</button>
         </div>
       </form>
-
-      <!-- Immediate Assistance Note -->
-      <div style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 16px;">
-        Need immediate assistance? Find a floor volunteer wearing a staff badge or visit the central helpdesk in the ground floor atrium.
-      </div>
-
-    </div>
-
-    <!-- Live Ticket Progress Stepper (Active when user has an active ticket) -->
-    <div id="ticketTrackerSection" style="display:none; margin-top: 28px;">
-      <div class="card" style="padding: 24px 28px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
-          <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--primary-green);" id="trackerTicketId">Ticket</span>
-          <span class="status-badge pending" id="trackerStatusBadge">Pending</span>
-        </div>
-        <div class="tracker-stepper">
-          <div class="step-node completed" id="stepNodeSubmitted">
-            <div class="step-circle">1</div>
-            <div class="step-label">Submitted</div>
-          </div>
-          <div class="step-node" id="stepNodeDispatched">
-            <div class="step-circle">2</div>
-            <div class="step-label">Dispatched</div>
-          </div>
-          <div class="step-node" id="stepNodeResolved">
-            <div class="step-circle">3</div>
-            <div class="step-label">Resolved</div>
-          </div>
-        </div>
-        <div id="trackerRemarksBox" style="background: var(--bg-subtle); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.84rem; color: var(--text-body); display:none;"></div>
-      </div>
     </div>
 
     <!-- Arena Wi-Fi & Central Helpdesk Info -->
-    <div class="card" style="margin-top: 28px; padding: 22px 26px;">
+    <div class="portal-section-box" style="padding:22px 28px; margin-top:24px;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
         <div>
-          <span style="font-size:0.86rem; color:var(--text-muted); font-weight: 500;">Arena Wi-Fi Network:</span>
-          <span style="font-family:var(--font-mono); font-weight:700; font-size:0.94rem; margin-left:6px; color:var(--primary-green);">[Arena Wi-Fi SSID]</span>
+          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:500;">Arena Wi-Fi:</span>
+          <span style="font-family:var(--font-mono); font-weight:700; font-size:0.96rem; margin-left:6px; color:var(--text-main);">[Arena Wi-Fi SSID]</span>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
-          <code style="font-family:var(--font-mono); font-size:0.86rem; background:var(--bg-subtle); padding:5px 12px; border-radius:var(--radius-sm); border:1px solid var(--border-color); color:var(--text-body);">[Password]</code>
+          <code style="font-family:var(--font-mono); font-size:0.86rem; background:rgba(209,234,226,0.4); padding:6px 12px; border-radius:var(--radius-sm); border:1px solid var(--border-color); color:var(--text-main);">[Password]</code>
           <button class="btn btn-outline btn-sm" id="copyWifiBtn">Copy</button>
         </div>
       </div>
-      <div style="font-size:0.8rem; color:var(--text-muted); margin-top:12px; border-top:1px solid var(--border-color); padding-top:10px;">
+      <div style="font-size:0.82rem; color:var(--text-secondary); margin-top:12px; border-top:1px solid var(--border-color); padding-top:10px; line-height:1.6;">
         <strong>Central Helpdesk:</strong> Ground floor atrium (24/7) &bull; Safety: report damaged sockets immediately.
-      </div>
-    </div>
-
-    <!-- Scan Team QR Modal -->
-    <div class="modal-backdrop" id="scanQrModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Scan Team QR Code</h3>
-          <button type="button" class="modal-close-btn" id="btnCloseScanQr">&times;</button>
-        </div>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-          Point your device camera at the table QR code or paste QR data below to auto-fill your team information.
-        </p>
-        <div style="margin-bottom: 16px;">
-          <input type="text" id="manualQrInput" class="form-input" placeholder="Paste QR code content (e.g. Table 14 - CodeCrafters)">
-        </div>
-        <div style="display: flex; justify-content: flex-end; gap: 8px;">
-          <button type="button" class="btn btn-outline btn-sm" id="btnCancelScanQr">Cancel</button>
-          <button type="button" class="btn btn-primary btn-sm" id="btnApplyScanQr">Apply QR Data</button>
-        </div>
       </div>
     </div>
 
     <!-- Attribution Footer -->
     <footer class="app-footer">
-      <p>Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
-      <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk</p>
+      <p style="font-size:0.92rem; color:var(--text-main);">Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
+      <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk &bull; Venture Development Centre</p>
     </footer>
 
   </div>
@@ -272,57 +169,5 @@
   <script src="js/ui-fx.js"></script>
   <script src="js/api.js"></script>
   <script src="js/participant.js"></script>
-  <script>
-    // Live Character Counter for Description
-    const issueArea = document.getElementById('issue');
-    const charCounter = document.getElementById('charCounter');
-    if (issueArea && charCounter) {
-      issueArea.addEventListener('input', () => {
-        charCounter.textContent = `${issueArea.value.length} / 500 characters`;
-      });
-    }
-
-    // QR Modal logic
-    const scanModal = document.getElementById('scanQrModal');
-    const btnOpenQr = document.getElementById('btnOpenScanQr');
-    const btnCloseQr = document.getElementById('btnCloseScanQr');
-    const btnCancelQr = document.getElementById('btnCancelScanQr');
-    const btnApplyQr = document.getElementById('btnApplyScanQr');
-    const manualQrInput = document.getElementById('manualQrInput');
-
-    btnOpenQr?.addEventListener('click', () => {
-      scanModal?.classList.add('active');
-      manualQrInput?.focus();
-    });
-
-    [btnCloseQr, btnCancelQr]?.forEach(btn => {
-      btn?.addEventListener('click', () => {
-        scanModal?.classList.remove('active');
-      });
-    });
-
-    btnApplyQr?.addEventListener('click', () => {
-      const val = manualQrInput?.value?.trim();
-      if (!val) return;
-      // Extract table number or team name
-      const match = val.match(/table\s*(\d+)/i) || val.match(/(\d+)/);
-      if (match) {
-        const tableNum = match[1];
-        const tableEl = document.getElementById('teamNo');
-        if (tableEl) {
-          tableEl.value = `Table ${tableNum}`;
-          tableEl.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-      } else {
-        const teamEl = document.getElementById('teamName');
-        if (teamEl) {
-          teamEl.value = val;
-          teamEl.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-      }
-      scanModal?.classList.remove('active');
-      window.ui?.showToast('QR code details applied!', 'success');
-    });
-  </script>
 </body>
 </html>

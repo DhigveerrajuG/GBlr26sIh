@@ -1,51 +1,46 @@
 /* ==========================================================================
-   SIH SUPPORT DESK — GITAM UNIVERSITY DESIGN SYSTEM
-   Modern, spacious, and beautiful UI inspired by sihsupport.vercel.app
-   Built on official GITAM University Brand Guidelines:
-   - Primary: GITAM Green (#007366)
-   - Gradient: Mint & Cream (#EEF7F4, #D1EAE2, #F0E0C1)
+   SIH SUPPORT DESK — GITAM UNIVERSITY PALETTE
+   Design system based on official GITAM University brand guidelines:
+   - Primary Brand Color: GITAM Green (#007366)
+   - Secondary / Accent: Antique Beige (#F4E4C9)
    - Supporting Palette: Kind Coral (#DD736E), Mellow Yellow (#E0B541), Wide Blue (#5E95CD)
    ========================================================================== */
 
 :root {
   /* Official GITAM University Brand Palette */
-  --primary-green: #007366;           /* GITAM Teal / Green */
+  --primary-green: #007366;           /* Official GITAM Green */
   --primary-green-hover: #005A50;
   --primary-green-dark: #00433B;
-  --primary-green-light: #D1EAE2;     /* University Mint */
-  --primary-green-glow: rgba(0, 115, 102, 0.18);
+  --primary-green-light: #E0F2EF;
+  --primary-green-glow: rgba(0, 115, 102, 0.2);
 
-  --university-cream: #F0E0C1;        /* Antique Beige / Cream */
-  --university-mint: #D1EAE2;
-  --university-light: #EEF7F4;
-  --university-primary: #007366;
+  --gitam-beige: #F4E4C9;             /* Official GITAM Antique Beige */
+  --gitam-coral: #DD736E;             /* Official GITAM Kind Coral */
+  --gitam-yellow: #E0B541;            /* Official GITAM Mellow Yellow */
+  --gitam-blue: #5E95CD;              /* Official GITAM Wide Blue */
 
-  --gitam-beige: #F0E0C1;
-  --gitam-coral: #DD736E;
-  --gitam-yellow: #E0B541;
-  --gitam-blue: #5E95CD;
-
-  /* Legacy aliases for backwards compatibility */
+  /* Legacy alias for compatibility */
   --teal-primary: var(--primary-green);
   --teal-light: var(--primary-green-light);
+
   --accent-green: #10B981;
   --accent-green-light: #D1FAE5;
 
-  /* Surfaces & Backgrounds */
-  --bg-primary: #EEF7F4;
+  /* Clean White / Light Surfaces & Ambient Gradient */
+  --bg-gradient: linear-gradient(135deg, #eef7f4 0%, #d1eae2 40%, #f0e0c1 80%, #d1eae2 100%);
+  --bg-primary: #eef7f4;
   --bg-secondary: #FFFFFF;
   --bg-surface: #FFFFFF;
-  --bg-surface-glass: rgba(255, 255, 255, 0.95);
-  --bg-subtle: #F0F6F4;
-  --border-color: #D1EAE2;
-  --border-muted: #E2ECE8;
+  --bg-surface-glass: rgba(255, 255, 255, 0.96);
+  --bg-subtle: rgba(209, 234, 226, 0.35);
+  --border-color: #d1eae2;
+  --border-hover: var(--primary-green);
   --border-focus: var(--primary-green);
 
-  /* Typography */
-  --text-main: #007366;
-  --text-body: #1F3D38;
-  --text-secondary: #3D615B;
-  --text-muted: #648A82;
+  /* Typography Colors */
+  --text-main: #004d44;
+  --text-secondary: #2d554e;
+  --text-muted: #5a7d75;
   --text-inverse: #FFFFFF;
 
   /* Status Colors */
@@ -55,15 +50,15 @@
   --status-ongoing-bg: #FEF3C7;
   --status-solved: #059669;
   --status-solved-bg: #D1FAE5;
-  --status-critical: #E11D48;
-  --status-critical-bg: #FFF1F2;
+  --status-critical: #DC2626;
+  --status-critical-bg: #FEE2E2;
 
-  /* Fonts */
-  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  /* Radius & Curves */
+  /* Shape & Geometry */
   --radius-xs: 6px;
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -71,20 +66,23 @@
   --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* Elevation Shadows */
+  /* Elevation & Glow */
   --shadow-xs: 0 1px 2px rgba(0, 115, 102, 0.04);
-  --shadow-sm: 0 2px 8px rgba(0, 115, 102, 0.06);
-  --shadow-md: 0 8px 24px rgba(0, 115, 102, 0.08);
-  --shadow-lg: 0 16px 36px rgba(0, 115, 102, 0.12);
-  --shadow-xl: 0 20px 40px -10px rgba(0, 115, 102, 0.18);
+  --shadow-sm: 0 2px 6px rgba(0, 115, 102, 0.05);
+  --shadow-md: 0 6px 18px rgba(0, 115, 102, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 115, 102, 0.12);
+  --shadow-card: 0 4px 20px rgba(0, 115, 102, 0.06);
+  --shadow-hover: 0 16px 36px rgba(0, 115, 102, 0.14);
 
-  /* Transitions */
+  /* Animation Timings */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Global Reset & Base */
+/* Locked to Light Mode — Clean Emerald & Crisp White */
+
+/* Reset & Base Elements */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -98,22 +96,14 @@ html {
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #eef7f4 0%, #d1eae2 40%, #f0e0c1 80%, #d1eae2 100%);
+  background: var(--bg-gradient);
   background-attachment: fixed;
-  color: var(--text-body);
+  color: var(--text-main);
   font-family: var(--font-body);
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  transition: background var(--transition-normal), color var(--transition-normal);
 }
 
-/* Luminous Homepage Gradient Utility */
-.homepage-gradient {
-  background: linear-gradient(135deg, #eef7f4 0%, #d1eae2 40%, #f0e0c1 80%, #d1eae2 100%);
-  min-height: 100vh;
-}
-
-/* Focus outline */
 :focus-visible {
   outline: 2px solid var(--primary-green);
   outline-offset: 2px;
@@ -122,11 +112,6 @@ body {
 a {
   color: var(--primary-green);
   text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--primary-green-hover);
 }
 
 button {
@@ -136,5 +121,5 @@ button {
 
 input, select, textarea {
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
