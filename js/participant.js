@@ -684,7 +684,7 @@ class ParticipantPortal {
 
   bindGuide() {
     document.getElementById('copyWifiBtn')?.addEventListener('click', () => {
-      window.ui.copyText('SIH2026@Arena!5G', 'Wi-Fi Password copied!');
+      window.ui.copyText('[Arena Wi-Fi Password]', 'Wi-Fi Password placeholder copied!');
     });
   }
 }

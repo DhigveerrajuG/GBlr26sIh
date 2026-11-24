@@ -114,25 +114,25 @@ def run_tests():
     print(f"✅ 5. Public ticket retrieval passed for {ticket_id}")
 
     # 5b. Table Autofill Lookup Endpoint
-    status, res, _ = http_req(f"{base_url}/api/teams/lookup?table=14")
+    status, res, _ = http_req(f"{base_url}/api/teams/lookup?table=99")
     assert status == 200 and res.get('found'), f"Table lookup failed: {res}"
-    assert "CodeCrafters" in res['data']['team_name'], f"Expected CodeCrafters, got {res}"
-    assert res['data'].get('leader_name') == "Rohan Gupta", f"Expected Rohan Gupta, got {res}"
-    print(f"✅ 5b. Table autofill lookup passed: Table 14 -> {res['data']['team_name']}, Leader: {res['data']['leader_name']} ({res['data']['venue']})")
+    assert "AutomatedTestTeam" in res['data']['team_name'], f"Expected AutomatedTestTeam, got {res}"
+    assert res['data'].get('leader_name') == "Alex Mercer", f"Expected Alex Mercer, got {res}"
+    print(f"✅ 5b. Table autofill lookup passed: Table 99 -> {res['data']['team_name']}, Leader: {res['data']['leader_name']} ({res['data']['venue']})")
 
     # 5c. Team Name Autofill Lookup Endpoint
-    status, res, _ = http_req(f"{base_url}/api/teams/lookup?team=CodeCrafters")
+    status, res, _ = http_req(f"{base_url}/api/teams/lookup?team=AutomatedTestTeam")
     assert status == 200 and res.get('found'), f"Team lookup failed: {res}"
-    assert "14" in res['data']['team_no'], f"Expected Table 14, got {res}"
-    assert res['data'].get('leader_name') == "Rohan Gupta", f"Expected Rohan Gupta, got {res}"
-    print(f"✅ 5c. Team name autofill lookup passed: CodeCrafters -> {res['data']['team_no']}, Leader: {res['data']['leader_name']} ({res['data']['venue']})")
+    assert "99" in res['data']['team_no'], f"Expected Table 99, got {res}"
+    assert res['data'].get('leader_name') == "Alex Mercer", f"Expected Alex Mercer, got {res}"
+    print(f"✅ 5c. Team name autofill lookup passed: AutomatedTestTeam -> {res['data']['team_no']}, Leader: {res['data']['leader_name']} ({res['data']['venue']})")
 
     # 5d. Leader Name Autofill Lookup Endpoint
-    status, res, _ = http_req(f"{base_url}/api/teams/lookup?leader=Rohan%20Gupta")
+    status, res, _ = http_req(f"{base_url}/api/teams/lookup?leader=Alex%20Mercer")
     assert status == 200 and res.get('found'), f"Leader lookup failed: {res}"
-    assert "CodeCrafters" in res['data']['team_name'], f"Expected CodeCrafters, got {res}"
-    assert "14" in res['data']['team_no'], f"Expected Table 14, got {res}"
-    print(f"✅ 5d. Leader autofill lookup passed: Rohan Gupta -> Table 14 ({res['data']['team_name']})")
+    assert "AutomatedTestTeam" in res['data']['team_name'], f"Expected AutomatedTestTeam, got {res}"
+    assert "99" in res['data']['team_no'], f"Expected Table 99, got {res}"
+    print(f"✅ 5d. Leader autofill lookup passed: Alex Mercer -> Table 99 ({res['data']['team_name']})")
 
     # 6. Authentication - Invalid Key
     status, res, _ = http_req(f"{base_url}/api/auth/login", method='POST', data={"key": "INVALID-KEY-XYZ"})

@@ -16,80 +16,9 @@ const deviceCooldowns = new Map();
 // SSE clients for real-time updates
 const sseClients = new Set();
 
-// Default initial data
+// Default initial data (empty complaints - left blank for real tickets)
 const INITIAL_DATA = {
-  complaints: [
-    {
-      ticketId: 'SIH-0001',
-      timestamp: new Date(Date.now() - 42 * 60 * 1000).toISOString(),
-      teamName: 'CodeCrafters',
-      teamNo: 'Table 14',
-      category: 'Internet / Wi-Fi',
-      issue: 'Intermittent Wi-Fi dropouts on primary router. Unable to push code to GitHub.',
-      venue: 'Main Arena, Hall A',
-      status: 'Solved',
-      remarks: 'Rebooted AP-04 and provided 5GHz credentials. Connectivity verified.',
-      lastUpdated: new Date(Date.now() - 25 * 60 * 1000).toISOString(),
-      handledBy: 'Organizer Lead',
-      priority: 'High'
-    },
-    {
-      ticketId: 'SIH-0002',
-      timestamp: new Date(Date.now() - 28 * 60 * 1000).toISOString(),
-      teamName: 'NeuralByte',
-      teamNo: 'Table 32',
-      category: 'Power / Electrical',
-      issue: 'Spike guard socket #3 is loose and sparking intermittently when charger is inserted.',
-      venue: 'Main Arena, Hall B',
-      status: 'Ongoing',
-      remarks: 'Technician Rohan dispatched with replacement heavy-duty surge protector.',
-      lastUpdated: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
-      handledBy: 'Desk Volunteer Alex',
-      priority: 'Critical'
-    },
-    {
-      ticketId: 'SIH-0003',
-      timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-      teamName: 'EcoVanguard',
-      teamNo: 'Table 08',
-      category: 'Hardware Components',
-      issue: 'ESP32 board GPIO pin 4 fried during sensor testing. Need one spare ESP32 module.',
-      venue: 'Hardware Lab, 1st Floor',
-      status: 'Pending',
-      remarks: '',
-      lastUpdated: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-      handledBy: '',
-      priority: 'Normal'
-    },
-    {
-      ticketId: 'SIH-0004',
-      timestamp: new Date(Date.now() - 8 * 60 * 1000).toISOString(),
-      teamName: 'QuantumLeap',
-      teamNo: 'Table 51',
-      category: 'Tech Support',
-      issue: 'Docker container network bridge error blocking local database port 5432.',
-      venue: 'Main Arena, Hall C',
-      status: 'Ongoing',
-      remarks: 'Mentor assisting with WSL2 port forwarding configuration.',
-      lastUpdated: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
-      handledBy: 'Desk Volunteer Alex',
-      priority: 'Normal'
-    },
-    {
-      ticketId: 'SIH-0005',
-      timestamp: new Date(Date.now() - 3 * 60 * 1000).toISOString(),
-      teamName: 'SmartGrid AI',
-      teamNo: 'Table 22',
-      category: 'Internet / Wi-Fi',
-      issue: 'DNS resolution failure when trying to pull npm dependencies.',
-      venue: 'Main Arena, Hall A',
-      status: 'Pending',
-      remarks: '',
-      lastUpdated: new Date(Date.now() - 3 * 60 * 1000).toISOString(),
-      handledBy: '',
-      priority: 'High'
-    }
-  ],
+  complaints: [],
   admins: [
     {
       name: 'Organizer Lead',

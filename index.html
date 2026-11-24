@@ -57,7 +57,7 @@
 
       <!-- Attribution Credit -->
       <div class="hero-credit" style="font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 18px; max-width: 480px; margin: 0 auto;">
-        Developed by <strong>VDC Venture Development Centre</strong>, GITAM University Bengaluru
+        Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru
       </div>
     </section>
 
@@ -101,10 +101,10 @@
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div>
           <span style="font-size: 0.84rem; color: var(--text-muted);">Arena Wi-Fi:</span>
-          <span style="font-family: var(--font-mono); font-weight: 600; font-size: 0.92rem; margin-left: 6px;">SIH_2026_ARENA_5G</span>
+          <span style="font-family: var(--font-mono); font-weight: 600; font-size: 0.92rem; margin-left: 6px;">[Arena Wi-Fi SSID]</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
-          <code style="font-family: var(--font-mono); font-size: 0.84rem; background: var(--bg-subtle); padding: 5px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">SIH2026@Arena!5G</code>
+          <code style="font-family: var(--font-mono); font-size: 0.84rem; background: var(--bg-subtle); padding: 5px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">[Password]</code>
           <button class="btn btn-outline btn-sm" id="copyWifiBtn">Copy</button>
         </div>
       </div>
@@ -115,7 +115,7 @@
 
     <!-- Attribution Footer -->
     <footer class="app-footer">
-      <p>Developed by <strong>VDC Venture Development Centre</strong>, GITAM University Bengaluru</p>
+      <p>Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
       <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk</p>
     </footer>
 
@@ -126,23 +126,35 @@
   <script>
     // Wi-Fi Copy
     document.getElementById('copyWifiBtn')?.addEventListener('click', () => {
-      window.ui.copyText('SIH2026@Arena!5G', 'Wi-Fi Password copied!');
+      window.ui.copyText('[Arena Wi-Fi Password]', 'Wi-Fi Password placeholder copied!');
     });
 
     // Live Hackathon Milestones & Timeline
     (function initTimeline() {
+      // Event schedule milestones (Leave blank template for organizers to add real milestones)
       const milestones = [
-        { time: '09:00 AM (Day 1)', title: 'Kickoff & Problem Selection', desc: 'Team table allotment & challenge kickoff', status: 'completed' },
-        { time: '04:00 PM (Day 1)', title: 'Mentoring Round 1', desc: 'Mandatory table evaluation & architecture validation', status: 'active' },
-        { time: '08:30 PM (Day 1)', title: 'Dinner & Mid-Way Check', desc: 'Dining Hall (Ground Floor). Hardware checkpoint', status: 'upcoming' },
-        { time: '12:00 AM (Day 2)', title: 'Midnight Review & Refreshments', desc: 'Energy drinks & code sanity check', status: 'upcoming' },
-        { time: '06:00 AM (Day 2)', title: 'Mentoring Round 2', desc: 'Final bug fixes, cloud deployment & UI polish', status: 'upcoming' },
-        { time: '11:00 AM (Day 2)', title: 'Final Code Freeze', desc: 'GitHub lock & PPT submission on portal', status: 'upcoming' },
-        { time: '01:00 PM (Day 2)', title: 'Grand Jury Pitching', desc: 'Main Stage presentations & winner announcement', status: 'upcoming' }
+        // Example format:
+        // { time: '09:00 AM (Day 1)', title: 'Kickoff & Problem Selection', desc: 'Team table allotment & challenge kickoff', status: 'completed' },
       ];
 
       const listEl = document.getElementById('milestonesList');
-      if (!listEl) return;
+      const activeTitleEl = document.getElementById('currentMilestoneTitle');
+      const activeDescEl = document.getElementById('currentMilestoneDesc');
+      const countdownEl = document.getElementById('freezeCountdown');
+
+      if (!milestones || milestones.length === 0) {
+        if (listEl) {
+          listEl.innerHTML = `
+            <div style="padding: 18px 16px; text-align: center; color: var(--text-muted); font-size: 0.88rem; border: 1px dashed var(--border-color); border-radius: var(--radius-sm); background: var(--bg-surface);">
+              Arena schedule and milestone phases will be announced by the organizing desk.
+            </div>
+          `;
+        }
+        if (activeTitleEl) activeTitleEl.textContent = 'Live Helpdesk Operational';
+        if (activeDescEl) activeDescEl.textContent = 'Organizers will update event schedule and mentoring milestones here.';
+        if (countdownEl) countdownEl.textContent = 'Operational';
+        return;
+      }
 
       listEl.innerHTML = milestones.map(m => {
         let badgeStyle = 'background: var(--bg-subtle); color: var(--text-muted);';
@@ -178,8 +190,7 @@
         `;
       }).join('');
 
-      // Live Code Freeze Countdown (Simulated relative to 36-hour schedule)
-      const countdownEl = document.getElementById('freezeCountdown');
+      // Live Code Freeze Countdown (Simulated relative to schedule)
       if (countdownEl) {
         let totalSeconds = 14 * 3600 + 45 * 60 + 20;
         setInterval(() => {
