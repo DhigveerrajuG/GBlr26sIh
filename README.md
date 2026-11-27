@@ -1,8 +1,8 @@
 # SIH Support Desk
 
-Real-time on-ground floor helpdesk and issue-resolution platform for Smart India Hackathon (SIH).
+Real-time floor issue-resolution platform for Smart India Hackathon (SIH).
 
-Developed by **DhigveerrajuG** for VDC, GITAM University Bengaluru.
+Venture Development Centre, GITAM University Bengaluru.
 
 ---
 

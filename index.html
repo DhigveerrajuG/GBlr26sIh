@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#007366">
-  <link rel="icon" type="image/png" href="images/sih_logo_transparent.png">
+  <link rel="icon" type="image/png" href="images/sih_logo_transparent.png">  <title>SIH Support Desk — Smart India Hackathon 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <title>University Issue Portal — SIH Helpdesk</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +19,73 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
+<body>
+  <div class="app-shell portal-hub">
+
+    <!-- Asymmetric Split Hero Section -->
+    <section class="portal-hero-split">
+      <!-- Left Column: Primary Hook & Action -->
+      <div class="hero-content">
+        <h1 class="hero-main-title">
+          Rapid Floor Resolution for <span>Smart India Hackathon</span>
+        </h1>
+        <p class="hero-main-desc">
+          Facing power socket trips, Wi-Fi connectivity dropouts, broken dev boards, or waiting for mentor evaluation? Submit your table request and floor volunteers are dispatched right to your table.
+        </p>
+        <div class="hero-actions-group">
+          <a href="report.html" class="btn-hero-primary" id="btnReportIssue">
+            Report an Issue Now &rarr;
+          </a>
+          <a href="#timelineSection" class="btn-hero-secondary">
+            Event Milestones &darr;
+          </a>
+        </div>
+        <div class="hero-feature-tags">
+          <div class="hero-feature-tag-item">
+            <span style="color: var(--primary-green); font-weight: bold;">&bull;</span>
+            <span>~2 Min Avg. Dispatch</span>
+          </div>
+          <div class="hero-feature-tag-item">
+            <span style="color: var(--primary-green); font-weight: bold;">&bull;</span>
+            <span>52 Arena Tables Covered</span>
+          </div>
+          <div class="hero-feature-tag-item">
+            <span style="color: var(--primary-green); font-weight: bold;">&bull;</span>
+            <span>24/7 Ground Floor Helpdesk</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Floating Live Operations Card -->
+      <div class="hero-live-card">
+        <div class="live-card-header">
+          <div>
+            <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-green); display: block;">Arena Overview</span>
+            <div class="live-card-title">Floor Operations Desk</div>
+          </div>
+          <div class="live-card-badge">
+            <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--primary-green);"></span>
+            Active Now
+          </div>
+        </div>
+
+        <div class="live-metrics-grid">
+          <div class="live-metric-box">
+            <div class="live-metric-value">&lt; 3m</div>
+            <div class="live-metric-label">Avg. Dispatch</div>
+          </div>
+          <div class="live-metric-box">
+            <div class="live-metric-value">52</div>
+            <div class="live-metric-label">Tables Active</div>
+          </div>
+          <div class="live-metric-box">
+            <div class="live-metric-value">100%</div>
+            <div class="live-metric-label">Resolution Focus</div>
+          </div>
+          <div class="live-metric-box">
+            <div class="live-metric-value">24/7</div>
+            <div class="live-metric-label">Support Coverage</div>
+          </div>
 <body class="homepage-gradient">
   <div class="app-shell">
 
@@ -180,49 +251,62 @@
           <span style="font-size: 0.74rem; color: var(--text-muted); display: block; text-transform: uppercase; letter-spacing: 0.05em;">Code Freeze Status</span>
           <span id="freezeCountdown" style="font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem; color: var(--primary-green);">Live &amp; Operational</span>
         </div>
-      </div>
 
-      <!-- Current Active Phase Callout -->
-      <div style="background: var(--bg-subtle); border-left: 3px solid var(--primary-green); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 18px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div class="live-card-wifi">
           <div>
-            <span style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; color: var(--primary-green); letter-spacing: 0.05em;">Current Phase</span>
-            <div id="currentMilestoneTitle" style="font-size: 0.98rem; font-weight: 600; color: var(--text-body); margin-top: 2px;">
-              Live Helpdesk Operational
-            </div>
-            <div id="currentMilestoneDesc" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
-              Organizers will update event schedule and mentoring milestones here.
-            </div>
+            <span style="font-size: 0.76rem; color: var(--text-muted); display: block;">Arena 5GHz Wi-Fi:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600; font-size: 0.88rem; color: var(--text-main);">[Arena Wi-Fi SSID]</span>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; background: var(--primary-green-light); color: var(--primary-green); padding: 4px 10px; border-radius: var(--radius-full);">Active Now</span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <code style="font-family: var(--font-mono); font-size: 0.82rem; background: #FFFFFF; padding: 4px 8px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">[Password]</code>
+            <button class="btn btn-outline btn-sm" id="copyWifiBtn" style="padding: 4px 10px; font-size: 0.76rem;">Copy</button>
+          </div>
         </div>
       </div>
-
-      <!-- Milestones List -->
-      <div id="milestonesList" style="display: grid; gap: 10px;"></div>
     </section>
 
-    <!-- Arena Wi-Fi & Central Helpdesk Info -->
-    <section class="card" style="margin-bottom: 28px; padding: 24px 28px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-        <div>
-          <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">Arena Wi-Fi Network:</span>
-          <span style="font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; margin-left: 8px; color: var(--primary-green);">[Arena Wi-Fi SSID]</span>
+    <!-- Two-Column Floor Guide & Staff Quick Access Section -->
+    <section class="portal-section">
+      <div class="guide-two-col">
+        <!-- Card 1: Central Helpdesk Info -->
+        <div style="background: #FFFFFF; border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 4px 16px rgba(0, 115, 102, 0.04);">
+          <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-green); margin-bottom: 6px;">Floor Presence</div>
+          <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Central Helpdesk &amp; Labs</h4>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+            The central floor desk is situated in the <strong>Ground Floor Atrium</strong>, staffed 24/7.
+            Spare electronic components, sensors, and soldering equipment can be checked out at <strong>Hardware Lab 104</strong> with your Team ID.
+          </p>
+          <div style="font-size: 0.82rem; color: var(--text-muted); padding-top: 12px; border-top: 1px solid var(--border-color);">
+            Safety Alert: Report damaged sockets or sparking cables immediately.
+          </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <code style="font-family: var(--font-mono); font-size: 0.88rem; background: var(--bg-subtle); padding: 6px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); color: var(--text-body);">[Password]</code>
-          <button class="btn btn-outline btn-sm" id="copyWifiBtn">Copy</button>
+
+        <!-- Card 2: Organizer & Volunteer Access -->
+        <div style="background: #FFFFFF; border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 4px 16px rgba(0, 115, 102, 0.04); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 6px;">Staff Triage</div>
+            <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Volunteer &amp; Mentor Console</h4>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+              Floor volunteers and technical mentors claim open table complaints, post live dispatch status, and log resolution remarks from the Command Center.
+            </p>
+          </div>
+          <div>
+            <a href="admin.html" class="btn btn-outline" style="width: 100%; font-weight: 600; justify-content: center;">
+              Launch Command Center &rarr;
+            </a>
+          </div>
         </div>
-      </div>
-      <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 12px;">
-        <strong>Central Helpdesk:</strong> Ground floor atrium (24/7) &bull; Safety: report damaged sockets or wiring immediately.
       </div>
     </section>
 
     <!-- Attribution Footer -->
-    <footer class="app-footer">
-      <p>Developed by <strong>DhigveerrajuG</strong> for VDC, GITAM University Bengaluru</p>
-      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">Smart India Hackathon 2026 &bull; On-Ground Floor Helpdesk</p>
+    <footer class="app-footer" style="padding-top: 48px; border-top: 1.5px solid var(--border-color);">
+      <p style="font-size: 0.88rem; color: var(--text-secondary);">
+        Venture Development Centre
+      </p>
+      <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 6px;">
+        Smart India Hackathon 2026 &bull; GITAM University Bengaluru
+      </p>
     </footer>
 
   </div>
@@ -230,10 +314,11 @@
   <script src="js/config.js"></script>
   <script src="js/ui-fx.js"></script>
   <script>
-    // Wi-Fi Copy
-    document.getElementById('copyWifiBtn')?.addEventListener('click', () => {
+    // Wi-Fi Copy Listener
+    const copyWifiAction = () => {
       window.ui.copyText('[Arena Wi-Fi Password]', 'Wi-Fi Password placeholder copied!');
-    });
+    };
+    document.getElementById('copyWifiBtn')?.addEventListener('click', copyWifiAction);
 
     // Live Milestones & Schedule
     (function initTimeline() {
@@ -247,6 +332,7 @@
       if (!milestones || milestones.length === 0) {
         if (listEl) {
           listEl.innerHTML = `
+            <div style="padding: 24px 20px; text-align: center; color: var(--text-muted); font-size: 0.9rem; border: 1.5px dashed var(--border-color); border-radius: var(--radius-md); background: var(--bg-subtle);">
             <div style="padding: 18px 16px; text-align: center; color: var(--text-muted); font-size: 0.88rem; border: 1px dashed var(--border-color); border-radius: var(--radius-sm); background: var(--bg-subtle);">
               Arena schedule and milestone phases will be announced by the organizing desk.
             </div>

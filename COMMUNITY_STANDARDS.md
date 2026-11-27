@@ -2,11 +2,11 @@
 
 ## 📌 Repository Description
 
-> **Lightweight, real-time issue reporting portal and organizer dashboard for on-ground hackathons, powered by Google Apps Script and Google Sheets.**
+> **Lightweight, real-time issue reporting portal and organizer dashboard for hackathons, powered by Google Apps Script and Google Sheets.**
 
 ### Short Description (Optimized for GitHub "About" Box)
 ```text
-Lightweight, real-time issue reporting portal and organizer dashboard for on-ground hackathons, powered by Google Apps Script and Google Sheets.
+Lightweight, real-time issue reporting portal and organizer dashboard for hackathons, powered by Google Apps Script and Google Sheets.
 ```
 
 ### Concise One-Liner

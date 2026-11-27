@@ -1,7 +1,7 @@
 {
   "name": "sih-support-desk",
   "version": "2.0.0",
-  "description": "Smart India Hackathon On-Ground Helpdesk & Issue Reporting Platform",
+  "description": "Smart India Hackathon Issue Reporting & Support Desk Platform",
   "main": "server.js",
   "scripts": {
     "start": "python server.py",

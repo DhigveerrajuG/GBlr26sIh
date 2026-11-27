@@ -42,6 +42,9 @@
   --accent-green: #10B981;
   --accent-green-light: #D1FAE5;
 
+  /* Clean White / Light Surfaces & Atmospheric GITAM Gradient */
+  --bg-gradient: linear-gradient(135deg, #EBF5F2 0%, #F4F9F7 35%, #FAF7F0 75%, #F6EDE0 100%);
+  --bg-primary: #F8FAF9;
   /* Surfaces & Backgrounds */
   --bg-primary: #EEF7F4;
   --bg-secondary: #FFFFFF;

@@ -3,7 +3,7 @@
 This ruleset governs code quality, contribution standards, and security constraints for the **SIH Support Desk** repository.
 
 ## 📌 Repository Description
-> **Lightweight, real-time issue reporting portal and organizer dashboard for on-ground hackathons, powered by Google Apps Script and Google Sheets.**
+> **Lightweight, real-time issue reporting portal and organizer dashboard for hackathons, powered by Google Apps Script and Google Sheets.**
 
 ## 1. Governance & Standards
 - All contributors and AI assistants must uphold the standards set forth in [CODE_OF_CONDUCT.md](../../CODE_OF_CONDUCT.md).
