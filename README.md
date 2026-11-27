@@ -1,8 +1,8 @@
 # SIH Support Desk
 
-Real-time on-ground floor helpdesk and issue-resolution platform for Smart India Hackathon (SIH).
+Real-time floor helpdesk and issue-resolution platform for Smart India Hackathon (SIH).
 
-Developed by **DhigveerrajuG** for VDC, GITAM University Bengaluru.
+**Venture Development Centre**, GITAM University Bengaluru.
 
 ---
 
@@ -58,4 +58,4 @@ python test_system.py
 
 ## License
 
-Restrictive Proprietary License. Copyright &copy; 2026 DhigveerrajuG. Developed by DhigveerrajuG for VDC, GITAM University Bengaluru. All Rights Reserved. See [LICENSE](LICENSE) for details.
+Restrictive Proprietary License. Copyright &copy; 2026 DhigveerrajuG. Venture Development Centre, GITAM University Bengaluru. All Rights Reserved. See [LICENSE](LICENSE) for details.

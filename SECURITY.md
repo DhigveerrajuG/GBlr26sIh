@@ -1,6 +1,6 @@
 # Security Policy
 
-The SIH Support Desk project takes the security and integrity of on-ground hackathon operations seriously. This document outlines our vulnerability disclosure process and security recommendations.
+The SIH Support Desk project takes the security and integrity of hackathon operations seriously. This document outlines our vulnerability disclosure process and security recommendations.
 
 ---
 
